@@ -3,7 +3,7 @@ FluxMyFluffyFloppy
 v1.13 - 2021-06-29
 A GUI for raw flux level tools
 
-FREEWARE
+FREEWARE - Source code will follow if "cleaned"
 
 Requirements: Microsoft(r) Windows(r) & Greaseweazle
 
