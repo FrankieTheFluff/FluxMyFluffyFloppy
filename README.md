@@ -1,7 +1,7 @@
 FluxMyFluffyFloppy
 ----------------------------------------
 v1.13 - 2021-06-29
-GUI for raw flux level tools
+A GUI for raw flux level tools
 
 FREEWARE
 
