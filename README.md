@@ -5,7 +5,7 @@ A GUI for raw flux level tools
 
 FREEWARE
 
-Requirements: Windows & Greaseweazle
+Requirements: Microsoft(r) Windows(r) & Greaseweazle
 
 (c) 2021 FrankieTheFluff - fluxmyfluffyfloppy@mail.de
 
