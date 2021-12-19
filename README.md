@@ -9,7 +9,7 @@ Requirements: Microsoft(r) Windows(r) & Greaseweazle v0.33 & FluxEngine
 
 (c) 2021 FrankieTheFluff - fluxmyfluffyfloppy@mail.de
 
-Greasweazle (c) Keir Fraser
+Greaseweazle (c) Keir Fraser
 https://github.com/keirf/Greaseweazle
 
 FluxEngine (c) David Given
