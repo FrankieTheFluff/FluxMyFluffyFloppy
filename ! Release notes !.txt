@@ -9,6 +9,7 @@ v1.23 - 2022-01-01
 - Removed file "FluxMyFluffyFloppy.exe"
 * Window resizing to the right
 + Start: Better "gw.exe" location handling (Ini-File)
+- Read: Fixed SCP disktype dropdown staying empty after selection
 - About: Removed download from "dropbox" --> Github only
 
 v1.22 - 2021-12-30
