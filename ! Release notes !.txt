@@ -3,6 +3,14 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v1.23 - 2022-01-01
+* 32bit file "FluxMyFluffyFloppy_32bit.exe"
+* 64bit file "FluxMyFluffyFloppy_64bit.exe"
+- Removed file "FluxMyFluffyFloppy.exe"
+* Window resizing to the right
++ Start: Better "gw.exe" location handling (Ini-File)
+- About: Removed download from "dropbox" --> Github only
+
 v1.22 - 2021-12-30
 * Supports/Requires Greaseweazle v0.35
 * Firmware: New Update options: "online" (default) or "file" (--force)
