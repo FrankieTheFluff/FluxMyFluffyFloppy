@@ -3,6 +3,13 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v1.24 - 2022-01-02
+- Read: Fixed reported wrong behaviour with optional "format spec"
+- Write: Fixed reported wrong behaviour with optional "format spec"
++ Global: Renamed "Com-Port:" to "COM/Dev:" and increased width of dropdown
+- Global: Removed dialog if "Com/Dev:" ("COM-Port") dropdown is empty
++ Languages: Updated files: 'English' & 'Deutsch'
+
 v1.23 - 2022-01-01
 * 32bit file "FluxMyFluffyFloppy_32bit.exe"
 * 64bit file "FluxMyFluffyFloppy_64bit.exe"
