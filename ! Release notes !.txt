@@ -3,6 +3,34 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
+Planned:
+# Parameter "-n" "--no-clobber" read + convert help="do not overwrite an existing file"
+# Logging: All output is now to stderr (consistent, and unbuffered)
+
+v1.25 - 2022-01-06
+* Requires Greaseweazle 0.36
+* Read: New option "--raw"
+* Read: New "--tracks" sub-option hswap: Treat side 1 as side 0 and vice versa
+* Read: Option "--rate" replaced with destination file ".HFE" option "bitrate"
++ Read: Updated templates
++ Read: On app start no template preselection
++ Read: Syntax "--track" --> "--tracks"
++ Read: Reorganized "Cylinders" sub-options fields
++ Read: Rename format sepc "sega.sf7" to "sega.sf7000"
++ Read: Rename destination filename format "Disktype" to "Option"
++ Write: Updated templates
++ Write: On app start no template preselection
++ Write: "--track" --> "--tracks"
++ Write: Reorganized "Cylinders" sub-options fields
++ Write: Rename format sepc "sega.sf7" to "sega.sf7000"
+* Convert: Added as new command
++ Settings: SetDelays: "Info" prints to console window
+- Settings: PIN: Get PIN level option not working
++ Firmware: "Info" prints to console window
++ Firmware: "Bandwidth" prints to console window
++ Languages: Updated files: 'English' & 'Deutsch'
+# Logging: All output is now to stderr (consistent, and unbuffered)
+
 v1.24 - 2022-01-02
 - Read: Fixed reported wrong behaviour with optional "format spec"
 - Write: Fixed reported wrong behaviour with optional "format spec"
