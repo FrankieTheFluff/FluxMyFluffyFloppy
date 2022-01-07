@@ -7,6 +7,11 @@ Planned:
 # Parameter "-n" "--no-clobber" read + convert help="do not overwrite an existing file"
 # Logging: All output is now to stderr (consistent, and unbuffered)
 
+v1.26 - 2022-01-07
+* Requires Greaseweazle 0.36
+* Tools: RPM: Added as new command
+- Convert: Missing window resizing to the right
+
 v1.25 - 2022-01-06
 * Requires Greaseweazle 0.36
 * Read: New option "--raw"
