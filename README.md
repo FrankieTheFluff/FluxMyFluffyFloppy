@@ -1,6 +1,6 @@
 FluxMyFluffyFloppy
 ----------------------------------------
-v1.26 - 2022-01-07 
+v1.27 - 2022-01-09 
 A GUI for raw flux level tools
 
 FREEWARE - Source code will follow if "cleaned"
