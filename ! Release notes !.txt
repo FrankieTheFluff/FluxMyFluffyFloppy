@@ -5,7 +5,14 @@ Release notes
 
 Planned:
 # Parameter "-n" "--no-clobber" read + convert help="do not overwrite an existing file"
-# Logging: All output is now to stderr (consistent, and unbuffered)
+
+v1.27 - 2022-01-09
+* Requires Greaseweazle 0.36
+- Read: Fixed logging: All output is now to stderr (consistent, and unbuffered)
++ Convert: Added missing colors option
+* Global: Changed gw.exe execution code from "shellexecute" to "process"
++ Global: Removed unused code
++ Languages: Updated files: 'English' & 'Deutsch'
 
 v1.26 - 2022-01-07
 * Requires Greaseweazle 0.36
