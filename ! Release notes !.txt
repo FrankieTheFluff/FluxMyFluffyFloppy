@@ -6,6 +6,16 @@ Release notes
 Planned:
 # Parameter "-n" "--no-clobber" read + convert help="do not overwrite an existing file"
 
+v1.28 - 2022-01-10
+* Requires Greaseweazle 0.37
+- Read: Fixes with the trackset
+- Write: Fixes with the trackset
+* Convert: New option "--out-tracks"
+- Convert: Fixes with the trackset
++ Languages: Updated files: 'English' & 'Deutsch'
+- Languages: Removed Update-Scripts / version check
+- some small bugs fixed...
+
 v1.27 - 2022-01-09
 * Requires Greaseweazle 0.36
 - Read: Fixed logging: All output is now to stderr (consistent, and unbuffered)
