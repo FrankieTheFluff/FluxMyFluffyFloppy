@@ -5,7 +5,7 @@ A GUI for raw flux level tools
 
 FREEWARE - Source code will follow if "cleaned"
 
-Requirements: Microsoft(r) Windows(r) & Greaseweazle v0.36 & FluxEngine
+Requirements: Microsoft(r) Windows(r) & Greaseweazle v0.37 & FluxEngine
 
 (c) 2021-2022 FrankieTheFluff - fluxmyfluffyfloppy@mail.de
 
