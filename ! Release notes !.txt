@@ -6,6 +6,9 @@ Release notes
 Planned:
 # Parameter "-n" "--no-clobber" read + convert help="do not overwrite an existing file"
 
+v1.29 - 2022-01-19
+- Write: Unable to write
+
 v1.28 - 2022-01-10
 * Requires Greaseweazle 0.37
 - Read: Fixes with the trackset
