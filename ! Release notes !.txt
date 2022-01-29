@@ -3,8 +3,21 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
-Planned:
-# Parameter "-n" "--no-clobber" read + convert help="do not overwrite an existing file"
+Planned/Undocumentated:
+Refs #150: TSPEC e.g. "c=0-81/2:step=1/2"
+
+v2.00 - 2022-01-29
+* Requires Greaseweazle 0.38
+
+v2.00beta1 - 2022-01-23
+* Requires Greaseweazle 0.37
+* Completely rewritten / less crap and no "SchnickSchnack"
++ Write: Logging
+- Removed "fluxengine" module
+- Fixed resize behaviour
+
+v1.30 - 2022-01-
+- Read: removed unsupported ".dsk" and ".ipf"
 
 v1.29 - 2022-01-19
 - Write: Unable to write
