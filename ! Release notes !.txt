@@ -3,8 +3,19 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
-Planned/Undocumentated:
-Refs #150: TSPEC e.g. "c=0-81/2:step=1/2"
+Planned:
+# Multilanguage support again
+
+v2.01 - 2022-01-30
+* Greasweazle: Added "Cmd/Dir" button for direct access to gw.exe folder
++ Read: Trackset: Refs #150: TSPEC e.g. "c=0-81/2:step=1/2"
+- Read: Fixed crash behaviour after saving a template and directly closing the app
++ Write: Trackset: Refs #150: TSPEC e.g. "c=0-81/2:step=1/2"
+- Write: Fixed crash behaviour after saving a template and directly closing the app
++ Convert: Out-/Trackset: Refs #150: TSPEC e.g. "c=0-81/2:step=1/2"
++ Global: Cleaned a bit the GUI design
+- Global: Fixed "gw.exe" location on start
+- Global: Fixed some filehandling issues
 
 v2.00 - 2022-01-29
 * Requires Greaseweazle 0.38
