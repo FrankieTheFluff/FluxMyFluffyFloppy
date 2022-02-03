@@ -6,6 +6,11 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v2.02
+* Read: Better usability with default Read-button 
+- Read: Fixed incremental filename generate
+* Write: Better usability with default Write-button
+
 v2.01 - 2022-01-30
 * Greasweazle: Added "Cmd/Dir" button for direct access to gw.exe folder
 + Read: Trackset: Refs #150: TSPEC e.g. "c=0-81/2:step=1/2"
