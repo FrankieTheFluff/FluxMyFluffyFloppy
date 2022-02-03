@@ -5,7 +5,7 @@ Release notes
 
 Planned:
 # Multilanguage support again
-
+ 
 v2.02 - 2022-02-03
 * Read: Better usability with default Read-button 
 - Read: Fixed incremental filename generate
