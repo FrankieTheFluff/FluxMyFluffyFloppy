@@ -5,7 +5,11 @@ Release notes
 
 Planned:
 # Multilanguage support again
- 
+
+v2.03 - 2022-02-06
+- Greasweazle: Fixed "Cmd/Dir" button for direct access to gw.exe folder
+* Read: New "Explorer" button linked directly to open destination folder
+
 v2.02 - 2022-02-03
 * Read: Better usability with default Read-button 
 - Read: Fixed incremental filename generate
