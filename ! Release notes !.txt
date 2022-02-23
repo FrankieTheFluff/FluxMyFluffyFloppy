@@ -6,6 +6,10 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.00 - 2022-02-23 (One year FluxMyFluffyFloppy)
+* Because of user feedbacks changed the GUI design back to v1.x
+* Completely rewritten from scratch (again... I know)
+
 v2.03 - 2022-02-06
 - Greasweazle: Fixed "Cmd/Dir" button for direct access to gw.exe folder
 * Read: New "Explorer" button linked directly to open destination folder
