@@ -6,6 +6,12 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.01 - 2022-02-26
+* Read: Create destination directory if it doesn't exists
+* Convert: Create destination directory if it doesn't exists
+- Convert: Fixed creation of commandline
++ Small dialogbox corrections
+
 v3.00 - 2022-02-23 (One year FluxMyFluffyFloppy)
 * Because of user feedbacks changed the GUI design back to v1.x
 * Completely rewritten from scratch (again... I know)
