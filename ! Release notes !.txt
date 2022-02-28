@@ -6,6 +6,12 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.02 - 2022-02-28
+* Requires Greaseweazle 0.39
+* Read: Format specification "atari.90" added
+* Write: Format specification "atari.90" added
+* Convert: Format specification "atari.90" added
+
 v3.01 - 2022-02-26
 * Read: Create destination directory if it doesn't exists
 * Convert: Create destination directory if it doesn't exists
