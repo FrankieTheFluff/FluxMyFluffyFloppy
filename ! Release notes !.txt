@@ -6,6 +6,9 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.03 - 2022-03-01
+* Erase: Added missing trackset options
+
 v3.02 - 2022-02-28
 * Requires Greaseweazle 0.39
 * Read: Format specification "atari.90" added
