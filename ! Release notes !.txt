@@ -6,6 +6,9 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.04 - 2022-03-19
+- 64bit version: fixes a multimonitor scaling problem
+
 v3.03 - 2022-03-01
 * Erase: Added missing trackset options
 
