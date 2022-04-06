@@ -6,6 +6,11 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.05 - 2022-04-06
+* Requires Greaseweazle 0.41
+* GW: Added drive option "apple2"
+* Settings: Update: Added "tag" feature
+
 v3.04 - 2022-03-19
 - 64bit version: fixes a multimonitor scaling problem
 
