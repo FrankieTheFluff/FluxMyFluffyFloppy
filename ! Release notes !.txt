@@ -6,6 +6,12 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.06 - 2022-06-19
+* Requires Greaseweazle 1.0
+* Read: Format specification "akai.800, akai1600, ensoniq.800, ensoniq.1600, ibm.1680, ibm.dmf" added
+* Write: Format specification "akai.800, akai1600, ensoniq.800, ensoniq.1600, ibm.1680, ibm.dmf" added
+* Convert: Format specification "akai.800, akai1600, ensoniq.800, ensoniq.1600, ibm.1680, ibm.dmf" added
+
 v3.05 - 2022-04-06
 * Requires Greaseweazle 0.41
 * GW: Added drive option "apple2"
