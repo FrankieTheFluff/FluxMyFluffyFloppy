@@ -6,6 +6,14 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.07 - 2022-07-26
+* Read: Format specification "pc98.dd, pc98.hd" added
+* Write: Format specification "pc98.dd, pc98.hd" added
+* Convert: Format specification "pc98.dd, pc98.hd" added
+- Convert: Fixed some missing FormResize
+- Info: Small fixes with too small text-height
+- GW: Removed unsupported drive "apple2"
+
 v3.06 - 2022-06-19
 * Requires Greaseweazle 1.0
 * Read: Format specification "akai.800, akai1600, ensoniq.800, ensoniq.1600, ibm.1680, ibm.dmf" added
