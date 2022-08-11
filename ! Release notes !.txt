@@ -6,7 +6,15 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.08 - 2022-08-11
+* Requires Greaseweazle 1.2
+* Read: Added PLL option (Refs #210)
+* Convert: Added PLL option (Refs #210)
++ Added some missing code for the format specifications "pc98.dd, pc98.hd"
+- Convert: Removed Messagedialog '#'
+
 v3.07 - 2022-07-26
+* Requires Greaseweazle 1.1
 * Read: Format specification "pc98.dd, pc98.hd" added
 * Write: Format specification "pc98.dd, pc98.hd" added
 * Convert: Format specification "pc98.dd, pc98.hd" added
