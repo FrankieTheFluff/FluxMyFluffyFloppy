@@ -6,6 +6,15 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.09 - 2022-09-24
+* Requires Greaseweazle 1.3
+* Read: Format specification "ibm.800, ibm.2880" added
+* Read: New image format *.MGT
+* Write: Format specification "ibm.800, ibm.2880" added
+* Write: New image format *.MGT
+* Convert: Format specification "ibm.800, ibm.2880" added
+* Convert: New image format *.MGT
+
 v3.08 - 2022-08-11
 * Requires Greaseweazle 1.2
 * Read: Added PLL option (Refs #210)
