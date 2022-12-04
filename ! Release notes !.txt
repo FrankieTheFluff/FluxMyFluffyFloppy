@@ -6,6 +6,15 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.10 - 2022-12-04
+* Requires Greaseweazle 1.4
+* Read: New image formats DIM, FDI, HDM, XDF, D88 and pc982hs
+* Read: Renamed pc98.hd and pc98.dd formats to pc98.2hd and pc98.2dd
+* Write: New image format pc982hs
+* Write: Renamed pc98.hd and pc98.dd formats to pc98.2hd and pc98.2dd
+* Convert: New image format pc982hs
+* Convert: Renamed pc98.hd and pc98.dd formats to pc98.2hd and pc98.2dd
+
 v3.09 - 2022-09-24
 * Requires Greaseweazle 1.3
 * Read: Format specification "ibm.800, ibm.2880" added
