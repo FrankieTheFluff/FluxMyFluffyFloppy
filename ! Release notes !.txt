@@ -6,6 +6,13 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.11 - 2023-01-08
+* Requires Greaseweazle 1.5
+* Requires diskdefs.cfg (included; to fill the "format specs.:" dropdown)
+- Read: Fixed missing format option (hfe & scp)
+- Read: Fixed missing PLL logging
+- Convert: Fixed missing format option (hfe & scp)
+
 v3.10 - 2022-12-04
 * Requires Greaseweazle 1.4
 * Read: New image formats DIM, FDI, HDM, XDF, D88 and pc982hs
