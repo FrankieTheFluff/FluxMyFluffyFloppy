@@ -6,6 +6,13 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.13 - 2023-01-09
+* Read: Dropdown "Diskdefs" or "Format specs" behaviour
+* Conv: Dropdown "Diskdefs" or "Format specs" behaviour
+- Read: Fixed correct '--diskdefs' syntax in commandline (Thank you Keir Fraser)
+- Convert: Fixed correct '--diskdefs' syntax in commandline (Thank you Keir Fraser)
+- Diskdefs.cfg: Fixed line 501
+
 v3.12 - 2023-01-09
 - Read: Fixed missing '--diskdefs' in commandline
 - Read: Fixed missing '--diskdefs' in template
