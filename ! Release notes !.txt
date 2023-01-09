@@ -6,6 +6,11 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v3.12 - 2023-01-09
+- Read: Fixed missing '--diskdefs' in commandline
+- Read: Fixed missing '--diskdefs' in template
+- Convert: Fixed missing '--diskdefs' in commandline
+
 v3.11 - 2023-01-08
 * Requires Greaseweazle 1.5
 * Requires diskdefs.cfg (included; to fill the "format specs.:" dropdown)
