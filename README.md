@@ -1,11 +1,11 @@
 FluxMyFluffyFloppy
 ----------------------------------------
-v3.13 - 2023-01-09
+v4.00 - 2023-02-05
 A GUI for raw flux level tools
 
 FREEWARE - Source code will follow if "cleaned"
 
-Requirements: Microsoft(r) Windows(r) & Greaseweazle v1.5+ & 'diskdefs.cfg'
+Requirements: Microsoft(r) Windows(r) & Greaseweazle v1.8+ & 'diskdefs.cfg'
 
 (c) 2021-2023 FrankieTheFluff - fluxmyfluffyfloppy@mail.de
 
