@@ -6,6 +6,13 @@ Release notes
 Planned:
 # Multilanguage support again
 
+v4.00 - 2023-02-05
+* Requires Greaseweazle 1.8
+* Moved back to develop with Lazarus/FreePascal
+* On boot "Select diskdefs.cfg" dialog (location stored in INI-file)
++ Diskdefs: File included in the "\greaseweazle" subfolder
++ Diskdefs: if not used it's not available in dropdown Comboboxes
+
 v3.13 - 2023-01-09
 * Read: Dropdown "Diskdefs" or "Format specs" behaviour
 * Conv: Dropdown "Diskdefs" or "Format specs" behaviour
