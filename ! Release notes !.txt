@@ -3,8 +3,8 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
-Planned:
-# Multilanguage support again
+v4.02 - 2023-02-06
+- Read: "Directory not selected" dialog instead of "Destination filename is not defined"
 
 v4.01 - 2023-02-06
 - Read: Remember last used folder location
