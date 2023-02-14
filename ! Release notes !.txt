@@ -3,6 +3,9 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v4.03 - 2023-02-14
+- Forms resizing updated
+
 v4.02 - 2023-02-06
 - Read: "Directory not selected" dialog instead of "Destination filename is not defined"
 
