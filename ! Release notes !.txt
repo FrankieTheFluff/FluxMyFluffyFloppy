@@ -8,6 +8,7 @@ v4.04 - 2023-03-04
 + diskdefs.cfg (Hint: Maybe user need to change location stored in INI-file)
 * Read: New image format MSA
 * Read: HFEv3 format option
+* Write: New image format MSA
 * Convert: New image format MSA
 * Convert: HFEv3 format option
 - Convert: Fixed non working format option select
