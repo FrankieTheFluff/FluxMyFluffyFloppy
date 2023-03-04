@@ -1,17 +1,17 @@
+----------------------------------------
 FluxMyFluffyFloppy
 ----------------------------------------
-v4.03 - 2023-02-14
-A GUI for raw flux level tools
+v4.04 - 2023-03-04
+GUI for raw flux level tools
+FREEWARE
+(c) 2021-2023 FrankieTheFluff
+fluxmyfluffyfloppy@mail.de
 
-FREEWARE - Source code will follow if "cleaned"
-
-Requirements: Microsoft(r) Windows(r) & Greaseweazle v1.8+ & 'diskdefs.cfg'
-
-(c) 2021-2023 FrankieTheFluff - fluxmyfluffyfloppy@mail.de
+Requirements: 
+- Microsoft(r)Windows(r) 
+- Greaseweazle v1.9
+- Greaseweazle 'diskdefs.cfg' optional
 
 Greaseweazle (c) Keir Fraser
 https://github.com/keirf/Greaseweazle
-
-Until v1.29 supported:
-FluxEngine (c) David Given
-http://cowlark.com/fluxengine/index.html
+----------------------------------------
