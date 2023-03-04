@@ -1,12 +1,9 @@
 ----------------------------------------
-
 FluxMyFluffyFloppy
-
 ----------------------------------------
-
 v4.04 - 2023-03-04
 
-GUI for raw flux level tools
+A GUI for Greseaweazle (raw flux level tools)
 
 FREEWARE
 
@@ -21,5 +18,3 @@ Requirements:
 
 Greaseweazle (c) Keir Fraser
 https://github.com/keirf/Greaseweazle
-----------------------------------------
- 
