@@ -3,6 +3,12 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v4.06 - 2023-04-13
+* Convert: New option "Use source directory as destination"
+* Convert: New option "Use source filename as destination"
+- Read: "Explorer" button didn't open correct directory
+- Convert: "Explorer" button didn't open correct directory
+
 v4.05 - 2023-04-09
 * Requires Greaseweazle 1.10
 * Options dialog: Select "diskdefs.cfg" file
