@@ -1,7 +1,7 @@
 ----------------------------------------
 FluxMyFluffyFloppy
 ----------------------------------------
-v4.05 - 2023-04-09
+v4.06 - 2023-04-12
 
 A GUI for Greseaweazle (raw flux level tools)
 
