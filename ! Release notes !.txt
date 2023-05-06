@@ -3,6 +3,17 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v4.07 - 2023-05-06
+* Requires Greaseweazle 1.11
+* New disc formats: mac.400, mac.800, dec.rx01, dec.rx02, msx.1d, msx.1dd, msx.2d, msx.2dd, occ1.sd, occ1.dd
+* Read: HFE: Suport Version, InterfaceMode and EncodingType
+* Write: New image formats a2r (Applesauce)
+* Convert: New image formats a2r (Applesauce)
+* Convert: HFE: Suport Version, InterfaceMode and EncodingType
++ Write: Source file dialog has now enhanced extension description
++ Convert: Source file dialog has now enhanced extension description
+- Read: Fixed the disabled "clear" button
+
 v4.06 - 2023-04-13
 * Convert: New option "Use source directory as destination"
 * Convert: New option "Use source filename as destination"
