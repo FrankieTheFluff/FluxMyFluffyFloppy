@@ -3,6 +3,11 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v4.08 - 2023-05-13
+* Requires Greaseweazle 1.12
+* New disc formats: commodore.1541, ibm.320, dragon... , coco...
+- Write: Fixed a missing refresh in the commandline after selecting a source file
+
 v4.07 - 2023-05-06
 * Requires Greaseweazle 1.11
 * New disc formats: mac.400, mac.800, dec.rx01, dec.rx02, msx.1d, msx.1dd, msx.2d, msx.2dd, occ1.sd, occ1.dd
