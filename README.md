@@ -3,7 +3,7 @@ FluxMyFluffyFloppy
 ----------------------------------------
 v4.08 - 2023-05-13
 
-A GUI for Greseaweazle (raw flux level tools)
+A Microsoft(r) Windows(r) GUI for Greseaweazle (raw flux level tools)
 
 FREEWARE
 
