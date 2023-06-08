@@ -3,6 +3,14 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v4.09 - 2023-06-08
+* Requires Greaseweazle 1.13
+* New disc formats: gem.1600, ibm.scan, coco.os9.*, mm1.os9.*
+* New image formats: D71, TD0. EDSK
+* Read: New option "--dd"
+* Read: PLL option "lowpass"
+- Read template: Fixed disabled "Save" button
+
 v4.08 - 2023-05-13
 * Requires Greaseweazle 1.12
 * New disc formats: commodore.1541, ibm.320, dragon... , coco...
