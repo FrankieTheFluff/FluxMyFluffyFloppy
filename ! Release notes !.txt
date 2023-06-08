@@ -3,6 +3,9 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v4.09.1 - 2023-06-08
+* Recompiled und not upx compressed
+
 v4.09 - 2023-06-08
 * Requires Greaseweazle 1.13
 * New disc formats: gem.1600, ibm.scan, coco.os9.*, mm1.os9.*
