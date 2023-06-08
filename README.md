@@ -1,7 +1,7 @@
 ----------------------------------------
 FluxMyFluffyFloppy
 ----------------------------------------
-v4.08 - 2023-05-13
+v4.09 - 2023-06-08
 
 A Microsoft(r) Windows(r) GUI for Greseaweazle (raw flux level tools)
 
@@ -13,7 +13,7 @@ fluxmyfluffyfloppy@mail.de
 
 Requirements: 
 - Microsoft(r)Windows(r) 
-- Greaseweazle v1.12+
+- Greaseweazle v1.13+
 - Greaseweazle 'diskdefs.cfg' optional
 
 Greaseweazle (c) Keir Fraser
