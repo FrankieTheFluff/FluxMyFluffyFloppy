@@ -3,6 +3,11 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v4.10 - 2023-07-22
+- Read: Bugfix extension length < 3 (e.g..st)
+- Convert: Bugfix extension length < 3 (e.g..st)
++ Templates: Renamed the Atari ST templates
+
 v4.09.1 - 2023-06-08
 * Recompiled und not upx compressed
 
