@@ -3,6 +3,12 @@ FluxMyFluffyFloppy - A GUI for Greaseweazle
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v4.11 - 2023-08-27
+* Write: New option "--dd" (was missing (GW v1.13), thx Klaus)
+* Write: New option "--pre-erase" (was missing (GW v1.13), thx Klaus)
++ Updated "diskdefs.cfg" (2023-08-17)
+- Fixed Enable/Disable behaviour template-buttons
+
 v4.10 - 2023-07-22
 - Read: Bugfix extension length < 3 (e.g..st)
 - Convert: Bugfix extension length < 3 (e.g..st)
