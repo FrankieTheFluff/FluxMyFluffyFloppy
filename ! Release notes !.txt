@@ -1,7 +1,42 @@
-FluxMyFluffyFloppy - A GUI for Greaseweazle
----------------------------------------------
+-----------------------------------------------------------------
+FluxMyFluffyFloppy 
+v5.xx
+-----------------------------------------------------------------
+A Microsoft(r) Windows(r) GUI for Greseaweazle Host Tools
+FREEWARE / OpenSource
+License: GNU General Public License v2.0
+(c) 2021-2023 FrankieTheFluff
+Web: https://github.com/FrankieTheFluff/FluxMyFluffyFloppy
+Mail: fluxmyfluffyfloppy@mail.de
+
+Requirements: 
+- Microsoft(r)Windows(r) 
+- Greaseweazle Host Tools
+- Greaseweazle 'diskdefs.cfg' optional
+-----------------------------------------------------------------
+Greaseweazle Host Tools (c) Keir Fraser
+Web: https://github.com/keirf/Greaseweazle
+-----------------------------------------------------------------
+Contains code from the following projects:
+UnTerminal 1.0 by Tito Hinostroza 02/10/2020
+https://github.com/t-edson/UnTerminal
+-----------------------------------------------------------------
+
 Release notes
 *new, +update, -bugfix, #unfixed
+
+v5.00 - 2023-08-30
+* Finally released with sourcecode
+* Infobox: GNU General Public License
+* Infobox: “Uses UnTerminal 1.0….”
+* TConsole instead of TProcess (using "UnTerminal 1.0")
+* Options: Select location folder of the templates
++ Application: Starts without selection of the first available template (read/write)
++ Application: Added missing groupbox captions
+- Fixed form resize
+* Read: New execution dialog with visualized reading tracks and logging
++ Read: Correct behaviour of dropdown when changed ("Internal"/"diskdefs") with mousewheel
++ Write: Correct behaviour of dropdown when changed ("Internal"/"diskdefs") with mousewheel
 
 v4.11 - 2023-08-27
 * Write: New option "--dd" (was missing (GW v1.13), thx Klaus)
@@ -242,7 +277,7 @@ v1.25 - 2022-01-06
 + Write: On app start no template preselection
 + Write: "--track" --> "--tracks"
 + Write: Reorganized "Cylinders" sub-options fields
-+ Write: Rename format sepc "sega.sf7" to "sega.sf7000"
++ Write: Rename format spec "sega.sf7" to "sega.sf7000"
 * Convert: Added as new command
 + Settings: SetDelays: "Info" prints to console window
 - Settings: PIN: Get PIN level option not working
