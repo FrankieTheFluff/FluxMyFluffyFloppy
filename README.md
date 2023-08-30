@@ -22,11 +22,11 @@ Mail: fluxmyfluffyfloppy@mail.de
 Requirements: 
 
 - Microsoft(r)Windows(r)
-- 
+  
 - Greaseweazle Host Tools
-- 
+  
 - Greaseweazle 'diskdefs.cfg' optional
-- 
+  
 -----------------------------------------------------------------
 
 Greaseweazle Host Tools (c) Keir Fraser
