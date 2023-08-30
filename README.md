@@ -1,5 +1,5 @@
 -----------------------------------------------------------------
-FluxMyFluffyFloppy 
+FluxMyFluffyFloppy
 v5.00 - 2023-08-30
 -----------------------------------------------------------------
 A Microsoft(r) Windows(r) GUI for Greseaweazle Host Tools
