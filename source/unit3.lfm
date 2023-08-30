@@ -1,0 +1,80 @@
+object FrmOptions: TFrmOptions
+  Left = 751
+  Height = 183
+  Top = 395
+  Width = 560
+  BorderStyle = bsDialog
+  Caption = 'Options'
+  ClientHeight = 183
+  ClientWidth = 560
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object Cancel: TButton
+    Left = 8
+    Height = 25
+    Top = 152
+    Width = 75
+    Caption = 'Cancel'
+    OnClick = CancelClick
+    TabOrder = 0
+  end
+  object OK: TButton
+    Left = 477
+    Height = 25
+    Top = 152
+    Width = 75
+    Caption = 'OK'
+    OnClick = OKClick
+    TabOrder = 1
+  end
+  object GroupBox1: TGroupBox
+    Left = 8
+    Height = 148
+    Top = 0
+    Width = 544
+    Caption = 'Location:'
+    ClientHeight = 128
+    ClientWidth = 540
+    TabOrder = 2
+    object lblDiskdefs: TLabel
+      Left = 16
+      Height = 15
+      Top = 8
+      Width = 74
+      Caption = 'Diskdefs (file):'
+      ParentColor = False
+    end
+    object fileDiskdefs: TFileNameEdit
+      Left = 24
+      Height = 23
+      Top = 32
+      Width = 504
+      FilterIndex = 0
+      HideDirectories = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 0
+    end
+    object lblTemplates: TLabel
+      Left = 16
+      Height = 15
+      Top = 72
+      Width = 98
+      Caption = 'Templates (folder):'
+      ParentColor = False
+    end
+    object folderTemplates: TDirectoryEdit
+      Left = 24
+      Height = 23
+      Top = 95
+      Width = 506
+      ShowHidden = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 1
+    end
+  end
+end

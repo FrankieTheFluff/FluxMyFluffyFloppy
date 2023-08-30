@@ -1,0 +1,266 @@
+object frmGW: TfrmGW
+  Left = 575
+  Height = 476
+  Top = 328
+  Width = 847
+  Caption = 'Greaseweazle'
+  ClientHeight = 476
+  ClientWidth = 847
+  OnClose = FormClose
+  OnShow = FormShow
+  Position = poMainFormCenter
+  LCLVersion = '2.2.6.0'
+  object pnSides: TPanel
+    Left = 0
+    Height = 476
+    Top = 0
+    Width = 232
+    Align = alLeft
+    BevelOuter = bvNone
+    ClientHeight = 476
+    ClientWidth = 232
+    TabOrder = 0
+    Visible = False
+    object Label1: TLabel
+      Left = 8
+      Height = 15
+      Top = 5
+      Width = 34
+      Caption = 'Side 0:'
+      ParentColor = False
+    end
+    object StrGrid_s0: TStringGrid
+      Left = 15
+      Height = 210
+      Top = 24
+      Width = 209
+      AlternateColor = clNone
+      AutoFillColumns = True
+      ColCount = 11
+      Columns = <      
+        item
+          Alignment = taCenter
+          Title.Caption = '0'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '1'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '2'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '3'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '4'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '5'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '6'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '7'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '8'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '9'
+          Width = 19
+        end>
+      DefaultDrawing = False
+      Enabled = False
+      ExtendedSelect = False
+      FixedColor = clNone
+      Flat = True
+      Font.CharSet = ANSI_CHARSET
+      Font.Height = -12
+      Font.Name = 'Consolas'
+      Font.Pitch = fpFixed
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      GridLineColor = clForm
+      HeaderHotZones = [gzFixedCols, gzFixedRows]
+      ParentFont = False
+      RowCount = 10
+      TabOrder = 0
+      ColWidths = (
+        18
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+      )
+    end
+    object Label2: TLabel
+      Left = 8
+      Height = 15
+      Top = 240
+      Width = 34
+      Caption = 'Side 1:'
+      ParentColor = False
+    end
+    object StrGrid_s1: TStringGrid
+      Left = 15
+      Height = 210
+      Top = 256
+      Width = 209
+      AlternateColor = clNone
+      AutoFillColumns = True
+      ColCount = 11
+      Columns = <      
+        item
+          Alignment = taCenter
+          Title.Caption = '0'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '1'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '2'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '3'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '4'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '5'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '6'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '7'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '8'
+          Width = 19
+        end      
+        item
+          Alignment = taCenter
+          Title.Caption = '9'
+          Width = 19
+        end>
+      DefaultDrawing = False
+      Enabled = False
+      ExtendedSelect = False
+      FixedColor = clNone
+      Flat = True
+      Font.CharSet = ANSI_CHARSET
+      Font.Height = -12
+      Font.Name = 'Consolas'
+      Font.Pitch = fpFixed
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      GridLineColor = clForm
+      HeaderHotZones = [gzFixedCols, gzFixedRows]
+      ParentFont = False
+      RowCount = 10
+      TabOrder = 1
+      ColWidths = (
+        18
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+      )
+    end
+  end
+  object Panel2: TPanel
+    Left = 232
+    Height = 476
+    Top = 0
+    Width = 615
+    Align = alClient
+    BevelOuter = bvNone
+    Caption = 'Panel2'
+    ClientHeight = 476
+    ClientWidth = 615
+    TabOrder = 1
+    object Memo1: TMemo
+      Left = 16
+      Height = 410
+      Top = 24
+      Width = 591
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      Font.CharSet = ANSI_CHARSET
+      Font.Height = -12
+      Font.Name = 'Consolas'
+      Font.Pitch = fpFixed
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentFont = False
+      ReadOnly = True
+      ScrollBars = ssBoth
+      TabOrder = 0
+    end
+    object Label3: TLabel
+      Left = 8
+      Height = 15
+      Top = 5
+      Width = 100
+      Caption = 'Console messages:'
+      ParentColor = False
+    end
+    object Button1: TButton
+      Left = 532
+      Height = 25
+      Top = 446
+      Width = 75
+      Anchors = [akRight, akBottom]
+      Caption = '&Close'
+      OnClick = Button1Click
+      TabOrder = 1
+    end
+  end
+end
