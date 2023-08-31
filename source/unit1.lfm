@@ -966,7 +966,7 @@ object Form1: TForm1
         object cbWriteTplName: TComboBox
           Left = 96
           Height = 23
-          Top = 0
+          Top = 2
           Width = 466
           Anchors = [akTop, akLeft, akRight]
           Font.Color = clBlack

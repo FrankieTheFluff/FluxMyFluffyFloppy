@@ -585,8 +585,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.00';
-  sAppDate := '2023-08-30';
+  sAppVersion := 'v5.0.1';
+  sAppDate := '2023-08-31';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   sAppPath := Dircheck(ExtractFilePath(ParamStr(0)));
@@ -604,7 +604,7 @@ begin
       INI.WriteString('FluxMyFluffyFloppy', 'Version', sAppVersion);
       INI.WriteString('FluxMyFluffyFloppy', 'Greaseweazle', '');
       INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', '');
-      INI.WriteString('FluxMyFluffyFloppy', 'FolderTemplates', sAppPath + 'templates\');
+      INI.WriteString('FluxMyFluffyFloppy', 'FolderTemplates', sAppPath + 'Templates\');
       INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Read_Dest', AppendPathDelim(GetUserDir + 'Documents'));
       INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Write_Source', AppendPathDelim(GetUserDir + 'Documents'));
       INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Convert_Source', sAppPath);
@@ -1421,11 +1421,13 @@ begin
    answer := MessageDlg('Please define a template name!',mtWarning, [mbOK], 0);
    if answer = mrOk then exit;
  end;
-  if DirectoryExists(sAppPath + 'Templates\') = false then CreateDir(sAppPath + 'Templates\');
+
+ tmp := INI.ReadString('FluxMyFluffyFloppy', 'FolderTemplates', '');
+ if tmp = '' then CreateDir(sAppPath + 'Templates\');
 
   if cbReadTplName.Text <> '' then
-  begin
-    INIRead := TINIFile.Create(sAppPath + 'Templates\' + cbReadTplName.Text + '.inir');
+   begin
+    INIRead := TINIFile.Create(DirCheck(tmp) + cbReadTplName.Text + '.inir');
     try
       INIRead.DeleteKey('Settings','RPM'); // older than 2.00
       INIRead.WriteString('FluxMyFluffyFloppy-Read-Template', 'Version', sAppVersion_ReadTmpl);
@@ -1544,10 +1546,13 @@ begin
    if answer = mrOk then exit;
   end;
 
-if cbWriteTplName.Text <> '' then
- begin
-  IniWrite := TINIFile.Create(sAppPath + 'Templates\' + cbWriteTplName.Text + '.iniw');
-  try
+ tmp := INI.ReadString('FluxMyFluffyFloppy', 'FolderTemplates', '');
+ if tmp = '' then CreateDir(sAppPath + 'Templates\');
+
+ if cbWriteTplName.Text <> '' then
+  begin
+   IniWrite := TINIFile.Create(DirCheck(tmp) + cbWriteTplName.Text + '.iniw');
+   try
     IniWrite.DeleteKey('Settings','RPM'); // older than 2.00
     IniWrite.DeleteKey('Settings','Erase-Empty'); // older than 2.00
     IniWrite.DeleteKey('Settings','No-Verify'); // older than 2.00
@@ -1576,10 +1581,9 @@ if cbWriteTplName.Text <> '' then
     Refresh_Templates_Write_DropDown;
     cbWriteTplName.Text := tmp;
     Refresh_Templates_Write;
-  finally
+   finally
+   end;
   end;
- end;
-
 end;
 
 procedure TForm1.Refresh_Templates_Write_DropDown;
@@ -1631,7 +1635,7 @@ begin
   If TmplFolder = '' then exit;
   INITmplFolder.Free;
 
-  iniRefreshWrite := TINIFile.Create(TmplFolder + cbWriteTplName.Text + '.iniw');
+  iniRefreshWrite := TINIFile.Create(DirCheck(TmplFolder) + cbWriteTplName.Text + '.iniw');
   try
     //ver := iniRefreshRead.ReadString('FluxMyFluffyFloppy-Write-Template','Version','');
     //name := iniRefreshRead.ReadString('FluxMyFluffyFloppy-Write-Template', 'Name', '');
