@@ -6,7 +6,7 @@ v5.0.1 - 2023-08-31
 
 -----------------------------------------------------------------
 
-A Microsoft(r) Windows(r) GUI for Greseaweazle Host Tools
+A Microsoft(r) Windows(r) GUI for Greaseweazle Host Tools
 
 FREEWARE / OpenSource
 
