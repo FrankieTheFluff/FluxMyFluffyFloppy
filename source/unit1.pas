@@ -585,8 +585,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.0.1';
-  sAppDate := '2023-08-31';
+  sAppVersion := 'v5.0.2';
+  sAppDate := '2023-10-17';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   sAppPath := Dircheck(ExtractFilePath(ParamStr(0)));
@@ -686,9 +686,9 @@ begin
 
   // Create StringLists Read/Conv Destination fileextension
   //Supported file suffixes:
-  //.a2r   .adf   .ads   .adm   .adl   .d64   .d71   .d81   .d88   .dcp   .dim
-  //.dsd   .dsk   .edsk  .fdi   .hdm   .hfe   .ima   .img   .imd   .ipf   .mgt
-  //.msa   .raw   .sf7   .scp   .ssd   .st    .td0   .xdf
+  //.a2r   .adf   .ads   .adm   .adl   .ctr   .d64   .d71   .d81   .d88   .dcp
+  //.dim   .dsd   .dsk   .edsk  .fdi   .hdm   .hfe   .ima   .img   .imd   .ipf
+  //.mgt   .msa   .raw   .sf7   .scp   .ssd   .st    .td0   .xdf
   FormatDest_Ext := TStringList.Create;
   FormatDest_Ext.Add('');
   FormatDest_Ext.Add('A2R (Applesauce)');
@@ -696,6 +696,7 @@ begin
   FormatDest_Ext.Add('ADS (Acorn)');
   FormatDest_Ext.Add('ADM (Acorn)');
   FormatDest_Ext.Add('ADL (Acorn)');
+  FormatDest_Ext.Add('CTR (CT Raw)');
   FormatDest_Ext.Add('D64 (Commodore 1541)');
   FormatDest_Ext.Add('D71 (Commodore 1571)');
   FormatDest_Ext.Add('D81 (Commodore 1581)');
@@ -789,6 +790,7 @@ begin
   FormatSpecs_Read.Add('pc98.2dd');
   FormatSpecs_Read.Add('pc98.2hd');
   FormatSpecs_Read.Add('pc98.2hs');
+  FormatSpecs_Read.Add('pc98.n88basic.hd');
   FormatSpecs_Read.Add('raw.125');
   FormatSpecs_Read.Add('raw.250');
   FormatSpecs_Read.Add('raw.500');
@@ -796,6 +798,7 @@ begin
   FormatSpecs_Read.Add('sega.sf7000');
   FormatSpecs_Read.Add('tsc.flex.dsdd');
   FormatSpecs_Read.Add('tsc.flex.ssdd');
+  FormatSpecs_Read.Add('zx.quorum.800');
   FormatSpecs_Read.Add('zx.trdos.640');
 
   // Create Stringlist Write Diskdefs
@@ -865,6 +868,7 @@ begin
   FormatSpecs_Write.Add('pc98.2dd');
   FormatSpecs_Write.Add('pc98.2hd');
   FormatSpecs_Write.Add('pc98.2hs');
+  FormatSpecs_Write.Add('pc98.n88basic.hd');
   FormatSpecs_Write.Add('raw.125');
   FormatSpecs_Write.Add('raw.250');
   FormatSpecs_Write.Add('raw.500');
@@ -872,6 +876,7 @@ begin
   FormatSpecs_Write.Add('sega.sf7000');
   FormatSpecs_Write.Add('tsc.flex.dsdd');
   FormatSpecs_Write.Add('tsc.flex.ssdd');
+  FormatSpecs_Write.Add('zx.quorum.800');
   FormatSpecs_Write.Add('zx.trdos.640');
 
   // Create StringList Convert  Diskdefs
@@ -941,6 +946,7 @@ begin
   FormatSpecs_Conv.Add('pc98.2dd');
   FormatSpecs_Conv.Add('pc98.2hd');
   FormatSpecs_Conv.Add('pc98.2hs');
+  FormatSpecs_Conv.Add('pc98.n88basic.hd');
   FormatSpecs_Conv.Add('raw.125');
   FormatSpecs_Conv.Add('raw.250');
   FormatSpecs_Conv.Add('raw.500');
@@ -948,11 +954,12 @@ begin
   FormatSpecs_Conv.Add('sega.sf7000');
   FormatSpecs_Conv.Add('tsc.flex.dsdd');
   FormatSpecs_Conv.Add('tsc.flex.ssdd');
+  FormatSpecs_Conv.Add('zx.quorum.800');
   FormatSpecs_Conv.Add('zx.trdos.640');
 
   EdGWFile.Filter := 'gw.exe|*.exe';
-  EdWriteFileName.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.dsd;*.d64;*.d71;*.d81;*.dsk;*.img;*.ima;*.imd;*.hfe;*.ipf;*.msa;*.scp;*.sf7;*.ssd;*.st|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|ImageDisk image (imd)|*.imd|Floppy image (img)|*.img|HFE (HxC Floppy Emulator) (hfe)|*.hfe|IPF|*.ipf|Kryoflux (raw)|*.raw|Disciple (mgt)|*.mgt|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
-  edConvFileSource.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.dsd;*.d64;*.d71;*.d81;*.dsk;*.img;*.ima;*.imd;*.hfe;*.ipf;*.msa;*.scp;*.sf7;*.ssd;*.st|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|EDSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|ImageDisk image (imd)|*.imd|Floppy image (img)|*.img|HFE (HxC Floppy Emulator) (hfe)|*.hfe|IPF|*.ipf|Kryoflux (raw)|*.raw|Disciple (mgt)|*.mgt|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
+  EdWriteFileName.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.dsd;*.d64;*.d71;*.d81;*.dsk;*.img;*.ima;*.imd;*.hfe;*.ipf;*.msa;*.scp;*.sf7;*.ssd;*.st|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|ImageDisk image (imd)|*.imd|Floppy image (img)|*.img|HFE (HxC Floppy Emulator) (hfe)|*.hfe|IPF|*.ipf|Kryoflux (raw)|*.raw|Disciple (mgt)|*.mgt|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
+  edConvFileSource.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.dsd;*.d64;*.d71;*.d81;*.dsk;*.img;*.ima;*.imd;*.hfe;*.ipf;*.msa;*.scp;*.sf7;*.ssd;*.st|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|EDSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|ImageDisk image (imd)|*.imd|Floppy image (img)|*.img|HFE (HxC Floppy Emulator) (hfe)|*.hfe|IPF|*.ipf|Kryoflux (raw)|*.raw|Disciple (mgt)|*.mgt|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
 
  Get_DeviceCOM;
 
@@ -2308,7 +2315,7 @@ end;
 
 procedure TForm1.Get_FormatSpecs_Conv;
 var
-   i, i2, l, answer : integer;
+   i, i2, l : integer;
    tmp : string;
 begin
  FormatSpecs_ConvDiskDefs := TStringList.Create;
@@ -3197,7 +3204,7 @@ end;
 procedure TForm1.Create_Filename;
 var
   filenameRead, lBlOf, filenameConvert: string;
-  disc1, disc2, digits, answer : integer;
+  disc1, disc2, digits : integer;
 begin
 
   // Read

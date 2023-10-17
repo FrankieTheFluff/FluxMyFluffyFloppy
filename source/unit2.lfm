@@ -1,7 +1,7 @@
 object FrmAbout: TFrmAbout
-  Left = 1045
+  Left = 761
   Height = 417
-  Top = 295
+  Top = 360
   Width = 585
   Caption = 'About'
   ClientHeight = 417
@@ -136,7 +136,7 @@ object FrmAbout: TFrmAbout
       Height = 15
       Top = 176
       Width = 316
-      Caption = 'Requires "Greaseweazle v1.13+" (and optional ''diskdefs.cfg'')'
+      Caption = 'Requires "Greaseweazle v1.16+" (and optional ''diskdefs.cfg'')'
       Font.CharSet = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -12

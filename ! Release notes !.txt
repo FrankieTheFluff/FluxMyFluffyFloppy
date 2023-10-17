@@ -25,6 +25,11 @@ https://github.com/t-edson/UnTerminal
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v5.0.2 - 2023-10-17
+* New disc formats: pc98.n88basic.hd, zx.quorum.800
+* New image format: CT Raw (ctr)
++ Updated "diskdefs.cfg" (2023-08-17)
+
 v5.0.1 - 2023-08-31
 - Read: Saving template in default instead of defined (options) templates-folder
 - Write: Saving template in default instead of defined (options) templates-folder
