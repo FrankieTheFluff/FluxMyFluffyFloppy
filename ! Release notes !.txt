@@ -25,6 +25,10 @@ https://github.com/t-edson/UnTerminal
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v5.0.3 - 2023-11-18
+- Read: Fixed reported issue #3: filename problem for kryoflux
+- Convert: Fixed reported issue #3: filename problem for kryoflux
+
 v5.0.2 - 2023-10-17
 * New disc formats: pc98.n88basic.hd, zx.quorum.800
 * New image format: CT Raw (ctr)
