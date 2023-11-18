@@ -585,8 +585,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.0.2';
-  sAppDate := '2023-10-17';
+  sAppVersion := 'v5.0.3';
+  sAppDate := '2023-11-18';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   sAppPath := Dircheck(ExtractFilePath(ParamStr(0)));
@@ -3388,6 +3388,8 @@ begin
       end;
     'SCP':
       cbReadPreview.Text := filenameRead + '.' + lowercase(leftStr(cbReadFormat.Text,3)) + cbReadFormatoption.Text;
+    'RAW':
+      cbReadPreview.Text := filenameRead + '00.0.' + lowercase(leftStr(cbReadFormat.Text,3));
     else
      cbReadFormatOptionHFEVer.Enabled :=false;
      cbReadFormatOptionHFEInt.Enabled :=false;
@@ -3574,6 +3576,8 @@ begin
        end;
      'SCP':
        edConvFilenamePreview.Text := FilenameConvert + '.' + Lowercase(leftStr(cbConvFileFormat.Text,3)) + cbConvFormatOption.Text;
+     'RAW':
+       edConvFilenamePreview.Text := FilenameConvert + '00.0.' + lowercase(leftStr(cbConvFileFormat.Text,3));
      else
        cbConvFormatOptionHFEVer.Enabled :=false;
        cbConvFormatOptionHFEInt.Enabled :=false;
