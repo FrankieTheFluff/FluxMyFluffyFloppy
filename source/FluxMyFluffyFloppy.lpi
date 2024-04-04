@@ -10,7 +10,7 @@
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
       <XPManifest>
-        <DpiAware Value="True"/>
+        <DpiAware Value="True/PM_V2"/>
         <TextName Value="FluxMyFluffyFloppy"/>
         <TextDesc Value="A GUI for Greaseweazle"/>
       </XPManifest>
@@ -19,15 +19,15 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="5"/>
-      <RevisionNr Value="3"/>
-      <StringTable Comments="Freeware" CompanyName="FrankieTheFluff" FileDescription="FluxMyFluffyFloppy - A GUI for Greaseweazle" InternalName="FluxMyFluffyFloppy" LegalCopyright="(c) 2021-2023 FrankieTheFluff" OriginalFilename="fluxmyfluffyfloppy.exe" ProductName="FluxMyFluffyFloppy" ProductVersion="5"/>
+      <RevisionNr Value="4"/>
+      <StringTable Comments="Freeware" CompanyName="FrankieTheFluff" FileDescription="FluxMyFluffyFloppy - A GUI for Greaseweazle" InternalName="FluxMyFluffyFloppy" LegalCopyright="(c) 2021-2024 FrankieTheFluff" OriginalFilename="fluxmyfluffyfloppy.exe" ProductName="FluxMyFluffyFloppy" ProductVersion="5"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Default" Default="True"/>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
-      <DestinationDirectory Value="C:\Users\Admin\Developer\FluxMyFluffyFloppy\Sources\5.x\Publish_Sourcecode"/>
+      <DestinationDirectory Value="C:\Users\fboep\Developer\FluxMyFluffyFloppy\Sources\5.x\Publish_Sourcecode"/>
       <UseFileFilters Value="True"/>
     </PublishOptions>
     <RunParams>

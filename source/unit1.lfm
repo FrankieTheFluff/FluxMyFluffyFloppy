@@ -1,16 +1,16 @@
 object Form1: TForm1
-  Left = 762
+  Left = 485
   Height = 753
-  Top = 190
+  Top = 145
   Width = 857
   Caption = 'FluxMyFluffyFloppy'
-  ClientHeight = 733
+  ClientHeight = 753
   ClientWidth = 857
   Menu = MainMenu1
   OnClose = FormClose
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.2.0.0'
   object grpGW: TGroupBox
     Left = 2
     Height = 80
@@ -63,10 +63,10 @@ object Form1: TForm1
       Top = 28
       Width = 144
       ItemHeight = 15
-      OnChange = cbGWDevCOMChange
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
+      OnChange = cbGWDevCOMChange
     end
     object lblGWDrive: TLabel
       Left = 264
@@ -91,10 +91,10 @@ object Form1: TForm1
         'A'
         'B'
       )
-      OnChange = cbGWDriveChange
       ParentShowHint = False
       ShowHint = True
       TabOrder = 3
+      OnChange = cbGWDriveChange
     end
     object btGWCMDDir: TButton
       Left = 756
@@ -104,10 +104,10 @@ object Form1: TForm1
       Width = 86
       Anchors = [akTop, akRight]
       Caption = 'CMD/Dir'
-      OnClick = btGWCMDDirClick
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
+      OnClick = btGWCMDDirClick
     end
     object btGWReset: TButton
       Left = 583
@@ -117,10 +117,10 @@ object Form1: TForm1
       Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Reset'
-      OnClick = btGWResetClick
       ParentShowHint = False
       ShowHint = True
       TabOrder = 4
+      OnClick = btGWResetClick
     end
     object btGWInfo: TButton
       Left = 756
@@ -130,10 +130,10 @@ object Form1: TForm1
       Width = 86
       Anchors = [akTop, akRight]
       Caption = 'Info'
-      OnClick = btGWInfoClick
       ParentShowHint = False
       ShowHint = True
       TabOrder = 6
+      OnClick = btGWInfoClick
     end
     object btGWBandwidth: TButton
       Left = 668
@@ -143,10 +143,10 @@ object Form1: TForm1
       Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Bandwidth'
-      OnClick = btGWBandwidthClick
       ParentShowHint = False
       ShowHint = True
       TabOrder = 5
+      OnClick = btGWBandwidthClick
     end
   end
   object pcActions: TPageControl
@@ -203,10 +203,10 @@ object Form1: TForm1
           Width = 75
           Anchors = [akTop, akRight]
           Caption = 'Explorer'
-          OnClick = btReadDestExploreClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
+          OnClick = btReadDestExploreClick
         end
         object lblReadDestFile: TLabel
           Left = 16
@@ -223,8 +223,8 @@ object Form1: TForm1
           Width = 645
           Anchors = [akTop, akLeft, akRight]
           MaxLength = 200
-          OnChange = EdReadFilenameChange
           TabOrder = 2
+          OnChange = EdReadFilenameChange
         end
         object btReadDiskReset: TButton
           Left = 754
@@ -235,10 +235,10 @@ object Form1: TForm1
           Anchors = [akTop, akRight]
           Caption = 'Clear'
           Enabled = False
-          OnClick = btReadDiskResetClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 3
+          OnClick = btReadDiskResetClick
         end
         object lblReadDestDiskNr: TLabel
           Left = 16
@@ -265,9 +265,9 @@ object Form1: TForm1
           Width = 80
           Alignment = taCenter
           Enabled = False
-          OnChange = edReadDiskOfChange
           TabOrder = 5
           Text = '_of_'
+          OnChange = edReadDiskOfChange
         end
         object edReadDisk2: TSpinEdit
           Left = 260
@@ -303,7 +303,7 @@ object Form1: TForm1
           Left = 688
           Height = 19
           Top = 64
-          Width = 83
+          Width = 81
           Caption = 'Incremental'
           Enabled = False
           TabOrder = 8
@@ -323,8 +323,8 @@ object Form1: TForm1
           Width = 228
           Enabled = False
           ItemHeight = 15
-          OnChange = cbReadFormatChange
           TabOrder = 10
+          OnChange = cbReadFormatChange
         end
         object lblReadDestFormatExtOpt: TLabel
           Left = 27
@@ -341,18 +341,18 @@ object Form1: TForm1
           Width = 184
           Enabled = False
           ItemHeight = 15
-          OnChange = cbReadFormatOptionChange
           TabOrder = 11
+          OnChange = cbReadFormatOptionChange
         end
         object cbReadNoOverwrite: TCheckBox
           Left = 688
           Height = 19
           Top = 96
-          Width = 108
+          Width = 106
           Caption = 'Do not overwrite'
           Enabled = False
-          OnClick = cbReadNoOverwriteClick
           TabOrder = 9
+          OnClick = cbReadNoOverwriteClick
         end
         object lblReadDestPreview: TLabel
           Left = 16
@@ -369,8 +369,8 @@ object Form1: TForm1
           Width = 733
           Anchors = [akTop, akLeft, akRight]
           Enabled = False
-          OnChange = cbReadPreviewChange
           TabOrder = 15
+          OnChange = cbReadPreviewChange
         end
         object cbReadFormatOptionHFEInt: TComboBox
           Left = 420
@@ -380,10 +380,10 @@ object Form1: TForm1
           Width = 192
           Enabled = False
           ItemHeight = 15
-          OnChange = cbReadFormatOptionChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 12
+          OnChange = cbReadFormatOptionChange
         end
         object lblReadDestFormatExtOpt1: TLabel
           Left = 340
@@ -415,10 +415,10 @@ object Form1: TForm1
           Width = 192
           Enabled = False
           ItemHeight = 15
-          OnChange = cbReadFormatOptionChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 14
+          OnChange = cbReadFormatOptionChange
         end
         object lblReadDestFormatExtOpt3: TLabel
           Left = 27
@@ -443,10 +443,10 @@ object Form1: TForm1
             ''
             '::version=3'
           )
-          OnChange = cbReadFormatOptionChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 13
+          OnChange = cbReadFormatOptionChange
         end
       end
       object GroupBox4: TGroupBox
@@ -477,10 +477,10 @@ object Form1: TForm1
           Items.Strings = (
             'Internal'
           )
-          OnChange = cbReadTplFormatSrcChange
           Style = csDropDownList
           TabOrder = 0
           Text = 'Internal'
+          OnChange = cbReadTplFormatSrcChange
         end
         object lblReadTplCyls: TLabel
           Left = 655
@@ -509,8 +509,8 @@ object Form1: TForm1
             '0-41'
             '0-7,9-12'
           )
-          OnChange = cbReadTplCylsChange
           TabOrder = 10
+          OnChange = cbReadTplCylsChange
         end
         object lblReadTplRevs: TLabel
           Left = 16
@@ -541,10 +541,10 @@ object Form1: TForm1
             '8'
             '9'
           )
-          OnChange = cbReadTplRevsChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
+          OnChange = cbReadTplRevsChange
         end
         object lblReadTplHeads: TLabel
           Left = 655
@@ -568,8 +568,8 @@ object Form1: TForm1
             '0'
             '1'
           )
-          OnChange = cbReadTplHeadsChange
           TabOrder = 11
+          OnChange = cbReadTplHeadsChange
         end
         object cbReadTplFormat: TComboBox
           Left = 96
@@ -577,8 +577,8 @@ object Form1: TForm1
           Top = 32
           Width = 208
           ItemHeight = 15
-          OnChange = cbReadTplFormatChange
           TabOrder = 1
+          OnChange = cbReadTplFormatChange
         end
         object lblReadTplRaw: TLabel
           Left = 16
@@ -590,14 +590,14 @@ object Form1: TForm1
         end
         object cbReadTplRaw: TCheckBox
           Left = 96
-          Height = 19
+          Height = 17
           Hint = 'Output raw stream (--format verifies only)'
           Top = 96
-          Width = 20
-          OnClick = cbReadTplRawClick
+          Width = 18
           ParentShowHint = False
           ShowHint = True
           TabOrder = 3
+          OnClick = cbReadTplRawClick
         end
         object lblReadTplSteps: TLabel
           Left = 655
@@ -623,8 +623,8 @@ object Form1: TForm1
             '4'
             '1/2'
           )
-          OnChange = cbReadTplStepsChange
           TabOrder = 12
+          OnChange = cbReadTplStepsChange
         end
         object lblReadTplFakeIndex: TLabel
           Left = 16
@@ -647,10 +647,10 @@ object Form1: TForm1
             '300rpm'
             '8000000scp'
           )
-          OnChange = cbReadTplFakeIndexChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 4
+          OnChange = cbReadTplFakeIndexChange
         end
         object lblReadTplHSwap: TLabel
           Left = 655
@@ -664,11 +664,11 @@ object Form1: TForm1
           Left = 719
           Height = 19
           Top = 96
-          Width = 98
+          Width = 96
           Caption = 'Side 1 as side 0'
           Enabled = False
-          OnChange = cbReadTplHSwapChange
           TabOrder = 13
+          OnChange = cbReadTplHSwapChange
         end
         object lblReadAdjustSpeed: TLabel
           Left = 340
@@ -691,10 +691,10 @@ object Form1: TForm1
             '300'
             '360'
           )
-          OnChange = cbReadTplAdjustSpeedChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 5
+          OnChange = cbReadTplAdjustSpeedChange
         end
         object lblReadTplFlippy: TLabel
           Left = 655
@@ -716,8 +716,8 @@ object Form1: TForm1
             'h0.off=+8'
             'h1.off=-8'
           )
-          OnChange = cbReadTplFlippyChange
           TabOrder = 14
+          OnChange = cbReadTplFlippyChange
         end
         object lblReadTplRetries: TLabel
           Left = 340
@@ -749,10 +749,10 @@ object Form1: TForm1
             '8'
             '9'
           )
-          OnChange = cbReadTplRetriesChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
+          OnChange = cbReadTplRetriesChange
         end
         object lblReadTplSeekRetries: TLabel
           Left = 340
@@ -783,10 +783,10 @@ object Form1: TForm1
             '8'
             '9'
           )
-          OnChange = cbReadTplSeekRetriesChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 7
+          OnChange = cbReadTplSeekRetriesChange
         end
         object lblReadTplPLL: TLabel
           Left = 340
@@ -808,17 +808,17 @@ object Form1: TForm1
             'period=5:phase=60'
             'period=5:phase=60:lowpass=2.5us'
           )
-          OnChange = cbReadTplPLLChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 8
+          OnChange = cbReadTplPLLChange
         end
         object lblReadTplDD: TLabel
           Left = 340
           Height = 15
           Top = 128
-          Width = 19
-          Caption = 'DD:'
+          Width = 38
+          Caption = 'Densel:'
           ParentColor = False
         end
         object cbReadTplDD: TComboBox
@@ -834,10 +834,10 @@ object Form1: TForm1
             'H'
             'L'
           )
-          OnChange = cbReadTplDDChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 9
+          OnChange = cbReadTplDDChange
         end
       end
       object GroupBox5: TGroupBox
@@ -865,9 +865,9 @@ object Form1: TForm1
           Width = 466
           Anchors = [akTop, akLeft, akRight]
           ItemHeight = 15
+          TabOrder = 0
           OnChange = cbReadTplNameChange
           OnSelect = cbReadTplNameSelect
-          TabOrder = 0
         end
         object btReadTplNew: TButton
           Left = 578
@@ -877,10 +877,10 @@ object Form1: TForm1
           Width = 75
           Anchors = [akTop, akRight]
           Caption = 'New'
-          OnClick = btReadTplNewClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
+          OnClick = btReadTplNewClick
         end
         object btReadTplSave: TButton
           Left = 666
@@ -891,10 +891,10 @@ object Form1: TForm1
           Anchors = [akTop, akRight]
           Caption = 'Save'
           Enabled = False
-          OnClick = btReadTplSaveClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
+          OnClick = btReadTplSaveClick
         end
         object btReadTplDel: TButton
           Left = 754
@@ -905,10 +905,10 @@ object Form1: TForm1
           Anchors = [akTop, akRight]
           Caption = 'Delete'
           Enabled = False
-          OnClick = btReadTplDelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 3
+          OnClick = btReadTplDelClick
         end
         object lblReadDescr: TLabel
           Left = 16
@@ -966,15 +966,15 @@ object Form1: TForm1
         object cbWriteTplName: TComboBox
           Left = 96
           Height = 23
-          Top = 2
+          Top = 0
           Width = 466
           Anchors = [akTop, akLeft, akRight]
           Font.Color = clBlack
           ItemHeight = 15
-          OnChange = cbWriteTplNameChange
-          OnSelect = cbWriteTplNameSelect
           ParentFont = False
           TabOrder = 0
+          OnChange = cbWriteTplNameChange
+          OnSelect = cbWriteTplNameSelect
         end
         object BtWriteTplNew: TButton
           Left = 578
@@ -984,10 +984,10 @@ object Form1: TForm1
           Width = 75
           Anchors = [akTop, akRight]
           Caption = 'New'
-          OnClick = BtWriteTplNewClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
+          OnClick = BtWriteTplNewClick
         end
         object BtWriteTplSave: TButton
           Left = 666
@@ -998,10 +998,10 @@ object Form1: TForm1
           Anchors = [akTop, akRight]
           Caption = 'Save'
           Enabled = False
-          OnClick = BtWriteTplSaveClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
+          OnClick = BtWriteTplSaveClick
         end
         object BtWriteTplDel: TButton
           Left = 754
@@ -1012,10 +1012,10 @@ object Form1: TForm1
           Anchors = [akTop, akRight]
           Caption = 'Delete'
           Enabled = False
-          OnClick = BtWriteTplDelClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 3
+          OnClick = BtWriteTplDelClick
         end
         object lblWriteDescription: TLabel
           Left = 16
@@ -1064,8 +1064,8 @@ object Form1: TForm1
           Width = 208
           DropDownCount = 15
           ItemHeight = 15
-          OnChange = cbWriteTplFormatChange
           TabOrder = 1
+          OnChange = cbWriteTplFormatChange
         end
         object lblWriteTplCyls: TLabel
           Left = 560
@@ -1096,8 +1096,8 @@ object Form1: TForm1
             '0-42'
             '0-7,9-12'
           )
+          TabOrder = 10
           OnChange = cbWriteTplCylsChange
-          TabOrder = 9
         end
         object lblWriteTplEraseEmpty: TLabel
           Left = 16
@@ -1109,14 +1109,14 @@ object Form1: TForm1
         end
         object cbWriteTplEraseEmpty: TCheckBox
           Left = 96
-          Height = 19
+          Height = 17
           Hint = 'Erase empty tracks (default: skip)'
           Top = 64
-          Width = 20
-          OnChange = cbWriteTplEraseEmptyChange
+          Width = 18
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
+          OnChange = cbWriteTplEraseEmptyChange
         end
         object lblWriteTplHeads: TLabel
           Left = 560
@@ -1140,8 +1140,8 @@ object Form1: TForm1
             '0'
             '1'
           )
+          TabOrder = 11
           OnChange = cbWriteTplHeadsChange
-          TabOrder = 10
         end
         object lblWriteTplFakeIndex: TLabel
           Left = 16
@@ -1164,10 +1164,10 @@ object Form1: TForm1
             '300rpm'
             '8000000scp'
           )
-          OnChange = cbWriteTplFakeIndexChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 3
+          OnChange = cbWriteTplFakeIndexChange
         end
         object lblWriteTplSteps: TLabel
           Left = 560
@@ -1191,8 +1191,8 @@ object Form1: TForm1
             '1/2'
             '2'
           )
+          TabOrder = 12
           OnChange = cbWriteTplStepsChange
-          TabOrder = 11
         end
         object lblWriteTplNoVerify: TLabel
           Left = 16
@@ -1204,14 +1204,14 @@ object Form1: TForm1
         end
         object cbWriteTplNoVerify: TCheckBox
           Left = 96
-          Height = 19
+          Height = 17
           Hint = 'Disable verify'
           Top = 128
-          Width = 20
-          OnChange = cbWriteTplNoVerifyChange
+          Width = 18
           ParentShowHint = False
           ShowHint = True
           TabOrder = 4
+          OnChange = cbWriteTplNoVerifyChange
         end
         object lblWriteTplHSwap: TLabel
           Left = 560
@@ -1225,11 +1225,11 @@ object Form1: TForm1
           Left = 624
           Height = 19
           Top = 96
-          Width = 98
+          Width = 96
           Caption = 'Side 1 as side 0'
           Enabled = False
+          TabOrder = 13
           OnChange = cbWriteTplHSwapChange
-          TabOrder = 12
         end
         object lblWriteTplRetries: TLabel
           Left = 16
@@ -1260,10 +1260,10 @@ object Form1: TForm1
             '8'
             '9'
           )
-          OnChange = cbWriteTplRetriesChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 5
+          OnChange = cbWriteTplRetriesChange
         end
         object lblWriteTplFlippy: TLabel
           Left = 560
@@ -1286,8 +1286,8 @@ object Form1: TForm1
             'h0.off=+8'
             'h1.off=-8'
           )
+          TabOrder = 14
           OnChange = cbWriteTplFlippyChange
-          TabOrder = 13
         end
         object lblWriteTplPrecomp: TLabel
           Left = 16
@@ -1309,10 +1309,10 @@ object Form1: TForm1
             ''
             'type=mfm:40=125'
           )
-          OnChange = cbWriteTplPrecompChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
+          OnChange = cbWriteTplPrecompChange
         end
         object lblWriteFile: TLabel
           Left = 16
@@ -1339,7 +1339,7 @@ object Form1: TForm1
           MaxLength = 0
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 14
+          TabOrder = 15
           OnChange = edWriteFileNameChange
         end
         object cbWriteTplFormatSrc: TComboBox
@@ -1353,20 +1353,20 @@ object Form1: TForm1
           Items.Strings = (
             'Internal'
           )
-          OnChange = cbWriteTplFormatSrcChange
           Style = csDropDownList
           TabOrder = 0
           Text = 'Internal'
+          OnChange = cbWriteTplFormatSrcChange
         end
         object lblWriteTplDD: TLabel
           Left = 344
           Height = 15
           Top = 32
-          Width = 19
-          Caption = 'DD:'
+          Width = 38
+          Caption = 'Densel:'
           ParentColor = False
         end
-        object cbWriteTplDD: TComboBox
+        object cbWriteTplDensel: TComboBox
           Left = 424
           Height = 23
           Hint = 'Set interface pin 2 for 5.25" drives'
@@ -1379,10 +1379,10 @@ object Form1: TForm1
             'H'
             'L'
           )
-          OnChange = cbWriteTplDDChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 8
+          OnChange = cbWriteTplDenselChange
         end
         object lblWriteTplPreErase: TLabel
           Left = 344
@@ -1394,14 +1394,34 @@ object Form1: TForm1
         end
         object cbWriteTplPreErase: TCheckBox
           Left = 424
-          Height = 19
+          Height = 17
           Hint = 'Erase tracks before writing (default: no)'
           Top = 0
-          Width = 20
-          OnChange = cbWriteTplPreEraseChange
+          Width = 18
           ParentShowHint = False
           ShowHint = True
           TabOrder = 7
+          OnChange = cbWriteTplPreEraseChange
+        end
+        object lblWriteTplTP43Pin2: TLabel
+          Left = 344
+          Height = 15
+          Top = 64
+          Width = 57
+          Caption = 'TP43 Pin 2:'
+          ParentColor = False
+          ParentShowHint = False
+        end
+        object cbWriteTplTplTP43Pin2: TCheckBox
+          Left = 424
+          Height = 17
+          Hint = 'Option --gen-tg43 generates 8-inch /TG43 signal on pin 2'
+          Top = 64
+          Width = 18
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 9
+          OnChange = cbWriteTplTplTP43Pin2Change
         end
       end
     end
@@ -1449,19 +1469,19 @@ object Form1: TForm1
           Left = 96
           Height = 19
           Top = 32
-          Width = 203
+          Width = 201
           Caption = 'Use source directory as destination'
-          OnChange = cbSrcAsDesDirChange
           TabOrder = 1
+          OnChange = cbSrcAsDesDirChange
         end
         object cbSrcAsDesFile: TCheckBox
           Left = 350
           Height = 19
           Top = 32
-          Width = 202
+          Width = 200
           Caption = 'Use source filename as destination'
-          OnChange = cbSrcAsDesFileChange
           TabOrder = 2
+          OnChange = cbSrcAsDesFileChange
         end
       end
       object GroupBox10: TGroupBox
@@ -1484,10 +1504,10 @@ object Form1: TForm1
           Items.Strings = (
             'Internal'
           )
-          OnChange = cbConvDiskdefsChange
           Style = csDropDownList
           TabOrder = 0
           Text = 'Internal'
+          OnChange = cbConvDiskdefsChange
         end
         object lblConvertTrackset: TLabel
           Left = 350
@@ -1520,8 +1540,8 @@ object Form1: TForm1
           Width = 208
           DropDownCount = 15
           ItemHeight = 15
-          OnChange = cbConvFormatChange
           TabOrder = 1
+          OnChange = cbConvFormatChange
         end
         object lblConvTracksetCyls: TLabel
           Left = 366
@@ -1552,8 +1572,8 @@ object Form1: TForm1
             '0-42'
             '0-7,9-12'
           )
-          OnChange = cbConvTracksetCylsChange
           TabOrder = 4
+          OnChange = cbConvTracksetCylsChange
         end
         object lblConvOutTracksetCyls: TLabel
           Left = 624
@@ -1584,8 +1604,8 @@ object Form1: TForm1
             '0-42'
             '0-7,9-12'
           )
-          OnChange = cbConvOutTracksetCylsChange
           TabOrder = 9
+          OnChange = cbConvOutTracksetCylsChange
         end
         object lblConvertAdjustSpeed: TLabel
           Left = 16
@@ -1607,8 +1627,8 @@ object Form1: TForm1
             '300'
             '360'
           )
-          OnChange = cbConvAdjustSpeedChange
           TabOrder = 2
+          OnChange = cbConvAdjustSpeedChange
         end
         object lblConvTracksetHeads: TLabel
           Left = 366
@@ -1632,8 +1652,8 @@ object Form1: TForm1
             '0'
             '1'
           )
-          OnChange = cbConvTracksetHeadsChange
           TabOrder = 5
+          OnChange = cbConvTracksetHeadsChange
         end
         object lblConvOutTracksetHeads: TLabel
           Left = 624
@@ -1657,8 +1677,8 @@ object Form1: TForm1
             '0'
             '1'
           )
-          OnChange = cbConvOutTracksetHeadsChange
           TabOrder = 10
+          OnChange = cbConvOutTracksetHeadsChange
         end
         object lblConvertPLL: TLabel
           Left = 16
@@ -1679,8 +1699,8 @@ object Form1: TForm1
             ''
             'period=5:phase=60'
           )
-          OnChange = cbConvPLLChange
           TabOrder = 3
+          OnChange = cbConvPLLChange
         end
         object lblConvTracksetSteps: TLabel
           Left = 366
@@ -1704,8 +1724,8 @@ object Form1: TForm1
             '1/2'
             '2'
           )
-          OnChange = cbConvTracksetStepsChange
           TabOrder = 6
+          OnChange = cbConvTracksetStepsChange
         end
         object lblConvOutTracksetSteps: TLabel
           Left = 624
@@ -1729,8 +1749,8 @@ object Form1: TForm1
             '1/2'
             '2'
           )
-          OnChange = cbConvOutTracksetStepsChange
           TabOrder = 11
+          OnChange = cbConvOutTracksetStepsChange
         end
         object lblConvTracksetHSwap: TLabel
           Left = 366
@@ -1744,11 +1764,11 @@ object Form1: TForm1
           Left = 436
           Height = 19
           Top = 128
-          Width = 98
+          Width = 96
           Caption = 'Side 1 as side 0'
           Enabled = False
-          OnClick = cbConvTracksetHSwapClick
           TabOrder = 7
+          OnClick = cbConvTracksetHSwapClick
         end
         object lblConvOutTracksetHSwap: TLabel
           Left = 624
@@ -1762,11 +1782,11 @@ object Form1: TForm1
           Left = 694
           Height = 19
           Top = 128
-          Width = 98
+          Width = 96
           Caption = 'Side 1 as side 0'
           Enabled = False
-          OnClick = cbConvOutTracksetHSwapClick
           TabOrder = 12
+          OnClick = cbConvOutTracksetHSwapClick
         end
         object lblConvTracksetFlippy: TLabel
           Left = 366
@@ -1789,8 +1809,8 @@ object Form1: TForm1
             'h0.off=+8'
             'h1.off=-8'
           )
-          OnChange = cbConvTracksetFlippyChange
           TabOrder = 8
+          OnChange = cbConvTracksetFlippyChange
         end
         object lblConvOutTracksetFlippy: TLabel
           Left = 624
@@ -1813,8 +1833,8 @@ object Form1: TForm1
             'h0.off=+8'
             'h1.off=-8'
           )
-          OnChange = cbConvOutTracksetFlippyChange
           TabOrder = 13
+          OnChange = cbConvOutTracksetFlippyChange
         end
       end
       object GroupBox11: TGroupBox
@@ -1847,10 +1867,10 @@ object Form1: TForm1
           Width = 75
           Anchors = [akTop, akRight]
           Caption = 'Explorer'
-          OnClick = btConvExplorerClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
+          OnClick = btConvExplorerClick
         end
         object Label1: TLabel
           Left = 16
@@ -1867,8 +1887,8 @@ object Form1: TForm1
           Width = 645
           Anchors = [akTop, akLeft, akRight]
           MaxLength = 200
-          OnChange = edConvFilenameChange
           TabOrder = 2
+          OnChange = edConvFilenameChange
         end
         object btConvClear: TButton
           Left = 754
@@ -1879,10 +1899,10 @@ object Form1: TForm1
           Anchors = [akTop, akRight]
           Caption = 'Clear'
           Enabled = False
-          OnClick = btConvClearClick
           ParentShowHint = False
           ShowHint = True
           TabOrder = 3
+          OnClick = btConvClearClick
         end
         object Label3: TLabel
           Left = 16
@@ -1910,9 +1930,9 @@ object Form1: TForm1
           Alignment = taCenter
           Enabled = False
           MaxLength = 255
-          OnChange = edConvDiskOfChange
           TabOrder = 5
           Text = '_of_'
+          OnChange = edConvDiskOfChange
         end
         object cbConvDisk2: TSpinEdit
           Left = 250
@@ -1948,11 +1968,11 @@ object Form1: TForm1
           Left = 624
           Height = 19
           Top = 64
-          Width = 83
+          Width = 81
           Caption = 'Incremental'
           Enabled = False
-          OnClick = cbConvIncrementClick
           TabOrder = 8
+          OnClick = cbConvIncrementClick
         end
         object Label2: TLabel
           Left = 16
@@ -1969,8 +1989,8 @@ object Form1: TForm1
           Width = 217
           Enabled = False
           ItemHeight = 15
-          OnChange = cbConvFileFormatChange
           TabOrder = 10
+          OnChange = cbConvFileFormatChange
         end
         object Label6: TLabel
           Left = 24
@@ -1987,8 +2007,8 @@ object Form1: TForm1
           Width = 146
           Enabled = False
           ItemHeight = 15
-          OnChange = cbConvFormatOptionChange
           TabOrder = 11
+          OnChange = cbConvFormatOptionChange
         end
         object Label4: TLabel
           Left = 16
@@ -2006,8 +2026,8 @@ object Form1: TForm1
           Anchors = [akTop, akLeft, akRight]
           Enabled = False
           MaxLength = 255
-          OnChange = cbReadPreviewChange
           TabOrder = 15
+          OnChange = cbReadPreviewChange
         end
         object edConvDirDest: TDirectoryEdit
           Left = 96
@@ -2027,10 +2047,10 @@ object Form1: TForm1
           Left = 624
           Height = 19
           Top = 96
-          Width = 171
+          Width = 169
           Caption = 'Do not overwrite existing file'
-          OnClick = cbConvNoOverwriteClick
           TabOrder = 9
+          OnClick = cbConvNoOverwriteClick
         end
         object lblConvDestFormatExtInt: TLabel
           Left = 366
@@ -2051,10 +2071,10 @@ object Form1: TForm1
           Width = 192
           Enabled = False
           ItemHeight = 15
-          OnChange = cbReadFormatOptionChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 12
+          OnChange = cbReadFormatOptionChange
         end
         object lblConvDestFormatExtVer: TLabel
           Left = 24
@@ -2079,10 +2099,10 @@ object Form1: TForm1
             ''
             '::version=3'
           )
-          OnChange = cbReadFormatOptionChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 13
+          OnChange = cbReadFormatOptionChange
         end
         object lblConvDestFormatExtEnc: TLabel
           Left = 365
@@ -2103,10 +2123,10 @@ object Form1: TForm1
           Width = 192
           Enabled = False
           ItemHeight = 15
-          OnChange = cbReadFormatOptionChange
           ParentShowHint = False
           ShowHint = True
           TabOrder = 14
+          OnChange = cbReadFormatOptionChange
         end
       end
     end
@@ -2128,19 +2148,19 @@ object Form1: TForm1
           Left = 16
           Height = 19
           Top = 0
-          Width = 365
+          Width = 363
           Caption = 'Backtrace the execution to get more detailed error message (--bt)'
-          OnChange = cbSetGlobalActionsBacktraceChange
           TabOrder = 0
+          OnChange = cbSetGlobalActionsBacktraceChange
         end
         object cbSetGlobalActionsTime: TCheckBox
           Left = 16
           Height = 19
           Top = 24
-          Width = 246
+          Width = 244
           Caption = 'Show elapsed time after execution (--time)'
-          OnChange = cbSetGlobalActionsTimeChange
           TabOrder = 1
+          OnChange = cbSetGlobalActionsTimeChange
         end
       end
       object grpToolsErase: TGroupBox
@@ -2228,9 +2248,9 @@ object Form1: TForm1
             '0-40'
             '0-39'
           )
-          OnChange = cbToolsEraseCylChange
           ParentFont = False
           TabOrder = 1
+          OnChange = cbToolsEraseCylChange
         end
         object cbToolsEraseHeads: TComboBox
           Left = 252
@@ -2247,9 +2267,9 @@ object Form1: TForm1
             '0'
             '1'
           )
-          OnChange = cbToolsEraseHeadsChange
           ParentFont = False
           TabOrder = 2
+          OnChange = cbToolsEraseHeadsChange
         end
         object cbToolsEraseFakeIndex: TComboBox
           Left = 512
@@ -2264,31 +2284,31 @@ object Form1: TForm1
             '300rpm'
             '8000000scp'
           )
-          OnChange = cbToolsEraseFakeIndexChange
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 7
+          OnChange = cbToolsEraseFakeIndexChange
         end
         object lblToolsEraseHFreq: TCheckBox
           Left = 387
           Height = 19
           Top = 52
-          Width = 248
+          Width = 246
           Caption = 'Write a high-frequency flux signal (--hfreq)'
-          OnClick = lblToolsEraseHFreqClick
           TabOrder = 8
+          OnClick = lblToolsEraseHFreqClick
         end
         object rbToolsErase: TRadioButton
           Left = 16
           Height = 19
           Top = 0
-          Width = 47
+          Width = 45
           Caption = 'Erase'
           Checked = True
-          OnClick = rbToolsEraseClick
           TabOrder = 0
           TabStop = True
+          OnClick = rbToolsEraseClick
         end
         object cbToolsEraseSteps: TComboBox
           Left = 252
@@ -2304,18 +2324,18 @@ object Form1: TForm1
             '1/2'
             '2'
           )
-          OnChange = cbToolsEraseStepsChange
           TabOrder = 3
+          OnChange = cbToolsEraseStepsChange
         end
         object cbToolsEraseHSwap: TCheckBox
           Left = 252
           Height = 19
           Top = 80
-          Width = 98
+          Width = 96
           Caption = 'Side 1 as side 0'
           Enabled = False
-          OnClick = cbToolsEraseHSwapClick
           TabOrder = 4
+          OnClick = cbToolsEraseHSwapClick
         end
         object cbToolsEraseFlippy: TComboBox
           Left = 252
@@ -2330,8 +2350,8 @@ object Form1: TForm1
             'h0.off=+8'
             'h1.off=-8'
           )
-          OnChange = cbToolsEraseFlippyChange
           TabOrder = 5
+          OnChange = cbToolsEraseFlippyChange
         end
         object lblToolsEraseRevs: TLabel
           Left = 387
@@ -2361,11 +2381,11 @@ object Form1: TForm1
             '8'
             '9'
           )
-          OnChange = cbToolsEraseRevsChange
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
+          OnChange = cbToolsEraseRevsChange
         end
       end
       object grpToolsSeek: TGroupBox
@@ -2395,10 +2415,10 @@ object Form1: TForm1
           Left = 16
           Height = 19
           Top = 0
-          Width = 44
+          Width = 42
           Caption = 'Seek'
-          OnClick = rbToolsSeekClick
           TabOrder = 0
+          OnClick = rbToolsSeekClick
         end
         object cbToolsSeekTrack: TSpinEdit
           Left = 252
@@ -2416,33 +2436,33 @@ object Form1: TForm1
         end
         object cbToolsSeekTrackForce: TCheckBox
           Left = 387
-          Height = 19
+          Height = 17
           Hint = 'allow extreme cylinders with no prompt'
           Top = 0
-          Width = 252
+          Width = 250
           Caption = 'Allow extreme cylinders with no prompt (--force)'
           Enabled = False
           Font.Color = clBlack
           Font.Height = -11
           Font.Name = 'Tahoma'
-          OnClick = cbToolsSeekTrackForceClick
           ParentFont = False
           TabOrder = 2
+          OnClick = cbToolsSeekTrackForceClick
         end
         object cbToolsSeekMotorOn: TCheckBox
           Left = 387
-          Height = 19
+          Height = 17
           Hint = 'Seek with drive motor activated'
           Top = 24
-          Width = 235
+          Width = 233
           Caption = 'Seek with drive motor activated (--motor-on)'
           Enabled = False
           Font.Color = clBlack
           Font.Height = -11
           Font.Name = 'Tahoma'
-          OnClick = cbToolsSeekMotorOnClick
           ParentFont = False
           TabOrder = 3
+          OnClick = cbToolsSeekMotorOnClick
         end
       end
       object grpToolsClean: TGroupBox
@@ -2498,10 +2518,10 @@ object Form1: TForm1
           Left = 16
           Height = 19
           Top = 0
-          Width = 50
+          Width = 48
           Caption = 'Clean'
-          OnClick = rbToolsCleanClick
           TabOrder = 0
+          OnClick = rbToolsCleanClick
         end
         object cbToolsCleanCyl: TSpinEdit
           Left = 252
@@ -2538,11 +2558,11 @@ object Form1: TForm1
             '8'
             '9'
           )
-          OnChange = cbToolsCleanPassesChange
-          OnEnter = cbToolsCleanPassesEnter
           ParentFont = False
           TabOrder = 2
           Text = '3'
+          OnChange = cbToolsCleanPassesChange
+          OnEnter = cbToolsCleanPassesEnter
         end
         object cbToolsCleanLinger: TComboBox
           Left = 512
@@ -2557,10 +2577,10 @@ object Form1: TForm1
           Items.Strings = (
             '100'
           )
-          OnChange = cbToolsCleanLingerChange
           ParentFont = False
           TabOrder = 3
           Text = '100'
+          OnChange = cbToolsCleanLingerChange
         end
       end
       object grpToolsRPM: TGroupBox
@@ -2590,10 +2610,10 @@ object Form1: TForm1
           Left = 16
           Height = 19
           Top = 0
-          Width = 45
+          Width = 43
           Caption = 'RPM'
-          OnClick = rbToolsRPMClick
           TabOrder = 0
+          OnClick = rbToolsRPMClick
         end
         object cbToolsRPMNumbIter: TSpinEdit
           Left = 252
@@ -2692,12 +2712,12 @@ object Form1: TForm1
           Left = 16
           Height = 19
           Top = 0
-          Width = 72
+          Width = 70
           Caption = 'Set delays'
           Checked = True
-          OnClick = rbSetDelaysClick
           TabOrder = 0
           TabStop = True
+          OnClick = rbSetDelaysClick
         end
         object cbSetDelaySelect: TSpinEdit
           Left = 244
@@ -2786,8 +2806,8 @@ object Form1: TForm1
           Width = 75
           Anchors = [akTop, akRight]
           Caption = 'Info'
-          OnClick = btSetDelaysInfoClick
           TabOrder = 6
+          OnClick = btSetDelaysInfoClick
         end
         object btSetDelaysDefault: TButton
           Left = 754
@@ -2796,8 +2816,8 @@ object Form1: TForm1
           Width = 75
           Anchors = [akTop, akRight]
           Caption = 'Default'
-          OnClick = btSetDelaysDefaultClick
           TabOrder = 7
+          OnClick = btSetDelaysDefaultClick
         end
       end
       object grpPIN: TGroupBox
@@ -2827,10 +2847,10 @@ object Form1: TForm1
           Left = 16
           Height = 19
           Top = 0
-          Width = 81
+          Width = 79
           Caption = 'Get/Set PIN'
-          OnClick = rbSetGetPINClick
           TabOrder = 0
+          OnClick = rbSetGetPINClick
         end
         object cbSetPINNumber: TSpinEdit
           Left = 244
@@ -2862,23 +2882,23 @@ object Form1: TForm1
             Left = 10
             Height = 19
             Top = 8
-            Width = 87
+            Width = 85
             Caption = 'Get PIN level'
             Checked = True
             Enabled = False
-            OnClick = rbGetPINClick
             TabOrder = 0
             TabStop = True
+            OnClick = rbGetPINClick
           end
           object rbSetPIN: TRadioButton
             Left = 10
             Height = 19
             Top = 30
-            Width = 102
+            Width = 100
             Caption = 'Set PIN level to:'
             Enabled = False
-            OnClick = rbSetPINClick
             TabOrder = 1
+            OnClick = rbSetPINClick
           end
           object cbSetPINLevel: TComboBox
             Left = 136
@@ -2897,9 +2917,9 @@ object Form1: TForm1
               'High (5v)'
               'Low (0v)'
             )
-            OnChange = cbSetPINLevelChange
             ParentFont = False
             TabOrder = 2
+            OnChange = cbSetPINLevelChange
           end
         end
       end
@@ -2930,10 +2950,10 @@ object Form1: TForm1
           Left = 16
           Height = 19
           Top = 0
-          Width = 109
+          Width = 107
           Caption = 'Firmware update'
-          OnClick = rbSetFirmwareClick
           TabOrder = 0
+          OnClick = rbSetFirmwareClick
         end
         object pnToolsFWSelect: TPanel
           Left = 126
@@ -2949,33 +2969,33 @@ object Form1: TForm1
             Left = 13
             Height = 19
             Top = 0
-            Width = 104
+            Width = 102
             Caption = 'Online (Default)'
             Checked = True
             Enabled = False
-            OnClick = opSetFWOnlineClick
             TabOrder = 0
             TabStop = True
+            OnClick = opSetFWOnlineClick
           end
           object opSetFWFile: TRadioButton
             Left = 13
             Height = 19
             Top = 27
-            Width = 41
+            Width = 39
             Caption = 'File:'
             Enabled = False
-            OnClick = opSetFWFileClick
             TabOrder = 1
+            OnClick = opSetFWFileClick
           end
           object opSetFWTag: TRadioButton
             Left = 13
             Height = 19
             Top = 56
-            Width = 42
+            Width = 40
             Caption = 'Tag:'
             Enabled = False
-            OnClick = opSetFWTagClick
             TabOrder = 3
+            OnClick = opSetFWTagClick
           end
           object edToolsFWTag: TEdit
             Left = 120
@@ -2983,8 +3003,8 @@ object Form1: TForm1
             Top = 56
             Width = 229
             Enabled = False
-            OnChange = edToolsFWTagChange
             TabOrder = 4
+            OnChange = edToolsFWTagChange
           end
           object edToolsFW: TFileNameEdit
             Left = 120
@@ -3003,18 +3023,18 @@ object Form1: TForm1
         end
         object cbSetFirmwareBootloader: TCheckBox
           Left = 140
-          Height = 19
+          Height = 17
           Hint = 'update the bootloader (use with caution!)'
           Top = 120
-          Width = 180
+          Width = 178
           Caption = 'Bootloader (Usually NOT needed)'
           Enabled = False
           Font.Color = clBlack
           Font.Height = -11
           Font.Name = 'Tahoma'
-          OnClick = cbSetFirmwareBootloaderClick
           ParentFont = False
           TabOrder = 2
+          OnClick = cbSetFirmwareBootloaderClick
         end
       end
     end
@@ -3022,7 +3042,7 @@ object Form1: TForm1
   object Panel2: TPanel
     Left = 0
     Height = 98
-    Top = 635
+    Top = 655
     Width = 857
     Align = alBottom
     BevelOuter = bvNone
@@ -3062,35 +3082,35 @@ object Form1: TForm1
         Anchors = [akTop, akRight]
         Caption = 'Read'
         Font.Style = [fsBold]
-        OnClick = btGoClick
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
+        OnClick = btGoClick
       end
       object cbReadTplLogParam: TCheckBox
         Left = 14
         Height = 19
         Top = 46
-        Width = 97
+        Width = 95
         Caption = 'Log parameter'
-        OnClick = cbReadTplLogParamClick
         TabOrder = 2
+        OnClick = cbReadTplLogParamClick
       end
       object cbReadTplLogOutput: TCheckBox
         Left = 152
         Height = 19
         Top = 46
-        Width = 190
+        Width = 188
         Caption = 'Log output (No live monitoring)'
-        OnClick = cbReadTplLogOutputClick
         TabOrder = 3
+        OnClick = cbReadTplLogOutputClick
       end
       object cbReadTplLogBoth: TCheckBox
         Left = 376
         Height = 19
         Top = 46
-        Width = 214
+        Width = 212
         Caption = 'Log parameter and output in one file'
         Enabled = False
         TabOrder = 4

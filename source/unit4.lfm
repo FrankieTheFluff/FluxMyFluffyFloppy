@@ -9,7 +9,7 @@ object frmGW: TfrmGW
   OnClose = FormClose
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.2.0.0'
   object pnSides: TPanel
     Left = 0
     Height = 476
@@ -259,8 +259,8 @@ object frmGW: TfrmGW
       Width = 75
       Anchors = [akRight, akBottom]
       Caption = '&Close'
-      OnClick = Button1Click
       TabOrder = 1
+      OnClick = Button1Click
     end
   end
 end

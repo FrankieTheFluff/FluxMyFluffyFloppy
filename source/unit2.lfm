@@ -8,7 +8,7 @@ object FrmAbout: TFrmAbout
   ClientWidth = 585
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.2.0.0'
   object GroupBox1: TGroupBox
     Left = 3
     Height = 414
@@ -70,7 +70,7 @@ object FrmAbout: TFrmAbout
       Top = 72
       Width = 350
       AutoSize = False
-      Caption = 'Copyright (c) 2021-2023 Frank Böpple (FrankieTheFluff)'
+      Caption = 'Copyright (c) 2021-2024 Frank Böpple (FrankieTheFluff)'
       Font.CharSet = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -12
@@ -662,8 +662,8 @@ object FrmAbout: TFrmAbout
       Width = 75
       Caption = 'OK'
       Default = True
-      OnClick = btOKClick
       TabOrder = 0
+      OnClick = btOKClick
     end
     object lblLicense: TLabel
       Left = 11

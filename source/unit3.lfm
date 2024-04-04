@@ -9,15 +9,15 @@ object FrmOptions: TFrmOptions
   ClientWidth = 560
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.2.0.0'
   object Cancel: TButton
     Left = 8
     Height = 25
     Top = 152
     Width = 75
     Caption = 'Cancel'
-    OnClick = CancelClick
     TabOrder = 0
+    OnClick = CancelClick
   end
   object OK: TButton
     Left = 477
@@ -25,8 +25,8 @@ object FrmOptions: TFrmOptions
     Top = 152
     Width = 75
     Caption = 'OK'
-    OnClick = OKClick
     TabOrder = 1
+    OnClick = OKClick
   end
   object GroupBox1: TGroupBox
     Left = 8

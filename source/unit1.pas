@@ -6,7 +6,7 @@ v5.xx
 A Microsoft(r) Windows(r) GUI for Greseaweazle Host Tools
 FREEWARE / OpenSource
 License: GNU General Public License v2.0
-(c) 2021-2023 FrankieTheFluff
+(c) 2021-2024 FrankieTheFluff
 Web: https://github.com/FrankieTheFluff/FluxMyFluffyFloppy
 Mail: fluxmyfluffyfloppy@mail.de
 -----------------------------------------------------------------
@@ -58,7 +58,7 @@ type
     cbConvFormatOptionHFEInt: TComboBox;
     cbReadFormatOptionHFEVer: TComboBox;
     cbConvFormatOptionHFEVer: TComboBox;
-    cbWriteTplDD: TComboBox;
+    cbWriteTplDensel: TComboBox;
     cbReadTplLogBoth: TCheckBox;
     cbReadTplLogOutput: TCheckBox;
     cbReadTplLogParam: TCheckBox;
@@ -88,6 +88,7 @@ type
     cbToolsSeekTrackForce: TCheckBox;
     cbSrcAsDesDir: TCheckBox;
     cbWriteTplPreErase: TCheckBox;
+    cbWriteTplTplTP43Pin2: TCheckBox;
     edConvDiskOf: TEdit;
     cbConvFileFormat: TComboBox;
     cbConvFormat: TComboBox;
@@ -258,6 +259,7 @@ type
     lblWriteFile: TLabel;
     lblWriteTemplate: TLabel;
     lblWriteTplCyls: TLabel;
+    lblWriteTplTP43Pin2: TLabel;
     lblWriteTplPreErase: TLabel;
     lblWriteTplEraseEmpty: TLabel;
     lblWriteTplFakeIndex: TLabel;
@@ -354,8 +356,9 @@ type
     procedure cbToolsSeekTrackChange(Sender: TObject);
     procedure cbToolsSeekTrackEnter(Sender: TObject);
     procedure cbToolsSeekTrackForceClick(Sender: TObject);
-    procedure cbWriteTplDDChange(Sender: TObject);
+    procedure cbWriteTplDenselChange(Sender: TObject);
     procedure cbWriteTplPreEraseChange(Sender: TObject);
+    procedure cbWriteTplTplTP43Pin2Change(Sender: TObject);
     procedure edConvDiskOfChange(Sender: TObject);
     procedure cbConvFileFormatChange(Sender: TObject);
     procedure cbConvFormatChange(Sender: TObject);
@@ -585,8 +588,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.0.3';
-  sAppDate := '2023-11-18';
+  sAppVersion := 'v5.0.4';
+  sAppDate := '2024-04-04';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   sAppPath := Dircheck(ExtractFilePath(ParamStr(0)));
@@ -959,7 +962,7 @@ begin
 
   EdGWFile.Filter := 'gw.exe|*.exe';
   EdWriteFileName.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.dsd;*.d64;*.d71;*.d81;*.dsk;*.img;*.ima;*.imd;*.hfe;*.ipf;*.msa;*.scp;*.sf7;*.ssd;*.st|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|ImageDisk image (imd)|*.imd|Floppy image (img)|*.img|HFE (HxC Floppy Emulator) (hfe)|*.hfe|IPF|*.ipf|Kryoflux (raw)|*.raw|Disciple (mgt)|*.mgt|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
-  edConvFileSource.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.dsd;*.d64;*.d71;*.d81;*.dsk;*.img;*.ima;*.imd;*.hfe;*.ipf;*.msa;*.scp;*.sf7;*.ssd;*.st|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|EDSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|ImageDisk image (imd)|*.imd|Floppy image (img)|*.img|HFE (HxC Floppy Emulator) (hfe)|*.hfe|IPF|*.ipf|Kryoflux (raw)|*.raw|Disciple (mgt)|*.mgt|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
+  edConvFileSource.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.dsd;*.d64;*.d71;*.d81;*.dsk;*.img;*.ima;*.imd;*.hfe;*.ipf;*.msa;*.scp;*.sf7;*.ssd;*.st|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|ImageDisk image (imd)|*.imd|Floppy image (img)|*.img|HFE (HxC Floppy Emulator) (hfe)|*.hfe|IPF|*.ipf|Kryoflux (raw)|*.raw|Disciple (mgt)|*.mgt|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
 
  Get_DeviceCOM;
 
@@ -1439,6 +1442,7 @@ begin
       INIRead.DeleteKey('Settings','RPM'); // older than 2.00
       INIRead.WriteString('FluxMyFluffyFloppy-Read-Template', 'Version', sAppVersion_ReadTmpl);
       INIRead.WriteString('FluxMyFluffyFloppy-Read-Template', 'Name', cbReadTplName.Text);
+      //INIRead.WriteString('FluxMyFluffyFloppy-Read-Template', 'Creator', '');
       INIRead.WriteString('FluxMyFluffyFloppy-Read-Template', 'Description', edReadTplDesc.Text);
       INIRead.WriteString('Settings', 'Diskdefs', cbReadTplFormatSrc.Text);
       INIRead.WriteString('Settings', 'FormatSpec', cbReadTplFormat.Text);
@@ -1529,7 +1533,8 @@ begin
  cbWriteTplRetries.Text := '';
  cbWriteTplPrecomp.Text := '';
  cbWriteTplPreErase.Checked := false;
- cbWriteTplDD.Text := '';
+ cbWriteTplDensel.Text := '';
+ cbWriteTplTplTP43Pin2.Checked:= false;
  btWriteTplDel.Enabled := false;
  //
  cbWriteTplCyls.Text := '';
@@ -1565,6 +1570,7 @@ begin
     IniWrite.DeleteKey('Settings','No-Verify'); // older than 2.00
     IniWrite.WriteString('FluxMyFluffyFloppy-Write-Template', 'Version', '3.00');
     IniWrite.WriteString('FluxMyFluffyFloppy-Write-Template', 'Name', cbWriteTplName.Text);
+    //IniWrite.WriteString('FluxMyFluffyFloppy-Write-Template', 'Creator', '');
     IniWrite.WriteString('FluxMyFluffyFloppy-Write-Template', 'Description', edWriteTplDesc.Text);
 
     IniWrite.WriteString('Settings', 'FormatSpec', cbWriteTplFormat.Text);
@@ -1574,8 +1580,8 @@ begin
     IniWrite.WriteString('Settings', 'Retries', cbWriteTplRetries.Text);
     IniWrite.WriteString('Settings', 'Precomp', cbWriteTplPrecomp.Text);
     IniWrite.WriteBool('Settings', 'Pre-Erase', cbWriteTplPreErase.Checked);
-    IniWrite.WriteString('Settings', 'DD', cbWriteTplDD.Text);
-
+    IniWrite.WriteString('Settings', 'DD', cbWriteTplDensel.Text);
+    IniWrite.WriteBool('Settings', 'TP43Pin2', cbWriteTplTplTP43Pin2.Checked);
     IniWrite.WriteString('Settings', 'Cylinders', cbWriteTplCyls.Text);
     IniWrite.WriteString('Settings', 'Heads', cbWriteTplHeads.Text);
     IniWrite.WriteString('Settings', 'Steps', cbWriteTplSteps.Text);
@@ -1646,6 +1652,7 @@ begin
   try
     //ver := iniRefreshRead.ReadString('FluxMyFluffyFloppy-Write-Template','Version','');
     //name := iniRefreshRead.ReadString('FluxMyFluffyFloppy-Write-Template', 'Name', '');
+    //creator := iniRefreshRead.ReadString('FluxMyFluffyFloppy-Write-Template', 'Creator', '');
     cbWriteTplFormatSrc.Text := iniRefreshWrite.ReadString('Settings', 'DiskDefs', 'Internal');
     cbWriteTplFormat.Text := iniRefreshWrite.ReadString('Settings', 'FormatSpec', '');
     edWriteTplDesc.Text   := iniRefreshWrite.ReadString('FluxMyFluffyFloppy-Write-Template', 'Description', '');
@@ -1655,7 +1662,8 @@ begin
     cbWriteTplRetries.Text:= iniRefreshWrite.ReadString('Settings', 'Retries', '');
     cbWriteTplPrecomp.Text:= iniRefreshWrite.ReadString('Settings', 'Precomp', '');
     cbWriteTplPreErase.Checked:= iniRefreshWrite.ReadBool('Settings', 'Pre-Erase', false);
-    cbWriteTplDD.Text:= iniRefreshWrite.ReadString('Settings', 'DD', '');
+    cbWriteTplDensel.Text:= iniRefreshWrite.ReadString('Settings', 'DD', '');
+    cbWriteTplTplTP43Pin2.Checked := IniRefreshWrite.ReadBool('Settings', 'TP43Pin2', false);
 
     cbWriteTplCyls.Text:= iniRefreshWrite.ReadString('Settings', 'Cylinders', '');
     cbWriteTplHeads.Text:= iniRefreshWrite.ReadString('Settings', 'Heads', '');
@@ -1969,14 +1977,19 @@ begin
   CMD_Generate;
 end;
 
-procedure TForm1.cbWriteTplDDChange(Sender: TObject);
+procedure TForm1.cbWriteTplDenselChange(Sender: TObject);
 begin
-  if cbWriteTplDD.Focused then CMD_Generate;
+  if cbWriteTplDensel.Focused then CMD_Generate;
 end;
 
 procedure TForm1.cbWriteTplPreEraseChange(Sender: TObject);
 begin
   if cbWriteTplPreErase.Focused then CMD_Generate;
+end;
+
+procedure TForm1.cbWriteTplTplTP43Pin2Change(Sender: TObject);
+begin
+ if cbWriteTplTplTP43Pin2.Focused then CMD_Generate;
 end;
 
 procedure TForm1.edConvDiskOfChange(Sender: TObject);
@@ -3378,7 +3391,12 @@ begin
   end;
 
   // read file extension - FMFF 4.0
-    case leftStr(cbReadFormat.Text,3) of
+   cbReadFormatOptionHFEVer.Enabled :=false;
+   cbReadFormatOptionHFEInt.Enabled :=false;
+   cbReadFormatOptionHFEEnc.Enabled :=false;
+   case trim(leftStr(cbReadFormat.Text,3)) of
+    'EDS':
+     cbReadPreview.Text := filenameRead + '.' + lowercase(trim(leftStr(cbReadFormat.Text,4)));
     'HFE':
       begin
        cbReadFormatOptionHFEVer.Enabled :=true;
@@ -3391,12 +3409,9 @@ begin
     'RAW':
       cbReadPreview.Text := filenameRead + '00.0.' + lowercase(leftStr(cbReadFormat.Text,3));
     else
-     cbReadFormatOptionHFEVer.Enabled :=false;
-     cbReadFormatOptionHFEInt.Enabled :=false;
-     cbReadFormatOptionHFEEnc.Enabled :=false;
      if cbReadFormat.Text <> '' then cbReadPreview.Text := filenameRead + '.' + lowercase(trim(leftStr(cbReadFormat.Text,3)));
      if cbReadFormat.Text = '' then cbReadPreview.Text := filenameRead;
-    end;
+   end;
  end;
 
   // Convert ####################################################################
@@ -3565,8 +3580,13 @@ begin
        end;
      end;
 
-     // conv file extension - FMFF 4.0
-     case leftStr(cbConvFileFormat.Text,3) of
+    // conv file extension - FMFF 4.0
+    cbConvFormatOptionHFEVer.Enabled :=false;
+    cbConvFormatOptionHFEInt.Enabled :=false;
+    cbConvFormatOptionHFEEnc.Enabled :=false;
+    case leftStr(cbConvFileFormat.Text,3) of
+     'EDS':
+      edConvFilenamePreview.Text := FilenameConvert + '.' + lowercase(trim(leftStr(cbConvFileFormat.Text,4)));
      'HFE':
        begin
         cbConvFormatOptionHFEVer.Enabled :=true;
@@ -3579,13 +3599,10 @@ begin
      'RAW':
        edConvFilenamePreview.Text := FilenameConvert + '00.0.' + lowercase(leftStr(cbConvFileFormat.Text,3));
      else
-       cbConvFormatOptionHFEVer.Enabled :=false;
-       cbConvFormatOptionHFEInt.Enabled :=false;
-       cbConvFormatOptionHFEEnc.Enabled :=false;
        if cbConvFileFormat.Text <> '' then edConvFilenamePreview.Text := FilenameConvert + '.' + lowercase(trim(leftStr(cbConvFileFormat.Text,3)));
        if cbConvFileFormat.Text = '' then edConvFilenamePreview.Text := FilenameConvert;
-     end;
     end;
+   end;
 
 end;
 procedure TForm1.CMD_Generate;
@@ -3691,7 +3708,7 @@ begin
    end;
   if cbReadTplDD.Text <> '' then
    begin
-    cmd := cmd + ' --dd ' + cbReadTplDD.Text;
+    cmd := cmd + ' --densel ' + cbReadTplDD.Text;
    end;
   if cbReadPreview.text <> '' then cmd := cmd + ' "' + Dircheck(edReadDirDest.Text) + cbReadPreview.text + '"';
  end;
@@ -3745,10 +3762,15 @@ begin
      begin
       cmd := cmd + ' --precomp=' + cbWriteTplPrecomp.Text;
      end;
-    if cbWriteTplDD.Text <> '' then
+    if cbWriteTplDensel.Text <> '' then
      begin
-      cmd := cmd + ' --dd ' + cbWriteTplDD.Text;
+      cmd := cmd + ' --densel ' + cbWriteTplDensel.Text;
      end;
+    if cbWriteTplTplTP43Pin2.Checked then
+     begin
+      cmd := cmd + ' --gen-tg43';
+     end;
+
     btGo.Default:=false;
     if edWriteFileName.Text <> '' then
      begin

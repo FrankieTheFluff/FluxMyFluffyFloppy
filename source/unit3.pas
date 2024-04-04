@@ -6,7 +6,7 @@ v5.xx
 A Microsoft(r) Windows(r) GUI for Greseaweazle Host Tools
 FREEWARE / OpenSource
 License: GNU General Public License v2.0
-(c) 2021-2023 FrankieTheFluff
+(c) 2021-2024 FrankieTheFluff
 Web: https://github.com/FrankieTheFluff/FluxMyFluffyFloppy
 Mail: fluxmyfluffyfloppy@mail.de
 -----------------------------------------------------------------

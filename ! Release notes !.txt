@@ -5,7 +5,7 @@ v5.xx
 A Microsoft(r) Windows(r) GUI for Greseaweazle Host Tools
 FREEWARE / OpenSource
 License: GNU General Public License v2.0
-(c) 2021-2023 FrankieTheFluff
+(c) 2021-2024 FrankieTheFluff
 Web: https://github.com/FrankieTheFluff/FluxMyFluffyFloppy
 Mail: fluxmyfluffyfloppy@mail.de
 
@@ -25,11 +25,22 @@ https://github.com/t-edson/UnTerminal
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v5.0.4 - 2024-04-04
+* Requires Greaseweazle 1.16.3
+* Read: Added new template "Commodore C64 SingleSided 48-TPI floppy disks (35 tracks).inir" by Richard Verlinden
+* Write: New option --gen-tg43 generates 8-inch /TG43 signal on pin 2
+* Write: Added new template "CommodoreC64170kbSingleSided(35tracks).iniw" by Richard Verlinden
++ Read: --dd option renamed to --densel
++ Write: --dd option renamed to --densel
+- Read: Fixed reported issue #5: File extension error when select EDSK format 
+- Convert: Fixed reported issue #5: File extension error when select EDSK format 
+
 v5.0.3 - 2023-11-18
 - Read: Fixed reported issue #3: filename problem for kryoflux
 - Convert: Fixed reported issue #3: filename problem for kryoflux
 
 v5.0.2 - 2023-10-17
+* Requires Greaseweazle 1.16
 * New disc formats: pc98.n88basic.hd, zx.quorum.800
 * New image format: CT Raw (ctr)
 + Updated "diskdefs.cfg" (2023-08-17)
@@ -41,7 +52,6 @@ v5.0.1 - 2023-08-31
 - Wrong version description
 
 v5.00 - 2023-08-30
-* Requires Greaseweazle 1.16
 * Finally released with sourcecode
 * Infobox: GNU General Public License
 * Infobox: “Uses UnTerminal 1.0….”
