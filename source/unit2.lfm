@@ -8,7 +8,7 @@ object FrmAbout: TFrmAbout
   ClientWidth = 585
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
+  LCLVersion = '3.4.0.0'
   object GroupBox1: TGroupBox
     Left = 3
     Height = 414
@@ -136,7 +136,7 @@ object FrmAbout: TFrmAbout
       Height = 15
       Top = 176
       Width = 316
-      Caption = 'Requires "Greaseweazle v1.16+" (and optional ''diskdefs.cfg'')'
+      Caption = 'Requires "Greaseweazle v1.17+" (and optional ''diskdefs.cfg'')'
       Font.CharSet = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -12
@@ -702,7 +702,7 @@ object FrmAbout: TFrmAbout
       Left = 11
       Height = 15
       Top = 280
-      Width = 177
+      Width = 180
       Caption = 'UnTerminal 1.0 by Tito Hinostroza'
       ParentColor = False
     end

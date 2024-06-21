@@ -588,8 +588,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.0.4';
-  sAppDate := '2024-04-04';
+  sAppVersion := 'v5.0.5';
+  sAppDate := '2024-06-21';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   sAppPath := Dircheck(ExtractFilePath(ParamStr(0)));
@@ -690,8 +690,8 @@ begin
   // Create StringLists Read/Conv Destination fileextension
   //Supported file suffixes:
   //.a2r   .adf   .ads   .adm   .adl   .ctr   .d64   .d71   .d81   .d88   .dcp
-  //.dim   .dsd   .dsk   .edsk  .fdi   .hdm   .hfe   .ima   .img   .imd   .ipf
-  //.mgt   .msa   .raw   .sf7   .scp   .ssd   .st    .td0   .xdf
+  //.dim   .do    .dsd   .dsk   .edsk  .fdi   .hdm   .hfe   .ima   .img   .imd
+  //.ipf   .mgt   .msa   .po    .raw   .sf7   .scp   .ssd   .st    .td0   .xdf
   FormatDest_Ext := TStringList.Create;
   FormatDest_Ext.Add('');
   FormatDest_Ext.Add('A2R (Applesauce)');
@@ -704,8 +704,9 @@ begin
   FormatDest_Ext.Add('D71 (Commodore 1571)');
   FormatDest_Ext.Add('D81 (Commodore 1581)');
   FormatDest_Ext.Add('D88 (D88)');
-  FormatDest_Ext.Add('DCP (DCP)');          // Read only
+  FormatDest_Ext.Add('DCP (DCP)');
   FormatDest_Ext.Add('DIM (DIM)');
+  FormatDest_Ext.Add('DO (Apple II)');
   FormatDest_Ext.Add('DSD (Acorn)');
   FormatDest_Ext.Add('DSK (DSK)');
   FormatDest_Ext.Add('EDSK (EDSK, use: format=ibm.scan)');
@@ -718,12 +719,13 @@ begin
   //FormatDest_Ext.Add('IPF (IPF)');       // Write Only
   FormatDest_Ext.Add('MGT (Disciple/+D)');
   FormatDest_Ext.Add('MSA (Atari ST)');
+  FormatDest_Ext.Add('PO (Apple II)');
   FormatDest_Ext.Add('RAW (KryoFlux)');
   FormatDest_Ext.Add('SF7 (SEGA)');
   FormatDest_Ext.Add('SCP (SuperCardPro)');
   FormatDest_Ext.Add('SSD (Acorn)');
   FormatDest_Ext.Add('ST (Atari ST)');
-  FormatDest_Ext.Add('TD0 (Teledisk)'); // Read Only
+  FormatDest_Ext.Add('TD0 (Teledisk)');
   FormatDest_Ext.Add('XDF (XDF)');
 
   // Create StringList Read Diskdefs
@@ -740,6 +742,8 @@ begin
   FormatSpecs_Read.Add('akai.800');
   FormatSpecs_Read.Add('amiga.amigados');
   FormatSpecs_Read.Add('amiga.amigados_hd');
+  FormatSpecs_Read.Add('apple2.appledos.140');
+  FormatSpecs_Read.Add('apple2.prodos.140');
   FormatSpecs_Read.Add('atari.90');
   FormatSpecs_Read.Add('atarist.360');
   FormatSpecs_Read.Add('atarist.400');
@@ -818,6 +822,8 @@ begin
   FormatSpecs_Write.Add('akai.800');
   FormatSpecs_Write.Add('amiga.amigados');
   FormatSpecs_Write.Add('amiga.amigados_hd');
+  FormatSpecs_Write.Add('apple2.appledos.140');
+  FormatSpecs_Write.Add('apple2.prodos.140');
   FormatSpecs_Write.Add('atari.90');
   FormatSpecs_Write.Add('atarist.360');
   FormatSpecs_Write.Add('atarist.400');
@@ -896,6 +902,8 @@ begin
   FormatSpecs_Conv.Add('akai.800');
   FormatSpecs_Conv.Add('amiga.amigados');
   FormatSpecs_Conv.Add('amiga.amigados_hd');
+  FormatSpecs_Conv.Add('apple2.appledos.140');
+  FormatSpecs_Conv.Add('apple2.prodos.140');
   FormatSpecs_Conv.Add('atari.90');
   FormatSpecs_Conv.Add('atarist.360');
   FormatSpecs_Conv.Add('atarist.400');
@@ -961,8 +969,8 @@ begin
   FormatSpecs_Conv.Add('zx.trdos.640');
 
   EdGWFile.Filter := 'gw.exe|*.exe';
-  EdWriteFileName.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.dsd;*.d64;*.d71;*.d81;*.dsk;*.img;*.ima;*.imd;*.hfe;*.ipf;*.msa;*.scp;*.sf7;*.ssd;*.st|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|ImageDisk image (imd)|*.imd|Floppy image (img)|*.img|HFE (HxC Floppy Emulator) (hfe)|*.hfe|IPF|*.ipf|Kryoflux (raw)|*.raw|Disciple (mgt)|*.mgt|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
-  edConvFileSource.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.dsd;*.d64;*.d71;*.d81;*.dsk;*.img;*.ima;*.imd;*.hfe;*.ipf;*.msa;*.scp;*.sf7;*.ssd;*.st|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|ImageDisk image (imd)|*.imd|Floppy image (img)|*.img|HFE (HxC Floppy Emulator) (hfe)|*.hfe|IPF|*.ipf|Kryoflux (raw)|*.raw|Disciple (mgt)|*.mgt|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
+  EdWriteFileName.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.d64;*.d71;*.d81;*.d88;*.dcp;*.dim;*.do;*.dsd;*.dsk;*.edsk;*.fdi;*hdm;*hfe;*.img;*.ima;*.imd;*.ipf;*.msa;*.scp;*.sf7;*.ssd;*.st;*.td0;*.xdf|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Apple II (do)|*.do||Apple II (po)|*.po|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|HDM (hdm)|*.hdm|HFE (HxC Floppy Emulator) (hfe)|*.hfe|ImageDisk image (imd)|*.imd|Floppy image (img)|*.img|IPF (ipf)|*.ipf|Kryoflux (raw)|*.raw|Disciple (mgt)|*.mgt|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
+  edConvFileSource.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.d64;*.d71;*.d81;*.d88;*.dcp;*.dim;*.do;*.dsd;*.dsk;*.edsk;*.fdi;*hdm;*hfe;*.img;*.ima;*.imd;*.ipf;*.msa;*.scp;*.sf7;*.ssd;*.st;*.td0;*.xdf|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Apple II (do)|*.do||Apple II (po)|*.po|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|HDM (hdm)|*.hdm|HFE (HxC Floppy Emulator) (hfe)|*.hfe|ImageDisk image (imd)|*.imd|Floppy image (img)|*.img|IPF (ipf)|*.ipf|Kryoflux (raw)|*.raw|Disciple (mgt)|*.mgt|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
 
  Get_DeviceCOM;
 

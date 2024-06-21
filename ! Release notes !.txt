@@ -25,6 +25,12 @@ https://github.com/t-edson/UnTerminal
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v5.0.5 - 2024-06-21
+* Requires Greaseweazle 1.17
+* New disc formats: apple2.appledos.140, apple2.prodos.140
+* New image formats: DO, PO
+- Small bugfixes
+
 v5.0.4 - 2024-04-04
 * Requires Greaseweazle 1.16.3
 * Read: Added new template "Commodore C64 SingleSided 48-TPI floppy disks (35 tracks).inir" by Richard Verlinden
