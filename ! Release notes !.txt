@@ -29,6 +29,7 @@ v5.0.5 - 2024-06-21
 * Requires Greaseweazle 1.17
 * New disc formats: apple2.appledos.140, apple2.prodos.140
 * New image formats: DO, PO
++ Updated "diskdefs.cfg" (2024-06-16)
 - Small bugfixes
 
 v5.0.4 - 2024-04-04
