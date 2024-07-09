@@ -89,6 +89,7 @@ type
     cbSrcAsDesDir: TCheckBox;
     cbWriteTplPreErase: TCheckBox;
     cbWriteTplTplTP43Pin2: TCheckBox;
+    cbConvIndexMarks: TComboBox;
     edConvDiskOf: TEdit;
     cbConvFileFormat: TComboBox;
     cbConvFormat: TComboBox;
@@ -185,6 +186,7 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
+    lblConvIndexMarks: TLabel;
     lblConvertAdjustSpeed: TLabel;
     lblConvertDestfile: TLabel;
     lblConvertFormat: TLabel;
@@ -327,6 +329,7 @@ type
     procedure cbConvDisk2Change(Sender: TObject);
     procedure cbConvDiskdefsChange(Sender: TObject);
     procedure cbConvFormatOptionChange(Sender: TObject);
+    procedure cbConvIndexMarksChange(Sender: TObject);
     procedure cbReadTplDDChange(Sender: TObject);
     procedure cbReadTplSeekRetries1Change(Sender: TObject);
     procedure cbSetDelayAutoOffChange(Sender: TObject);
@@ -588,8 +591,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.0.5';
-  sAppDate := '2024-06-21';
+  sAppVersion := 'v5.0.6';
+  sAppDate := '2024-07-09';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   sAppPath := Dircheck(ExtractFilePath(ParamStr(0)));
@@ -716,9 +719,10 @@ begin
   FormatDest_Ext.Add('IMA (Disk Image)');
   FormatDest_Ext.Add('IMG (Disk Image)');
   FormatDest_Ext.Add('IMD (ImageDisk)');
-  //FormatDest_Ext.Add('IPF (IPF)');       // Write Only
+  FormatDest_Ext.Add('IPF (IPF)');
   FormatDest_Ext.Add('MGT (Disciple/+D)');
   FormatDest_Ext.Add('MSA (Atari ST)');
+  FormatDest_Ext.Add('NSI (NS DOS Northstar)');
   FormatDest_Ext.Add('PO (Apple II)');
   FormatDest_Ext.Add('RAW (KryoFlux)');
   FormatDest_Ext.Add('SF7 (SEGA)');
@@ -770,6 +774,8 @@ begin
   FormatSpecs_Read.Add('ensoniq.800');
   FormatSpecs_Read.Add('ensoniq.mirage');
   FormatSpecs_Read.Add('gem.1600');
+  FormatSpecs_Read.Add('hp.mmfm.9885');
+  FormatSpecs_Read.Add('hp.mmfm.9895');
   FormatSpecs_Read.Add('ibm.1200');
   FormatSpecs_Read.Add('ibm.1440');
   FormatSpecs_Read.Add('ibm.160');
@@ -784,12 +790,18 @@ begin
   FormatSpecs_Read.Add('ibm.scan');
   FormatSpecs_Read.Add('mac.400');
   FormatSpecs_Read.Add('mac.800');
-  FormatSpecs_Read.Add('mm1.os9.80ds.hd32spt');
-  FormatSpecs_Read.Add('mm1.os9.80ds.hd36spt');
+  FormatSpecs_Read.Add('mm1.os9.80dshd_32');
+  FormatSpecs_Read.Add('mm1.os9.80dshd_33');
+  FormatSpecs_Read.Add('mm1.os9.80dshd_36');
+  FormatSpecs_Read.Add('mm1.os9.80dshd_37');
   FormatSpecs_Read.Add('msx.1d');
   FormatSpecs_Read.Add('msx.1dd');
   FormatSpecs_Read.Add('msx.2d');
   FormatSpecs_Read.Add('msx.2dd');
+  FormatSpecs_Read.Add('northstar.fm.ds');
+  FormatSpecs_Read.Add('northstar.fm.ss');
+  FormatSpecs_Read.Add('northstar.mfm.ds');
+  FormatSpecs_Read.Add('northstar.mfm.ss');
   FormatSpecs_Read.Add('occ1.dd');
   FormatSpecs_Read.Add('occ1.sd');
   FormatSpecs_Read.Add('olivetti.m20');
@@ -850,6 +862,8 @@ begin
   FormatSpecs_Write.Add('ensoniq.800');
   FormatSpecs_Write.Add('ensoniq.mirage');
   FormatSpecs_Write.Add('gem.1600');
+  FormatSpecs_Write.Add('hp.mmfm.9885');
+  FormatSpecs_Write.Add('hp.mmfm.9895');
   FormatSpecs_Write.Add('ibm.1200');
   FormatSpecs_Write.Add('ibm.1440');
   FormatSpecs_Write.Add('ibm.160');
@@ -864,12 +878,18 @@ begin
   FormatSpecs_Write.Add('ibm.scan');
   FormatSpecs_Write.Add('mac.400');
   FormatSpecs_Write.Add('mac.800');
-  FormatSpecs_Write.Add('mm1.os9.80ds.hd32spt');
-  FormatSpecs_Write.Add('mm1.os9.80ds.hd36spt');
+  FormatSpecs_Write.Add('mm1.os9.80dshd_32');
+  FormatSpecs_Write.Add('mm1.os9.80dshd_33');
+  FormatSpecs_Write.Add('mm1.os9.80dshd_36');
+  FormatSpecs_Write.Add('mm1.os9.80dshd_37');
   FormatSpecs_Write.Add('msx.1d');
   FormatSpecs_Write.Add('msx.1dd');
   FormatSpecs_Write.Add('msx.2d');
   FormatSpecs_Write.Add('msx.2dd');
+  FormatSpecs_Write.Add('northstar.fm.ds');
+  FormatSpecs_Write.Add('northstar.fm.ss');
+  FormatSpecs_Write.Add('northstar.mfm.ds');
+  FormatSpecs_Write.Add('northstar.mfm.ss');
   FormatSpecs_Write.Add('occ1.dd');
   FormatSpecs_Write.Add('occ1.sd');
   FormatSpecs_Write.Add('olivetti.m20');
@@ -930,6 +950,8 @@ begin
   FormatSpecs_Conv.Add('ensoniq.800');
   FormatSpecs_Conv.Add('ensoniq.mirage');
   FormatSpecs_Conv.Add('gem.1600');
+  FormatSpecs_Conv.Add('hp.mmfm.9885');
+  FormatSpecs_Conv.Add('hp.mmfm.9895');
   FormatSpecs_Conv.Add('ibm.1200');
   FormatSpecs_Conv.Add('ibm.1440');
   FormatSpecs_Conv.Add('ibm.160');
@@ -944,12 +966,18 @@ begin
   FormatSpecs_Conv.Add('ibm.scan');
   FormatSpecs_Conv.Add('mac.400');
   FormatSpecs_Conv.Add('mac.800');
-  FormatSpecs_Conv.Add('mm1.os9.80ds.hd32spt');
-  FormatSpecs_Conv.Add('mm1.os9.80ds.hd36spt');
+  FormatSpecs_Conv.Add('mm1.os9.80dshd_32');
+  FormatSpecs_Conv.Add('mm1.os9.80dshd_33');
+  FormatSpecs_Conv.Add('mm1.os9.80dshd_36');
+  FormatSpecs_Conv.Add('mm1.os9.80dshd_37');
   FormatSpecs_Conv.Add('msx.1d');
   FormatSpecs_Conv.Add('msx.1dd');
   FormatSpecs_Conv.Add('msx.2d');
   FormatSpecs_Conv.Add('msx.2dd');
+  FormatSpecs_Conv.Add('northstar.fm.ds');
+  FormatSpecs_Conv.Add('northstar.fm.ss');
+  FormatSpecs_Conv.Add('northstar.mfm.ds');
+  FormatSpecs_Conv.Add('northstar.mfm.ss');
   FormatSpecs_Conv.Add('occ1.dd');
   FormatSpecs_Conv.Add('occ1.sd');
   FormatSpecs_Conv.Add('olivetti.m20');
@@ -969,8 +997,8 @@ begin
   FormatSpecs_Conv.Add('zx.trdos.640');
 
   EdGWFile.Filter := 'gw.exe|*.exe';
-  EdWriteFileName.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.d64;*.d71;*.d81;*.d88;*.dcp;*.dim;*.do;*.dsd;*.dsk;*.edsk;*.fdi;*hdm;*hfe;*.img;*.ima;*.imd;*.ipf;*.msa;*.scp;*.sf7;*.ssd;*.st;*.td0;*.xdf|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Apple II (do)|*.do||Apple II (po)|*.po|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|HDM (hdm)|*.hdm|HFE (HxC Floppy Emulator) (hfe)|*.hfe|ImageDisk image (imd)|*.imd|Floppy image (img)|*.img|IPF (ipf)|*.ipf|Kryoflux (raw)|*.raw|Disciple (mgt)|*.mgt|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
-  edConvFileSource.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.d64;*.d71;*.d81;*.d88;*.dcp;*.dim;*.do;*.dsd;*.dsk;*.edsk;*.fdi;*hdm;*hfe;*.img;*.ima;*.imd;*.ipf;*.msa;*.scp;*.sf7;*.ssd;*.st;*.td0;*.xdf|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Apple II (do)|*.do||Apple II (po)|*.po|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|HDM (hdm)|*.hdm|HFE (HxC Floppy Emulator) (hfe)|*.hfe|ImageDisk image (imd)|*.imd|Floppy image (img)|*.img|IPF (ipf)|*.ipf|Kryoflux (raw)|*.raw|Disciple (mgt)|*.mgt|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
+  EdWriteFileName.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.d64;*.d71;*.d81;*.d88;*.dcp;*.dim;*.do;*.dsd;*.dsk;*.edsk;*.fdi;*hdm;*hfe;*.img;*.ima;*.imd;*.ipf;*.msa;*.nsi;*.po;*.raw;*.scp;*.sf7;*.ssd;*.st;*.td0;*.xdf|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Apple II (do)|*.do||Apple II (po)|*.po|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|Disciple (mgt)|*.mgt|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|Floppy image (img)|*.img|HDM (hdm)|*.hdm|HFE (HxC Floppy Emulator) (hfe)|*.hfe|ImageDisk image (imd)|*.imd|IPF (ipf)|*.ipf|Kryoflux (raw)|*.raw|NS DOS Northstar (nsi)|*.nis|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
+  edConvFileSource.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.d64;*.d71;*.d81;*.d88;*.dcp;*.dim;*.do;*.dsd;*.dsk;*.edsk;*.fdi;*hdm;*hfe;*.img;*.ima;*.imd;*.ipf;*.msa;*.nsi;*.po;*.raw;*.scp;*.sf7;*.ssd;*.st;*.td0;*.xdf|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Apple II (do)|*.do||Apple II (po)|*.po|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|Disciple (mgt)|*.mgt|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|Floppy image (img)|*.img|HDM (hdm)|*.hdm|HFE (HxC Floppy Emulator) (hfe)|*.hfe|ImageDisk image (imd)|*.imd|IPF (ipf)|*.ipf|Kryoflux (raw)|*.raw|NS DOS Northstar (nsi)|*.nis|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
 
  Get_DeviceCOM;
 
@@ -1807,6 +1835,11 @@ end;
 procedure TForm1.cbConvFormatOptionChange(Sender: TObject);
 begin
  Create_Filename;
+end;
+
+procedure TForm1.cbConvIndexMarksChange(Sender: TObject);
+begin
+ if cbConvIndexMarks.Focused then CMD_Generate;
 end;
 
 procedure TForm1.cbReadTplDDChange(Sender: TObject);
@@ -3819,6 +3852,10 @@ begin
     if cbConvPLL.Text <> '' then
      begin
       cmd := cmd + ' --pll ' + cbConvPLL.Text;
+     end;
+    if cbConvIndexMarks.Text <> '' then
+     begin
+      cmd := cmd + ' ' + cbConvIndexMarks.Text;
      end;
     if edConvFileSource.Text <> '' then
      begin

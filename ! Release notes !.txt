@@ -25,6 +25,16 @@ https://github.com/t-edson/UnTerminal
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v5.0.6 - 2024-07-09
+* Requires Greaseweazle 1.18
+* New image format: NS Dos Northstar (nsi)
+* New disc formats: "hp.mmfm.9885", "hp.mmfm.9895"
+* New disc formats: "northstar.fm.ds", "northstar.fm.ds", "northstar.mfm.ds", "northstar.mfm.ds"
+* Convert: Added "--hard-sectors" converts input index marks into hard sectors
++ Updated "diskdefs.cfg" (2024-07-07)
++ Updated disc formats syntax: "mm1.os9.80dshd_32", "..._33", "..._36", "..._37"
+- Write/Convert: Small fixes with file extensions (.ipf, sorting)
+
 v5.0.5 - 2024-06-21
 * Requires Greaseweazle 1.17
 * New disc formats: apple2.appledos.140, apple2.prodos.140

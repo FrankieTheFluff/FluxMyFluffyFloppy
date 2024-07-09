@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 512
+  Left = 673
   Height = 753
-  Top = 15
+  Top = 48
   Width = 857
   Caption = 'FluxMyFluffyFloppy'
   ClientHeight = 753
@@ -1572,7 +1572,7 @@ object Form1: TForm1
             '0-42'
             '0-7,9-12'
           )
-          TabOrder = 4
+          TabOrder = 5
           OnChange = cbConvTracksetCylsChange
         end
         object lblConvOutTracksetCyls: TLabel
@@ -1604,7 +1604,7 @@ object Form1: TForm1
             '0-42'
             '0-7,9-12'
           )
-          TabOrder = 9
+          TabOrder = 10
           OnChange = cbConvOutTracksetCylsChange
         end
         object lblConvertAdjustSpeed: TLabel
@@ -1652,7 +1652,7 @@ object Form1: TForm1
             '0'
             '1'
           )
-          TabOrder = 5
+          TabOrder = 6
           OnChange = cbConvTracksetHeadsChange
         end
         object lblConvOutTracksetHeads: TLabel
@@ -1677,7 +1677,7 @@ object Form1: TForm1
             '0'
             '1'
           )
-          TabOrder = 10
+          TabOrder = 11
           OnChange = cbConvOutTracksetHeadsChange
         end
         object lblConvertPLL: TLabel
@@ -1724,7 +1724,7 @@ object Form1: TForm1
             '1/2'
             '2'
           )
-          TabOrder = 6
+          TabOrder = 7
           OnChange = cbConvTracksetStepsChange
         end
         object lblConvOutTracksetSteps: TLabel
@@ -1749,7 +1749,7 @@ object Form1: TForm1
             '1/2'
             '2'
           )
-          TabOrder = 11
+          TabOrder = 12
           OnChange = cbConvOutTracksetStepsChange
         end
         object lblConvTracksetHSwap: TLabel
@@ -1767,7 +1767,7 @@ object Form1: TForm1
           Width = 96
           Caption = 'Side 1 as side 0'
           Enabled = False
-          TabOrder = 7
+          TabOrder = 8
           OnClick = cbConvTracksetHSwapClick
         end
         object lblConvOutTracksetHSwap: TLabel
@@ -1785,7 +1785,7 @@ object Form1: TForm1
           Width = 96
           Caption = 'Side 1 as side 0'
           Enabled = False
-          TabOrder = 12
+          TabOrder = 13
           OnClick = cbConvOutTracksetHSwapClick
         end
         object lblConvTracksetFlippy: TLabel
@@ -1809,7 +1809,7 @@ object Form1: TForm1
             'h0.off=+8'
             'h1.off=-8'
           )
-          TabOrder = 8
+          TabOrder = 9
           OnChange = cbConvTracksetFlippyChange
         end
         object lblConvOutTracksetFlippy: TLabel
@@ -1833,8 +1833,32 @@ object Form1: TForm1
             'h0.off=+8'
             'h1.off=-8'
           )
-          TabOrder = 13
+          TabOrder = 14
           OnChange = cbConvOutTracksetFlippyChange
+        end
+        object lblConvIndexMarks: TLabel
+          Left = 16
+          Height = 15
+          Top = 128
+          Width = 66
+          Caption = 'Index marks:'
+        end
+        object cbConvIndexMarks: TComboBox
+          Left = 96
+          Height = 23
+          Hint = 'Convert index positions to hard sectors'
+          Top = 128
+          Width = 140
+          ItemHeight = 15
+          ItemIndex = 0
+          Items.Strings = (
+            ''
+            '--hard-sectors'
+          )
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 4
+          OnChange = cbConvIndexMarksChange
         end
       end
       object GroupBox11: TGroupBox
