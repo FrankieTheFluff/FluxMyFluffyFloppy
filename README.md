@@ -17,10 +17,14 @@ Requirements:
 - Greaseweazle 'diskdefs.cfg' optional
 
 -----------------------------------------------------------------
+
 Greaseweazle Host Tools (c) Keir Fraser
 Web: https://github.com/keirf/Greaseweazle
+
 -----------------------------------------------------------------
+
 Contains code from the following project:
 UnTerminal 1.0 by Tito Hinostroza 02/10/2020
 https://github.com/t-edson/UnTerminal
+
 -----------------------------------------------------------------
