@@ -591,8 +591,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.0.6';
-  sAppDate := '2024-07-09';
+  sAppVersion := 'v5.0.7';
+  sAppDate := '2024-08-25';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   sAppPath := Dircheck(ExtractFilePath(ParamStr(0)));
@@ -691,10 +691,6 @@ begin
     end;
 
   // Create StringLists Read/Conv Destination fileextension
-  //Supported file suffixes:
-  //.a2r   .adf   .ads   .adm   .adl   .ctr   .d64   .d71   .d81   .d88   .dcp
-  //.dim   .do    .dsd   .dsk   .edsk  .fdi   .hdm   .hfe   .ima   .img   .imd
-  //.ipf   .mgt   .msa   .po    .raw   .sf7   .scp   .ssd   .st    .td0   .xdf
   FormatDest_Ext := TStringList.Create;
   FormatDest_Ext.Add('');
   FormatDest_Ext.Add('A2R (Applesauce)');
@@ -722,6 +718,7 @@ begin
   FormatDest_Ext.Add('IPF (IPF)');
   FormatDest_Ext.Add('MGT (Disciple/+D)');
   FormatDest_Ext.Add('MSA (Atari ST)');
+  FormatDest_Ext.Add('NFD (T98-Next)');    // v1.19 read only
   FormatDest_Ext.Add('NSI (NS DOS Northstar)');
   FormatDest_Ext.Add('PO (Apple II)');
   FormatDest_Ext.Add('RAW (KryoFlux)');
@@ -747,6 +744,7 @@ begin
   FormatSpecs_Read.Add('amiga.amigados');
   FormatSpecs_Read.Add('amiga.amigados_hd');
   FormatSpecs_Read.Add('apple2.appledos.140');
+  FormatSpecs_Read.Add('apple2.nofs.140');
   FormatSpecs_Read.Add('apple2.prodos.140');
   FormatSpecs_Read.Add('atari.90');
   FormatSpecs_Read.Add('atarist.360');
@@ -773,6 +771,12 @@ begin
   FormatSpecs_Read.Add('ensoniq.1600');
   FormatSpecs_Read.Add('ensoniq.800');
   FormatSpecs_Read.Add('ensoniq.mirage');
+  FormatSpecs_Read.Add('epson.qx10.320');
+  FormatSpecs_Read.Add('epson.qx10.396');
+  FormatSpecs_Read.Add('epson.qx10.399');
+  FormatSpecs_Read.Add('epson.qx10.400');
+  FormatSpecs_Read.Add('epson.qx10.booter');
+  FormatSpecs_Read.Add('epson.qx10.logo');
   FormatSpecs_Read.Add('gem.1600');
   FormatSpecs_Read.Add('hp.mmfm.9885');
   FormatSpecs_Read.Add('hp.mmfm.9895');
@@ -835,6 +839,7 @@ begin
   FormatSpecs_Write.Add('amiga.amigados');
   FormatSpecs_Write.Add('amiga.amigados_hd');
   FormatSpecs_Write.Add('apple2.appledos.140');
+  FormatSpecs_Write.Add('apple2.nofs.140');
   FormatSpecs_Write.Add('apple2.prodos.140');
   FormatSpecs_Write.Add('atari.90');
   FormatSpecs_Write.Add('atarist.360');
@@ -861,6 +866,12 @@ begin
   FormatSpecs_Write.Add('ensoniq.1600');
   FormatSpecs_Write.Add('ensoniq.800');
   FormatSpecs_Write.Add('ensoniq.mirage');
+  FormatSpecs_Write.Add('epson.qx10.320');
+  FormatSpecs_Write.Add('epson.qx10.396');
+  FormatSpecs_Write.Add('epson.qx10.399');
+  FormatSpecs_Write.Add('epson.qx10.400');
+  FormatSpecs_Write.Add('epson.qx10.booter');
+  FormatSpecs_Write.Add('epson.qx10.logo');
   FormatSpecs_Write.Add('gem.1600');
   FormatSpecs_Write.Add('hp.mmfm.9885');
   FormatSpecs_Write.Add('hp.mmfm.9895');
@@ -923,6 +934,7 @@ begin
   FormatSpecs_Conv.Add('amiga.amigados');
   FormatSpecs_Conv.Add('amiga.amigados_hd');
   FormatSpecs_Conv.Add('apple2.appledos.140');
+  FormatSpecs_Conv.Add('apple2.nofs.140');
   FormatSpecs_Conv.Add('apple2.prodos.140');
   FormatSpecs_Conv.Add('atari.90');
   FormatSpecs_Conv.Add('atarist.360');
@@ -949,6 +961,12 @@ begin
   FormatSpecs_Conv.Add('ensoniq.1600');
   FormatSpecs_Conv.Add('ensoniq.800');
   FormatSpecs_Conv.Add('ensoniq.mirage');
+  FormatSpecs_Conv.Add('epson.qx10.320');
+  FormatSpecs_Conv.Add('epson.qx10.396');
+  FormatSpecs_Conv.Add('epson.qx10.399');
+  FormatSpecs_Conv.Add('epson.qx10.400');
+  FormatSpecs_Conv.Add('epson.qx10.booter');
+  FormatSpecs_Conv.Add('epson.qx10.logo');
   FormatSpecs_Conv.Add('gem.1600');
   FormatSpecs_Conv.Add('hp.mmfm.9885');
   FormatSpecs_Conv.Add('hp.mmfm.9895');
@@ -2051,13 +2069,14 @@ begin
   cbConvFormatOption.ItemIndex := -1;
   cbConvFormatOption.Items.Add('');
   cbConvFormatOption.Items.Add('::disktype=amiga');
+  cbConvFormatOption.Items.Add('::disktype=amigahd');
   cbConvFormatOption.Items.Add('::disktype=c64');
   cbConvFormatOption.Items.Add('::disktype=amstrad-cpc');
   cbConvFormatOption.Items.Add('::disktype=apple-1m44');
   cbConvFormatOption.Items.Add('::disktype=apple-400k');
   cbConvFormatOption.Items.Add('::disktype=apple-800k');
-  cbConvFormatOption.Items.Add('::disktype=appleII');
-  cbConvFormatOption.Items.Add('::disktype=appleIIpro');
+  cbConvFormatOption.Items.Add('::disktype=appleii');
+  cbConvFormatOption.Items.Add('::disktype=appleiipro');
   cbConvFormatOption.Items.Add('::disktype=atari800-dd');
   cbConvFormatOption.Items.Add('::disktype=atari800-ed ');
   cbConvFormatOption.Items.Add('::disktype=atari800-sd');
@@ -2066,8 +2085,8 @@ begin
   cbConvFormatOption.Items.Add('::disktype=hdd-mfm');
   cbConvFormatOption.Items.Add('::disktype=hdd-rll');
   cbConvFormatOption.Items.Add('::disktype=ibmpc-1m2');
-  cbConvFormatOption.Items.Add('::disktype=ibmpc-1m44 ');
-  cbConvFormatOption.Items.Add('::disktype=ibmpc-320k');
+  cbConvFormatOption.Items.Add('::disktype=ibmpc-1m44');
+  cbConvFormatOption.Items.Add('::disktype=ibmpc-360k');
   cbConvFormatOption.Items.Add('::disktype=ibmpc-720k');
   cbConvFormatOption.Items.Add('::disktype=other-1m2');
   cbConvFormatOption.Items.Add('::disktype=other-1m44');
@@ -3105,13 +3124,14 @@ begin
    cbReadFormatOption.Enabled:= true;
    cbReadFormatOption.Items.Add('');
    cbReadFormatOption.Items.Add('::disktype=amiga');
+   cbReadFormatOption.Items.Add('::disktype=amigahd');
    cbReadFormatOption.Items.Add('::disktype=c64');
    cbReadFormatOption.Items.Add('::disktype=amstrad-cpc');
    cbReadFormatOption.Items.Add('::disktype=apple-1m44');
    cbReadFormatOption.Items.Add('::disktype=apple-400k');
    cbReadFormatOption.Items.Add('::disktype=apple-800k');
-   cbReadFormatOption.Items.Add('::disktype=appleII');
-   cbReadFormatOption.Items.Add('::disktype=appleIIpro');
+   cbReadFormatOption.Items.Add('::disktype=appleii');
+   cbReadFormatOption.Items.Add('::disktype=appleiipro');
    cbReadFormatOption.Items.Add('::disktype=atari800-dd');
    cbReadFormatOption.Items.Add('::disktype=atari800-ed ');
    cbReadFormatOption.Items.Add('::disktype=atari800-sd');
@@ -3120,8 +3140,8 @@ begin
    cbReadFormatOption.Items.Add('::disktype=hdd-mfm');
    cbReadFormatOption.Items.Add('::disktype=hdd-rll');
    cbReadFormatOption.Items.Add('::disktype=ibmpc-1m2');
-   cbReadFormatOption.Items.Add('::disktype=ibmpc-1m44 ');
-   cbReadFormatOption.Items.Add('::disktype=ibmpc-320k');
+   cbReadFormatOption.Items.Add('::disktype=ibmpc-1m44');
+   cbReadFormatOption.Items.Add('::disktype=ibmpc-360k');
    cbReadFormatOption.Items.Add('::disktype=ibmpc-720k');
    cbReadFormatOption.Items.Add('::disktype=other-1m2');
    cbReadFormatOption.Items.Add('::disktype=other-1m44');

@@ -1,4 +1,4 @@
------------------------------------------------------------------
+﻿-----------------------------------------------------------------
 FluxMyFluffyFloppy 
 v5.xx
 -----------------------------------------------------------------
@@ -24,6 +24,14 @@ https://github.com/t-edson/UnTerminal
 
 Release notes
 *new, +update, -bugfix, #unfixed
+
+v5.0.7 - 2024-08-25
+* Requires Greaseweazle 1.19
+* New image format: T98-Next (nfd) (Read only)
+* New disc formats: Epson QX-10: ".320", ".396", ".399", ".400", ".booter", ".logo"
+* New disc formats: "apple2.nofs.140"
++ Updated "diskdefs.cfg" (2024-08-20)
++ Read/Convert: Fixed SuperCardPro (SCP) disktypes
 
 v5.0.6 - 2024-07-09
 * Requires Greaseweazle 1.18

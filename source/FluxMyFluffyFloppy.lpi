@@ -19,7 +19,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="5"/>
-      <RevisionNr Value="6"/>
+      <RevisionNr Value="7"/>
       <StringTable Comments="Freeware" CompanyName="FrankieTheFluff" FileDescription="FluxMyFluffyFloppy - A GUI for Greaseweazle" InternalName="FluxMyFluffyFloppy" LegalCopyright="(c) 2021-2024 FrankieTheFluff" OriginalFilename="fluxmyfluffyfloppy.exe" ProductName="FluxMyFluffyFloppy" ProductVersion="5"/>
     </VersionInfo>
     <BuildModes>
@@ -27,7 +27,7 @@
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
-      <DestinationDirectory Value=""/>
+      <DestinationDirectory Value="C:\Users\Don&apos;t Touch\fmff"/>
       <UseFileFilters Value="True"/>
     </PublishOptions>
     <RunParams>

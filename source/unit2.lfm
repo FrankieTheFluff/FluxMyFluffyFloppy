@@ -136,7 +136,7 @@ object FrmAbout: TFrmAbout
       Height = 15
       Top = 176
       Width = 316
-      Caption = 'Requires "Greaseweazle v1.18+" (and optional ''diskdefs.cfg'')'
+      Caption = 'Requires "Greaseweazle v1.19+" (and optional ''diskdefs.cfg'')'
       Font.CharSet = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -12
