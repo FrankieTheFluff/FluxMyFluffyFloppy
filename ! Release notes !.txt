@@ -25,6 +25,10 @@ https://github.com/t-edson/UnTerminal
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v5.0.8 - 2024-08-25
+* Requires Greaseweazle 1.19
+* Read/Write/Convert: New option "--reverse"
+
 v5.0.7 - 2024-08-25
 * Requires Greaseweazle 1.19
 * New image format: T98-Next (nfd) (Read only)

@@ -1,10 +1,10 @@
 object Form1: TForm1
   Left = 486
-  Height = 753
+  Height = 768
   Top = 16
   Width = 857
   Caption = 'FluxMyFluffyFloppy'
-  ClientHeight = 753
+  ClientHeight = 768
   ClientWidth = 857
   Menu = MainMenu1
   OnClose = FormClose
@@ -151,7 +151,7 @@ object Form1: TForm1
   end
   object pcActions: TPageControl
     Left = 2
-    Height = 568
+    Height = 584
     Top = 80
     Width = 855
     ActivePage = tbRead
@@ -162,12 +162,12 @@ object Form1: TForm1
     OnChange = pcActionsChange
     object tbRead: TTabSheet
       Caption = 'Read'
-      ClientHeight = 540
+      ClientHeight = 556
       ClientWidth = 847
       object GroupBox3: TGroupBox
         Left = 0
         Height = 248
-        Top = 256
+        Top = 285
         Width = 843
         Anchors = [akTop, akLeft, akRight]
         Caption = 'Destination:'
@@ -451,12 +451,12 @@ object Form1: TForm1
       end
       object GroupBox4: TGroupBox
         Left = 0
-        Height = 178
+        Height = 205
         Top = 80
         Width = 843
         Anchors = [akTop, akLeft, akRight]
         Caption = 'Arguments:'
-        ClientHeight = 158
+        ClientHeight = 185
         ClientWidth = 839
         TabOrder = 1
         object lblReadTplFormat: TLabel
@@ -839,6 +839,26 @@ object Form1: TForm1
           TabOrder = 9
           OnChange = cbReadTplDDChange
         end
+        object lblReadTplFlippyReverse: TLabel
+          Left = 655
+          Height = 15
+          Top = 160
+          Width = 43
+          Caption = 'Reverse:'
+          ParentColor = False
+        end
+        object cbReadTplFlippyReverse: TCheckBox
+          Left = 719
+          Height = 17
+          Hint = 'Reverse flippy'
+          Top = 160
+          Width = 18
+          Enabled = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 15
+          OnClick = cbReadTplFlippyReverseClick
+        end
       end
       object GroupBox5: TGroupBox
         Left = 0
@@ -930,7 +950,7 @@ object Form1: TForm1
     end
     object tbWrite: TTabSheet
       Caption = 'Write'
-      ClientHeight = 540
+      ClientHeight = 556
       ClientWidth = 847
       object Memo1: TMemo
         Left = 16
@@ -1423,11 +1443,31 @@ object Form1: TForm1
           TabOrder = 9
           OnChange = cbWriteTplTplTP43Pin2Change
         end
+        object lblWriteTplFlippyReverse: TLabel
+          Left = 560
+          Height = 15
+          Top = 160
+          Width = 43
+          Caption = 'Reverse:'
+          ParentColor = False
+        end
+        object cbWriteTplFlippyReverse: TCheckBox
+          Left = 624
+          Height = 17
+          Hint = 'Reverse flippy'
+          Top = 160
+          Width = 18
+          Enabled = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 16
+          OnClick = cbWriteTplFlippyReverseClick
+        end
       end
     end
     object tbConv: TTabSheet
       Caption = 'Convert'
-      ClientHeight = 540
+      ClientHeight = 556
       ClientWidth = 847
       object GroupBox9: TGroupBox
         Left = 0
@@ -1486,12 +1526,12 @@ object Form1: TForm1
       end
       object GroupBox10: TGroupBox
         Left = 0
-        Height = 208
+        Height = 235
         Top = 80
         Width = 843
         Anchors = [akTop, akLeft, akRight]
         Caption = 'Arguments:'
-        ClientHeight = 188
+        ClientHeight = 215
         ClientWidth = 839
         TabOrder = 1
         object cbConvDiskdefs: TComboBox
@@ -1860,11 +1900,31 @@ object Form1: TForm1
           TabOrder = 4
           OnChange = cbConvIndexMarksChange
         end
+        object lblConvTplFlippyReverse: TLabel
+          Left = 624
+          Height = 15
+          Top = 192
+          Width = 43
+          Caption = 'Reverse:'
+          ParentColor = False
+        end
+        object cbConvTplFlippyReverse: TCheckBox
+          Left = 694
+          Height = 17
+          Hint = 'Reverse flippy'
+          Top = 192
+          Width = 18
+          Enabled = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 15
+          OnClick = cbConvTplFlippyReverseClick
+        end
       end
       object GroupBox11: TGroupBox
         Left = 0
         Height = 240
-        Top = 288
+        Top = 315
         Width = 843
         Anchors = [akTop, akLeft, akRight]
         Caption = 'Destination:'
@@ -2156,7 +2216,7 @@ object Form1: TForm1
     end
     object tbTools: TTabSheet
       Caption = 'Tools'
-      ClientHeight = 540
+      ClientHeight = 556
       ClientWidth = 847
       object GroupBox2: TGroupBox
         Left = 0
@@ -2660,7 +2720,7 @@ object Form1: TForm1
     end
     object TabSheet1: TTabSheet
       Caption = 'Settings'
-      ClientHeight = 540
+      ClientHeight = 556
       ClientWidth = 847
       object grpSetDelays: TGroupBox
         Left = 0
@@ -3066,7 +3126,7 @@ object Form1: TForm1
   object Panel2: TPanel
     Left = 0
     Height = 98
-    Top = 655
+    Top = 670
     Width = 857
     Align = alBottom
     BevelOuter = bvNone

@@ -58,6 +58,8 @@ type
     cbConvFormatOptionHFEInt: TComboBox;
     cbReadFormatOptionHFEVer: TComboBox;
     cbConvFormatOptionHFEVer: TComboBox;
+    cbReadTplFlippyReverse: TCheckBox;
+    cbWriteTplFlippyReverse: TCheckBox;
     cbWriteTplDensel: TComboBox;
     cbReadTplLogBoth: TCheckBox;
     cbReadTplLogOutput: TCheckBox;
@@ -87,6 +89,7 @@ type
     cbToolsSeekTrack: TSpinEdit;
     cbToolsSeekTrackForce: TCheckBox;
     cbSrcAsDesDir: TCheckBox;
+    cbConvTplFlippyReverse: TCheckBox;
     cbWriteTplPreErase: TCheckBox;
     cbWriteTplTplTP43Pin2: TCheckBox;
     cbConvIndexMarks: TComboBox;
@@ -224,6 +227,8 @@ type
     lblReadDestPreview: TLabel;
     lblReadTpl: TLabel;
     lblReadTplCyls: TLabel;
+    lblReadTplFlippyReverse: TLabel;
+    lblWriteTplFlippyReverse: TLabel;
     lblWriteTplDD: TLabel;
     lblReadTplFakeIndex: TLabel;
     lblReadTplFlippy: TLabel;
@@ -261,6 +266,7 @@ type
     lblWriteFile: TLabel;
     lblWriteTemplate: TLabel;
     lblWriteTplCyls: TLabel;
+    lblConvTplFlippyReverse: TLabel;
     lblWriteTplTP43Pin2: TLabel;
     lblWriteTplPreErase: TLabel;
     lblWriteTplEraseEmpty: TLabel;
@@ -323,6 +329,7 @@ type
     procedure BtWriteTplDelClick(Sender: TObject);
     procedure BtWriteTplNewClick(Sender: TObject);
     procedure BtWriteTplSaveClick(Sender: TObject);
+    procedure cbConvTplFlippyReverseClick(Sender: TObject);
     procedure cbConvAdjustSpeedChange(Sender: TObject);
     procedure cbConvDigitsChange(Sender: TObject);
     procedure cbConvDisk1Change(Sender: TObject);
@@ -331,6 +338,7 @@ type
     procedure cbConvFormatOptionChange(Sender: TObject);
     procedure cbConvIndexMarksChange(Sender: TObject);
     procedure cbReadTplDDChange(Sender: TObject);
+    procedure cbReadTplFlippyReverseClick(Sender: TObject);
     procedure cbReadTplSeekRetries1Change(Sender: TObject);
     procedure cbSetDelayAutoOffChange(Sender: TObject);
     procedure cbSetDelayMotorChange(Sender: TObject);
@@ -360,6 +368,7 @@ type
     procedure cbToolsSeekTrackEnter(Sender: TObject);
     procedure cbToolsSeekTrackForceClick(Sender: TObject);
     procedure cbWriteTplDenselChange(Sender: TObject);
+    procedure cbWriteTplFlippyReverseClick(Sender: TObject);
     procedure cbWriteTplPreEraseChange(Sender: TObject);
     procedure cbWriteTplTplTP43Pin2Change(Sender: TObject);
     procedure edConvDiskOfChange(Sender: TObject);
@@ -591,7 +600,7 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.0.7';
+  sAppVersion := 'v5.0.8';
   sAppDate := '2024-08-25';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
@@ -1653,6 +1662,11 @@ begin
   end;
 end;
 
+procedure TForm1.cbConvTplFlippyReverseClick(Sender: TObject);
+begin
+  CMD_Generate;
+end;
+
 procedure TForm1.Refresh_Templates_Write_DropDown;
 var
   Templates_Write: TStringList;
@@ -1865,6 +1879,11 @@ begin
  if cbReadTplDD.Focused then CMD_Generate;
 end;
 
+procedure TForm1.cbReadTplFlippyReverseClick(Sender: TObject);
+begin
+ CMD_Generate;
+end;
+
 procedure TForm1.cbReadTplSeekRetries1Change(Sender: TObject);
 begin
  if cbReadTplPLL.Focused then CMD_Generate;
@@ -2041,6 +2060,11 @@ begin
   if cbWriteTplDensel.Focused then CMD_Generate;
 end;
 
+procedure TForm1.cbWriteTplFlippyReverseClick(Sender: TObject);
+begin
+ CMD_Generate;
+end;
+
 procedure TForm1.cbWriteTplPreEraseChange(Sender: TObject);
 begin
   if cbWriteTplPreErase.Focused then CMD_Generate;
@@ -2202,6 +2226,7 @@ begin
    cbConvOutTracksetSteps.Enabled := true;
    cbConvOutTracksetHSwap.Enabled := true;
    cbConvOutTracksetFlippy.Enabled := true;
+   cbConvTplFlippyReverse.Enabled := true;
  end
  else
  begin
@@ -2209,13 +2234,14 @@ begin
    cbConvOutTracksetSteps.Enabled := false;
    cbConvOutTracksetHSwap.Enabled := false;
    cbConvOutTracksetFlippy.Enabled := false;
+   cbConvTplFlippyReverse.Enabled := false;
  end;
- if cbConvOutTracksetCyls.Focused then CMD_Generate;
+ CMD_Generate;
 end;
 
 procedure TForm1.cbConvOutTracksetFlippyChange(Sender: TObject);
 begin
-   if cbConvOutTracksetFlippy.Focused then CMD_Generate;
+ CMD_Generate;
 end;
 
 procedure TForm1.cbConvOutTracksetHeadsChange(Sender: TObject);
@@ -2303,7 +2329,7 @@ end;
 
 procedure TForm1.cbReadTplCylsChange(Sender: TObject);
 begin
-  if cbReadTplCyls.Focused then CMD_Generate;
+  CMD_Generate;
 end;
 
 procedure TForm1.cbReadTplFakeIndexChange(Sender: TObject);
@@ -2313,7 +2339,7 @@ end;
 
 procedure TForm1.cbReadTplFlippyChange(Sender: TObject);
 begin
-  if cbReadTplFlippy.Focused then CMD_Generate;
+  CMD_Generate;
 end;
 
 procedure TForm1.cbReadTplFormatChange(Sender: TObject);
@@ -2903,6 +2929,7 @@ begin
     cbWriteTplSteps.Enabled := true;
     cbWriteTplHSwap.Enabled := true;
     cbWriteTplFlippy.Enabled := true;
+    cbWriteTplFlippyReverse.Enabled := true;
   end
   else
   begin
@@ -2910,8 +2937,9 @@ begin
     cbWriteTplSteps.Enabled := false;
     cbWriteTplHSwap.Enabled := false;
     cbWriteTplFlippy.Enabled := false;
+    cbWriteTplFlippyReverse.Enabled := false;
   end;
-  if cbWriteTplCyls.Focused then CMD_Generate;
+  CMD_Generate;
 end;
 
 procedure TForm1.cbWriteTplEraseEmptyChange(Sender: TObject);
@@ -2926,7 +2954,7 @@ end;
 
 procedure TForm1.cbWriteTplFlippyChange(Sender: TObject);
 begin
-  if cbWriteTplFlippy.Focused then CMD_Generate;
+  CMD_Generate;
 end;
 
 procedure TForm1.cbWriteTplFormatChange(Sender: TObject);
@@ -3727,13 +3755,21 @@ begin
     cbReadTplHSwap.Enabled := true;
     cbReadTplFlippy.Enabled := true;
     cmd := cmd + Trackset(' --tracks=',cbReadTplCyls.Text,cbReadTplHeads.Text,cbReadTplSteps.Text,cbReadTplHSwap.Checked,cbReadTplFlippy.Text);
-   end;
+    if cbReadTplFlippy.Text <> '' then
+     begin
+      cbReadTplFlippyReverse.Enabled := true;
+      if cbReadTplFlippyReverse.Checked = true then cmd := cmd + ' --reverse';
+     end
+    else
+     cbReadTplFlippyReverse.Enabled := false;
+    end;
   if cbReadTplCyls.Text = '' then                       //Trackset
    begin
     cbReadTplHeads.Enabled := false;
     cbReadTplSteps.Enabled := false;
     cbReadTplHSwap.Enabled := false;
     cbReadTplFlippy.Enabled := false;
+    cbReadTplFlippyReverse.Enabled := false;
    end;
   if cbReadTplRevs.Text <> '' then
    begin
@@ -3797,7 +3833,14 @@ begin
      end;
     if cbWriteTplCyls.Text <> '' then
      begin
-       cmd := cmd + Trackset(' --tracks=',cbWriteTplCyls.Text,cbWriteTplHeads.Text,cbWriteTplSteps.Text,cbWriteTplHSwap.Checked,cbWriteTplFlippy.Text);
+      cmd := cmd + Trackset(' --tracks=',cbWriteTplCyls.Text,cbWriteTplHeads.Text,cbWriteTplSteps.Text,cbWriteTplHSwap.Checked,cbWriteTplFlippy.Text);
+      if cbWriteTplFlippy.Text <> '' then
+       begin
+        cbWriteTplFlippyReverse.Enabled := true;
+        if cbWriteTplFlippyReverse.Checked = true then cmd := cmd + ' --reverse';
+       end
+      else
+       cbWriteTplFlippyReverse.Enabled := false;
      end;
     if cbWriteTplPreErase.Checked = true then
      begin
@@ -3859,7 +3902,14 @@ begin
       end;
      if cbConvOutTracksetCyls.Text <> '' then
       begin
-        cmd := cmd + Trackset(' --out-tracks=',cbConvOutTracksetCyls.Text,cbConvOutTracksetHeads.Text,cbConvOutTracksetSteps.Text,cbConvOutTracksetHSwap.Checked,cbConvOutTracksetFlippy.Text);
+       cmd := cmd + Trackset(' --out-tracks=',cbConvOutTracksetCyls.Text,cbConvOutTracksetHeads.Text,cbConvOutTracksetSteps.Text,cbConvOutTracksetHSwap.Checked,cbConvOutTracksetFlippy.Text);
+       if cbConvOutTracksetFlippy.Text <> '' then
+        begin
+         cbConvTplFlippyReverse.Enabled := true;
+         if cbConvTplFlippyReverse.Checked = true then cmd := cmd + ' --reverse';
+        end
+       else
+        cbConvTplFlippyReverse.Enabled := false;
       end;
      if cbConvAdjustSpeed.Text <> '' then
       begin
