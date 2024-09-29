@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, SQLite3Conn, SQLDB, DB, Forms, Controls, Graphics, Dialogs,
   ComCtrls, DBGrids, StdCtrls, DBCtrls, Menus, EditBtn, Spin, ExtCtrls,
-  IniFiles, Process, Registry, Fileutil, LazFileUtils;
+  IniFiles, Process, Registry, Fileutil, LazFileUtils, LCLIntf;
 type
 
   { TForm1 }
@@ -52,52 +52,14 @@ type
     cbConvDisk1: TSpinEdit;
     cbConvDisk2: TSpinEdit;
     cbConvDiskdefs: TComboBox;
-    cbConvFormatOptionHFEEnc: TComboBox;
-    cbReadFormatOptionHFEInt: TComboBox;
-    cbReadFormatOptionHFEEnc: TComboBox;
-    cbConvFormatOptionHFEInt: TComboBox;
-    cbReadFormatOptionHFEVer: TComboBox;
-    cbConvFormatOptionHFEVer: TComboBox;
-    cbReadTplFlippyReverse: TCheckBox;
-    cbWriteTplFlippyReverse: TCheckBox;
-    cbWriteTplDensel: TComboBox;
-    cbReadTplLogBoth: TCheckBox;
-    cbReadTplLogOutput: TCheckBox;
-    cbReadTplLogParam: TCheckBox;
-    cbReadTplDD: TComboBox;
-    cbSetDelayAutoOff: TSpinEdit;
-    cbSetDelayMotor: TSpinEdit;
-    cbSetDelaySelect: TSpinEdit;
-    cbSetDelaySettle: TSpinEdit;
-    cbSetDelayStep: TSpinEdit;
-    cbSetFirmwareBootloader: TCheckBox;
-    cbSetPINLevel: TComboBox;
-    cbSetPINNumber: TSpinEdit;
-    cbSrcAsDesFile: TCheckBox;
-    cbToolsCleanCyl: TSpinEdit;
-    cbToolsCleanLinger: TComboBox;
-    cbToolsCleanPasses: TComboBox;
-    cbToolsEraseCyl: TComboBox;
-    cbToolsEraseFakeIndex: TComboBox;
-    cbToolsEraseRevs: TComboBox;
-    cbToolsEraseFlippy: TComboBox;
-    cbToolsEraseHeads: TComboBox;
-    cbToolsEraseHSwap: TCheckBox;
-    cbToolsEraseSteps: TComboBox;
-    cbToolsRPMNumbIter: TSpinEdit;
-    cbToolsSeekMotorOn: TCheckBox;
-    cbToolsSeekTrack: TSpinEdit;
-    cbToolsSeekTrackForce: TCheckBox;
-    cbSrcAsDesDir: TCheckBox;
-    cbConvTplFlippyReverse: TCheckBox;
-    cbWriteTplPreErase: TCheckBox;
-    cbWriteTplTplTP43Pin2: TCheckBox;
-    cbConvIndexMarks: TComboBox;
-    edConvDiskOf: TEdit;
     cbConvFileFormat: TComboBox;
     cbConvFormat: TComboBox;
     cbConvFormatOption: TComboBox;
+    cbConvFormatOptionHFEEnc: TComboBox;
+    cbConvFormatOptionHFEInt: TComboBox;
+    cbConvFormatOptionHFEVer: TComboBox;
     cbConvIncrement: TCheckBox;
+    cbConvIndexMarks: TComboBox;
     cbConvNoOverwrite: TCheckBox;
     cbConvOutTracksetCyls: TComboBox;
     cbConvOutTracksetFlippy: TComboBox;
@@ -105,52 +67,96 @@ type
     cbConvOutTracksetHSwap: TCheckBox;
     cbConvOutTracksetSteps: TComboBox;
     cbConvPLL: TComboBox;
+    cbConvTplFlippyReverse: TCheckBox;
     cbConvTracksetCyls: TComboBox;
     cbConvTracksetFlippy: TComboBox;
     cbConvTracksetHeads: TComboBox;
     cbConvTracksetHSwap: TCheckBox;
     cbConvTracksetSteps: TComboBox;
-    cbGWDevCOM: TComboBox;
-    cbGWDrive: TComboBox;
     cbReadFormat: TComboBox;
     cbReadFormatOption: TComboBox;
+    cbReadFormatOptionHFEEnc: TComboBox;
+    cbReadFormatOptionHFEInt: TComboBox;
+    cbReadFormatOptionHFEVer: TComboBox;
     cbReadIncremental: TCheckBox;
     cbReadNoOverwrite: TCheckBox;
     cbReadPreview: TEdit;
-    cbReadTplName: TComboBox;
     cbReadTplAdjustSpeed: TComboBox;
     cbReadTplCyls: TComboBox;
+    cbReadTplDD: TComboBox;
     cbReadTplFakeIndex: TComboBox;
     cbReadTplFlippy: TComboBox;
+    cbReadTplFlippyReverse: TCheckBox;
     cbReadTplFormat: TComboBox;
     cbReadTplFormatSrc: TComboBox;
+    cbReadTplHardSec: TCheckBox;
     cbReadTplHeads: TComboBox;
     cbReadTplHSwap: TCheckBox;
+    cbReadTplLogBoth: TCheckBox;
+    cbReadTplLogOutput: TCheckBox;
+    cbReadTplLogParam: TCheckBox;
+    cbGWDevCOM: TComboBox;
+    cbGWDrive: TComboBox;
+    cbReadTplName: TComboBox;
     cbReadTplPLL: TComboBox;
     cbReadTplRaw: TCheckBox;
     cbReadTplRetries: TComboBox;
     cbReadTplRevs: TComboBox;
     cbReadTplSeekRetries: TComboBox;
     cbReadTplSteps: TComboBox;
+    cbSetDelayAutoOff: TSpinEdit;
+    cbSetDelayIndexMask: TSpinEdit;
+    cbSetDelayMotor: TSpinEdit;
+    cbSetDelayPostWrite: TSpinEdit;
+    cbSetDelayPreWrite: TSpinEdit;
+    cbSetDelaySelect: TSpinEdit;
+    cbSetDelaySettle: TSpinEdit;
+    cbSetDelayStep: TSpinEdit;
+    cbSetFirmwareBootloader: TCheckBox;
     cbSetGlobalActionsBacktrace: TCheckBox;
     cbSetGlobalActionsTime: TCheckBox;
+    cbSetPINLevel: TComboBox;
+    cbSetPINNumber: TSpinEdit;
+    cbSrcAsDesDir: TCheckBox;
+    cbSrcAsDesFile: TCheckBox;
+    cbToolsCleanCyl: TSpinEdit;
+    cbToolsCleanLinger: TComboBox;
+    cbToolsCleanPasses: TComboBox;
+    cbToolsEraseCyl: TComboBox;
+    cbToolsEraseFakeIndex: TComboBox;
+    cbToolsEraseFlippy: TComboBox;
+    cbToolsEraseHeads: TComboBox;
+    cbToolsEraseHSwap: TCheckBox;
+    cbToolsEraseRevs: TComboBox;
+    cbToolsEraseSteps: TComboBox;
+    cbToolsRPMNumbIter: TSpinEdit;
+    cbToolsSeekMotorOn: TCheckBox;
+    cbToolsSeekTrack: TSpinEdit;
+    cbToolsSeekTrackForce: TCheckBox;
     cbWriteTplCyls: TComboBox;
+    cbWriteTplDensel: TComboBox;
     cbWriteTplEraseEmpty: TCheckBox;
     cbWriteTplFakeIndex: TComboBox;
     cbWriteTplFlippy: TComboBox;
+    cbWriteTplFlippyReverse: TCheckBox;
     cbWriteTplFormat: TComboBox;
     cbWriteTplFormatSrc: TComboBox;
+    cbWriteTplHardSec: TCheckBox;
     cbWriteTplHeads: TComboBox;
     cbWriteTplHSwap: TCheckBox;
     cbWriteTplName: TComboBox;
     cbWriteTplNoVerify: TCheckBox;
     cbWriteTplPrecomp: TComboBox;
+    cbWriteTplPreErase: TCheckBox;
     cbWriteTplRetries: TComboBox;
     cbWriteTplSteps: TComboBox;
+    cbWriteTplTplTP43Pin2: TCheckBox;
     DataSource1: TDataSource;
     edConvDirDest: TDirectoryEdit;
+    edConvDiskOf: TEdit;
     edConvFilename: TEdit;
     edConvFilenamePreview: TEdit;
+    edConvFileSource: TFileNameEdit;
     EdGWCmd: TMemo;
     EdGWFile: TFileNameEdit;
     edReadDigits: TSpinEdit;
@@ -160,11 +166,10 @@ type
     edReadDiskOf: TEdit;
     EdReadFilename: TEdit;
     edReadTplDesc: TEdit;
-    edToolsFWTag: TEdit;
-    edWriteTplDesc: TEdit;
-    edWriteFileName: TFileNameEdit;
-    edConvFileSource: TFileNameEdit;
     edToolsFW: TFileNameEdit;
+    edToolsFWTag: TEdit;
+    edWriteFileName: TFileNameEdit;
+    edWriteTplDesc: TEdit;
     GroupBox1: TGroupBox;
     GroupBox10: TGroupBox;
     GroupBox11: TGroupBox;
@@ -189,7 +194,9 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
-    lblConvIndexMarks: TLabel;
+    lblConvDestFormatExtEnc: TLabel;
+    lblConvDestFormatExtInt: TLabel;
+    lblConvDestFormatExtVer: TLabel;
     lblConvertAdjustSpeed: TLabel;
     lblConvertDestfile: TLabel;
     lblConvertFormat: TLabel;
@@ -197,11 +204,13 @@ type
     lblConvertPLL: TLabel;
     lblConvertSourcefile: TLabel;
     lblConvertTrackset: TLabel;
+    lblConvIndexMarks: TLabel;
     lblConvOutTracksetCyls: TLabel;
     lblConvOutTracksetFlippy: TLabel;
     lblConvOutTracksetHeads: TLabel;
     lblConvOutTracksetHSwap: TLabel;
     lblConvOutTracksetSteps: TLabel;
+    lblConvTplFlippyReverse: TLabel;
     lblConvTracksetCyls: TLabel;
     lblConvTracksetFlippy: TLabel;
     lblConvTracksetHeads: TLabel;
@@ -221,29 +230,28 @@ type
     lblReadDestFormatExtOpt1: TLabel;
     lblReadDestFormatExtOpt2: TLabel;
     lblReadDestFormatExtOpt3: TLabel;
-    lblConvDestFormatExtInt: TLabel;
-    lblConvDestFormatExtVer: TLabel;
-    lblConvDestFormatExtEnc: TLabel;
     lblReadDestPreview: TLabel;
     lblReadTpl: TLabel;
     lblReadTplCyls: TLabel;
-    lblReadTplFlippyReverse: TLabel;
-    lblWriteTplFlippyReverse: TLabel;
-    lblWriteTplDD: TLabel;
+    lblReadTplDD: TLabel;
     lblReadTplFakeIndex: TLabel;
     lblReadTplFlippy: TLabel;
+    lblReadTplFlippyReverse: TLabel;
     lblReadTplFormat: TLabel;
+    lblReadTplHardSec: TLabel;
     lblReadTplHeads: TLabel;
     lblReadTplHSwap: TLabel;
     lblReadTplPLL: TLabel;
-    lblReadTplDD: TLabel;
     lblReadTplRaw: TLabel;
     lblReadTplRetries: TLabel;
     lblReadTplRevs: TLabel;
     lblReadTplSeekRetries: TLabel;
     lblReadTplSteps: TLabel;
     lblSetDelayAutoOff: TLabel;
+    lblSetDelayIndexMask: TLabel;
     lblSetDelayMotor: TLabel;
+    lblSetDelayPostWrite: TLabel;
+    lblSetDelayPreWrite: TLabel;
     lblSetDelaySelect: TLabel;
     lblSetDelaySettle: TLabel;
     lblSetDelayStep: TLabel;
@@ -254,11 +262,11 @@ type
     lblToolsCleanPasses: TLabel;
     lblToolsEraseCyl: TLabel;
     lblToolsEraseFakeIndex: TLabel;
-    lblToolsEraseRevs: TLabel;
     lblToolsEraseFlippy: TLabel;
     lblToolsEraseHeads: TLabel;
     lblToolsEraseHFreq: TCheckBox;
     lblToolsEraseHSwap: TLabel;
+    lblToolsEraseRevs: TLabel;
     lblToolsEraseSteps: TLabel;
     lblToolsRPMNumbIter: TLabel;
     lblToolsSeek: TLabel;
@@ -266,24 +274,32 @@ type
     lblWriteFile: TLabel;
     lblWriteTemplate: TLabel;
     lblWriteTplCyls: TLabel;
-    lblConvTplFlippyReverse: TLabel;
-    lblWriteTplTP43Pin2: TLabel;
-    lblWriteTplPreErase: TLabel;
+    lblWriteTplDD: TLabel;
     lblWriteTplEraseEmpty: TLabel;
     lblWriteTplFakeIndex: TLabel;
     lblWriteTplFlippy: TLabel;
+    lblWriteTplFlippyReverse: TLabel;
     lblWriteTplFormat: TLabel;
+    lblWriteTplHardSec: TLabel;
     lblWriteTplHeads: TLabel;
     lblWriteTplHSwap: TLabel;
     lblWriteTplNoVerify: TLabel;
     lblWriteTplPrecomp: TLabel;
+    lblWriteTplPreErase: TLabel;
     lblWriteTplRetries: TLabel;
     lblWriteTplSteps: TLabel;
+    lblWriteTplTP43Pin2: TLabel;
     MainMenu1: TMainMenu;
     Memo1: TMemo;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    mnuFMFF: TMenuItem;
+    mnuGWDownload: TMenuItem;
+    mnuWebsite: TMenuItem;
+    mnuGWGettingStarted: TMenuItem;
+    Separator1: TMenuItem;
     mnuClose: TMenuItem;
     mnuFile: TMenuItem;
     NewDB: TOpenDialog;
@@ -293,6 +309,7 @@ type
     opSetFWTag: TRadioButton;
     Panel1: TPanel;
     Panel2: TPanel;
+    Panel3: TPanel;
     pcActions: TPageControl;
     pnToolsFWSelect: TPanel;
     rbGetPIN: TRadioButton;
@@ -308,10 +325,10 @@ type
     SQLQueryDir: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
     TabSheet1: TTabSheet;
-    tbTools: TTabSheet;
-    tbWrite: TTabSheet;
     tbConv: TTabSheet;
     tbRead: TTabSheet;
+    tbTools: TTabSheet;
+    tbWrite: TTabSheet;
     procedure btConvClearClick(Sender: TObject);
     procedure btConvExplorerClick(Sender: TObject);
     procedure btGoClick(Sender: TObject);
@@ -339,9 +356,13 @@ type
     procedure cbConvIndexMarksChange(Sender: TObject);
     procedure cbReadTplDDChange(Sender: TObject);
     procedure cbReadTplFlippyReverseClick(Sender: TObject);
+    procedure cbReadTplHardSecClick(Sender: TObject);
     procedure cbReadTplSeekRetries1Change(Sender: TObject);
     procedure cbSetDelayAutoOffChange(Sender: TObject);
+    procedure cbSetDelayIndexMaskChange(Sender: TObject);
     procedure cbSetDelayMotorChange(Sender: TObject);
+    procedure cbSetDelayPostWriteChange(Sender: TObject);
+    procedure cbSetDelayPreWriteChange(Sender: TObject);
     procedure cbSetDelaySelectChange(Sender: TObject);
     procedure cbSetDelaySettleChange(Sender: TObject);
     procedure cbSetDelayStepChange(Sender: TObject);
@@ -369,6 +390,7 @@ type
     procedure cbToolsSeekTrackForceClick(Sender: TObject);
     procedure cbWriteTplDenselChange(Sender: TObject);
     procedure cbWriteTplFlippyReverseClick(Sender: TObject);
+    procedure cbWriteTplHardSecChange(Sender: TObject);
     procedure cbWriteTplPreEraseChange(Sender: TObject);
     procedure cbWriteTplTplTP43Pin2Change(Sender: TObject);
     procedure edConvDiskOfChange(Sender: TObject);
@@ -454,6 +476,10 @@ type
     procedure lblToolsEraseHFreqClick(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
     procedure MenuItem3Click(Sender: TObject);
+    procedure mnuFMFFClick(Sender: TObject);
+    procedure mnuGWDownloadClick(Sender: TObject);
+    procedure mnuGWGettingStartedClick(Sender: TObject);
+    procedure mnuWebsiteClick(Sender: TObject);
     procedure opSetFWFileClick(Sender: TObject);
     procedure opSetFWOnlineClick(Sender: TObject);
     procedure opSetFWTagClick(Sender: TObject);
@@ -600,8 +626,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.0.8';
-  sAppDate := '2024-08-25';
+  sAppVersion := 'v5.0.9';
+  sAppDate := '2024-09-29';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   sAppPath := Dircheck(ExtractFilePath(ParamStr(0)));
@@ -708,16 +734,21 @@ begin
   FormatDest_Ext.Add('ADM (Acorn)');
   FormatDest_Ext.Add('ADL (Acorn)');
   FormatDest_Ext.Add('CTR (CT Raw)');
+  FormatDest_Ext.Add('D1M (CMD FD2000 DD)');
+  FormatDest_Ext.Add('D2M (CMD FD2000 HD)');
+  FormatDest_Ext.Add('D4M (CMD FD4000 ED)');
   FormatDest_Ext.Add('D64 (Commodore 1541)');
   FormatDest_Ext.Add('D71 (Commodore 1571)');
   FormatDest_Ext.Add('D81 (Commodore 1581)');
   FormatDest_Ext.Add('D88 (D88)');
   FormatDest_Ext.Add('DCP (DCP)');
   FormatDest_Ext.Add('DIM (DIM)');
+  FormatDest_Ext.Add('DMK (TRS80 Tandy Dragon MSX)');
   FormatDest_Ext.Add('DO (Apple II)');
   FormatDest_Ext.Add('DSD (Acorn)');
   FormatDest_Ext.Add('DSK (DSK)');
   FormatDest_Ext.Add('EDSK (EDSK, use: format=ibm.scan)');
+  FormatDest_Ext.Add('FD (FD)');
   FormatDest_Ext.Add('FDI (FDI)');
   FormatDest_Ext.Add('HDM (HDM)');
   FormatDest_Ext.Add('HFE (HxC Floppy Emulator)');
@@ -738,6 +769,10 @@ begin
   FormatDest_Ext.Add('TD0 (Teledisk)');
   FormatDest_Ext.Add('XDF (XDF)');
 
+  EdGWFile.Filter := 'gw.exe|*.exe';
+  EdWriteFileName.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.d1m;*.d2m;*.d4m;*.d64;*.d71;*.d81;*.d88;*.dcp;*.dim;*.dmk;*.do;*.dsd;*.dsk;*.edsk;*.fd;*.fdi;*hdm;*hfe;*.img;*.ima;*.imd;*.ipf;*.msa;*.nsi;*.po;*.raw;*.scp;*.sf7;*.ssd;*.st;*.td0;*.xdf|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Apple II (do)|*.do||Apple II (po)|*.po|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|Disciple (mgt)|*.mgt|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|Floppy image (img)|*.img|HDM (hdm)|*.hdm|HFE (HxC Floppy Emulator) (hfe)|*.hfe|ImageDisk image (imd)|*.imd|IPF (ipf)|*.ipf|Kryoflux (raw)|*.raw|NS DOS Northstar (nsi)|*.nis|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
+  edConvFileSource.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.d1m;*.d2m;*.d4m;*.d64;*.d71;*.d81;*.d88;*.dcp;*.dim;*.dmk;*.do;*.dsd;*.dsk;*.edsk;*.fd;*.fdi;*hdm;*hfe;*.img;*.ima;*.imd;*.ipf;*.msa;*.nsi;*.po;*.raw;*.scp;*.sf7;*.ssd;*.st;*.td0;*.xdf|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Apple II (do)|*.do||Apple II (po)|*.po|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|Disciple (mgt)|*.mgt|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|Floppy image (img)|*.img|HDM (hdm)|*.hdm|HFE (HxC Floppy Emulator) (hfe)|*.hfe|ImageDisk image (imd)|*.imd|IPF (ipf)|*.ipf|Kryoflux (raw)|*.raw|NS DOS Northstar (nsi)|*.nis|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
+
   // Create StringList Read Diskdefs
   FormatSpecs_Read := TStringList.Create;
   FormatSpecs_Read.Add('');
@@ -747,7 +782,9 @@ begin
   FormatSpecs_Read.Add('acorn.adfs.640');
   FormatSpecs_Read.Add('acorn.adfs.800');
   FormatSpecs_Read.Add('acorn.dfs.ds');
+  FormatSpecs_Read.Add('acorn.dfs.ds80');
   FormatSpecs_Read.Add('acorn.dfs.ss');
+  FormatSpecs_Read.Add('acorn.dfs.ss80');
   FormatSpecs_Read.Add('akai.1600');
   FormatSpecs_Read.Add('akai.800');
   FormatSpecs_Read.Add('amiga.amigados');
@@ -771,6 +808,9 @@ begin
   FormatSpecs_Read.Add('commodore.1541');
   FormatSpecs_Read.Add('commodore.1571');
   FormatSpecs_Read.Add('commodore.1581');
+  FormatSpecs_Read.Add('commodore.fd2000.dd');
+  FormatSpecs_Read.Add('commodore.fd2000.hd');
+  FormatSpecs_Read.Add('commodore.fd4000.ed');
   FormatSpecs_Read.Add('dec.rx01');
   FormatSpecs_Read.Add('dec.rx02');
   FormatSpecs_Read.Add('dragon.40ds');
@@ -828,6 +868,11 @@ begin
   FormatSpecs_Read.Add('raw.500');
   FormatSpecs_Read.Add('sci.prophet');
   FormatSpecs_Read.Add('sega.sf7000');
+  FormatSpecs_Read.Add('thomson.1s160');
+  FormatSpecs_Read.Add('thomson.1s320');
+  FormatSpecs_Read.Add('thomson.1s80');
+  FormatSpecs_Read.Add('thomson.2s160');
+  FormatSpecs_Read.Add('thomson.2s320');
   FormatSpecs_Read.Add('tsc.flex.dsdd');
   FormatSpecs_Read.Add('tsc.flex.ssdd');
   FormatSpecs_Read.Add('zx.quorum.800');
@@ -842,7 +887,9 @@ begin
   FormatSpecs_Write.Add('acorn.adfs.640');
   FormatSpecs_Write.Add('acorn.adfs.800');
   FormatSpecs_Write.Add('acorn.dfs.ds');
+  FormatSpecs_Write.Add('acorn.dfs.ds80');
   FormatSpecs_Write.Add('acorn.dfs.ss');
+  FormatSpecs_Write.Add('acorn.dfs.ss80');
   FormatSpecs_Write.Add('akai.1600');
   FormatSpecs_Write.Add('akai.800');
   FormatSpecs_Write.Add('amiga.amigados');
@@ -866,6 +913,9 @@ begin
   FormatSpecs_Write.Add('commodore.1541');
   FormatSpecs_Write.Add('commodore.1571');
   FormatSpecs_Write.Add('commodore.1581');
+  FormatSpecs_Write.Add('commodore.fd2000.dd');
+  FormatSpecs_Write.Add('commodore.fd2000.hd');
+  FormatSpecs_Write.Add('commodore.fd4000.ed');
   FormatSpecs_Write.Add('dec.rx01');
   FormatSpecs_Write.Add('dec.rx02');
   FormatSpecs_Write.Add('dragon.40ds');
@@ -923,6 +973,11 @@ begin
   FormatSpecs_Write.Add('raw.500');
   FormatSpecs_Write.Add('sci.prophet');
   FormatSpecs_Write.Add('sega.sf7000');
+  FormatSpecs_Write.Add('thomson.1s160');
+  FormatSpecs_Write.Add('thomson.1s320');
+  FormatSpecs_Write.Add('thomson.1s80');
+  FormatSpecs_Write.Add('thomson.2s160');
+  FormatSpecs_Write.Add('thomson.2s320');
   FormatSpecs_Write.Add('tsc.flex.dsdd');
   FormatSpecs_Write.Add('tsc.flex.ssdd');
   FormatSpecs_Write.Add('zx.quorum.800');
@@ -937,7 +992,9 @@ begin
   FormatSpecs_Conv.Add('acorn.adfs.640');
   FormatSpecs_Conv.Add('acorn.adfs.800');
   FormatSpecs_Conv.Add('acorn.dfs.ds');
+  FormatSpecs_Conv.Add('acorn.dfs.ds80');
   FormatSpecs_Conv.Add('acorn.dfs.ss');
+  FormatSpecs_Conv.Add('acorn.dfs.ss80');
   FormatSpecs_Conv.Add('akai.1600');
   FormatSpecs_Conv.Add('akai.800');
   FormatSpecs_Conv.Add('amiga.amigados');
@@ -961,6 +1018,9 @@ begin
   FormatSpecs_Conv.Add('commodore.1541');
   FormatSpecs_Conv.Add('commodore.1571');
   FormatSpecs_Conv.Add('commodore.1581');
+  FormatSpecs_Conv.Add('commodore.fd2000.dd');
+  FormatSpecs_Conv.Add('commodore.fd2000.hd');
+  FormatSpecs_Conv.Add('commodore.fd4000.ed');
   FormatSpecs_Conv.Add('dec.rx01');
   FormatSpecs_Conv.Add('dec.rx02');
   FormatSpecs_Conv.Add('dragon.40ds');
@@ -1018,14 +1078,15 @@ begin
   FormatSpecs_Conv.Add('raw.500');
   FormatSpecs_Conv.Add('sci.prophet');
   FormatSpecs_Conv.Add('sega.sf7000');
+  FormatSpecs_Conv.Add('thomson.1s160');
+  FormatSpecs_Conv.Add('thomson.1s320');
+  FormatSpecs_Conv.Add('thomson.1s80');
+  FormatSpecs_Conv.Add('thomson.2s160');
+  FormatSpecs_Conv.Add('thomson.2s320');
   FormatSpecs_Conv.Add('tsc.flex.dsdd');
   FormatSpecs_Conv.Add('tsc.flex.ssdd');
   FormatSpecs_Conv.Add('zx.quorum.800');
   FormatSpecs_Conv.Add('zx.trdos.640');
-
-  EdGWFile.Filter := 'gw.exe|*.exe';
-  EdWriteFileName.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.d64;*.d71;*.d81;*.d88;*.dcp;*.dim;*.do;*.dsd;*.dsk;*.edsk;*.fdi;*hdm;*hfe;*.img;*.ima;*.imd;*.ipf;*.msa;*.nsi;*.po;*.raw;*.scp;*.sf7;*.ssd;*.st;*.td0;*.xdf|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Apple II (do)|*.do||Apple II (po)|*.po|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|Disciple (mgt)|*.mgt|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|Floppy image (img)|*.img|HDM (hdm)|*.hdm|HFE (HxC Floppy Emulator) (hfe)|*.hfe|ImageDisk image (imd)|*.imd|IPF (ipf)|*.ipf|Kryoflux (raw)|*.raw|NS DOS Northstar (nsi)|*.nis|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
-  edConvFileSource.Filter := 'Floppy-Images (*.*)|*.a2r;*.adf;*.adm;*.adl;*.ads;*.ctr;*.d64;*.d71;*.d81;*.d88;*.dcp;*.dim;*.do;*.dsd;*.dsk;*.edsk;*.fdi;*hdm;*hfe;*.img;*.ima;*.imd;*.ipf;*.msa;*.nsi;*.po;*.raw;*.scp;*.sf7;*.ssd;*.st;*.td0;*.xdf|Applesauce (a2r)|*.a2r|Acorn (adl)|*.adl|Acorn (adm)|*.adm|Acorn (ads)|*.ads|Acorn (dsd)|*.dsd|Acorn (ssd)|*.ssd|AmigaDOS (adf)|*.adf|Apple II (do)|*.do||Apple II (po)|*.po|Atari ST (msa)|*.msa|Atari ST (st)|*.st|Commodore 1541 (d64)|*.d64|Commodore 1571 (d71)|*.d71|Commodore 1581 (d81)|*.d81|CT Raw (ctr)|*.ctr|Disciple (mgt)|*.mgt|DSK (dsk)|*.dsk|EDSK (edsk)|*.edsk|Floppy image (ima)|*.ima|Floppy image (img)|*.img|HDM (hdm)|*.hdm|HFE (HxC Floppy Emulator) (hfe)|*.hfe|ImageDisk image (imd)|*.imd|IPF (ipf)|*.ipf|Kryoflux (raw)|*.raw|NS DOS Northstar (nsi)|*.nis|SEGA (sf7)|*.sf7|SuperCardPro (scp)|*.scp';
 
  Get_DeviceCOM;
 
@@ -1546,6 +1607,9 @@ begin
   cbSetDelaySettle.Text:= '15';
   cbSetDelayMotor.Text:= '750';
   cbSetDelayAutoOff.Text:= '10000';
+  cbSetDelayPreWrite.Text:='100';
+  cbSetDelayPostWrite.Text:='1000';
+  cbSetDelayIndexMask.Text:='200';
 end;
 
 procedure TForm1.btSetDelaysInfoClick(Sender: TObject);
@@ -1884,6 +1948,11 @@ begin
  CMD_Generate;
 end;
 
+procedure TForm1.cbReadTplHardSecClick(Sender: TObject);
+begin
+ if cbReadTplHardSec.Focused then CMD_Generate;
+end;
+
 procedure TForm1.cbReadTplSeekRetries1Change(Sender: TObject);
 begin
  if cbReadTplPLL.Focused then CMD_Generate;
@@ -1894,7 +1963,22 @@ begin
   CMD_Generate;
 end;
 
+procedure TForm1.cbSetDelayIndexMaskChange(Sender: TObject);
+begin
+  CMD_Generate;
+end;
+
 procedure TForm1.cbSetDelayMotorChange(Sender: TObject);
+begin
+  CMD_Generate;
+end;
+
+procedure TForm1.cbSetDelayPostWriteChange(Sender: TObject);
+begin
+  CMD_Generate;
+end;
+
+procedure TForm1.cbSetDelayPreWriteChange(Sender: TObject);
 begin
   CMD_Generate;
 end;
@@ -2063,6 +2147,11 @@ end;
 procedure TForm1.cbWriteTplFlippyReverseClick(Sender: TObject);
 begin
  CMD_Generate;
+end;
+
+procedure TForm1.cbWriteTplHardSecChange(Sender: TObject);
+begin
+  if cbWriteTplHardSec.Focused then CMD_Generate;
 end;
 
 procedure TForm1.cbWriteTplPreEraseChange(Sender: TObject);
@@ -2449,7 +2538,26 @@ end;
 procedure TForm1.MenuItem3Click(Sender: TObject);
 begin
   FrmOptions.showmodal;
+end;
 
+procedure TForm1.mnuFMFFClick(Sender: TObject);
+begin
+  OpenURL('https://github.com/FrankieTheFluff/FluxMyFluffyFloppy');
+end;
+
+procedure TForm1.mnuGWDownloadClick(Sender: TObject);
+begin
+  OpenURL('https://github.com/keirf/greaseweazle/wiki/Download-Host-Tools');
+end;
+
+procedure TForm1.mnuGWGettingStartedClick(Sender: TObject);
+begin
+ OpenURL('https://github.com/keirf/greaseweazle/wiki/Getting-Started');
+end;
+
+procedure TForm1.mnuWebsiteClick(Sender: TObject);
+begin
+ OpenURL('https://github.com/keirf/Greaseweazle');
 end;
 
 procedure TForm1.opSetFWFileClick(Sender: TObject);
@@ -3783,6 +3891,10 @@ begin
    begin
     cmd := cmd + ' --fake-index=' + cbReadTplFakeIndex.Text;
    end;
+  if cbReadTplHardSec.Checked = true then
+   begin
+    cmd := cmd + ' --hard-sectors ';
+   end;
   if cbReadTplAdjustSpeed.Text <> '' then
    begin
     cmd := cmd + ' --adjust-speed=' + cbReadTplAdjustSpeed.Text ;
@@ -3853,6 +3965,10 @@ begin
     if cbWriteTplFakeIndex.Text <> '' then
      begin
       cmd := cmd + ' --fake-index=' + cbWriteTplFakeIndex.Text;
+     end;
+    if cbWriteTplHardSec.Checked = true then
+     begin
+      cmd := cmd + ' --hard-sectors ';
      end;
     if cbWriteTplNoVerify.Checked = true then
      begin
@@ -4034,15 +4150,21 @@ begin
          cmd := cmd + ' --device=' + cbGWDevCOM.Text;
         end;
       if cbSetDelaySelect.Text <>'' then
-        cmd := cmd + ' --select=' + cbSetDelaySelect.Text;
+        cmd := cmd + ' --select ' + cbSetDelaySelect.Text;
       if cbSetDelayStep.Text <>'' then
-        cmd := cmd + ' --step=' + cbSetDelayStep.Text;
+        cmd := cmd + ' --step ' + cbSetDelayStep.Text;
       if cbSetDelaySettle.Text <>'' then
-        cmd := cmd + ' --settle=' + cbSetDelaySettle.Text;
+        cmd := cmd + ' --settle ' + cbSetDelaySettle.Text;
       if cbSetDelayMotor.Text <>'' then
-        cmd := cmd + ' --motor=' + cbSetDelayMotor.Text;
+        cmd := cmd + ' --motor ' + cbSetDelayMotor.Text;
       if cbSetDelayAutoOff.Text <>'' then
-        cmd := cmd + ' --watchdog=' + cbSetDelayAutoOff.Text;
+        cmd := cmd + ' --watchdog ' + cbSetDelayAutoOff.Text;
+      if cbSetDelayPreWrite.Text <>'' then
+        cmd := cmd + ' --pre-write ' + cbSetDelayPreWrite.Text;
+      if cbSetDelayPostWrite.Text <>'' then
+        cmd := cmd + ' --post-write ' + cbSetDelayPostWrite.Text;
+      if cbSetDelayIndexMask.Text <>'' then
+        cmd := cmd + ' --index-mask ' + cbSetDelayIndexMask.Text;
       end;
 
      if rbSetGetPIN.Checked = true then
