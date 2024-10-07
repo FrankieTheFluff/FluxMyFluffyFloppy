@@ -25,11 +25,16 @@ https://github.com/t-edson/UnTerminal
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v5.0.10 - 2024-10-07
+- Read/Write: Fixed save template if destination folder (options) doesn't exist
+- Read/Write: Fixed save template missing arguments "Hard-sectors" and "Reverse"
+
 v5.0.9 - 2024-09-29
 * Requires Greaseweazle 1.20
 * Read/Write: New image formats: D1M, D2M, D4M, DMK, FD
 * Read/Write: New disc formats: acorn.dfs.ds80, acorn.dfs.ss80, thomson.*
 * Read/Write: Added "--hard-sectors"
+* Menu "Help": Added GitHub links
 - Fixed: GUI AutoScroll form
 
 v5.0.8 - 2024-08-25
