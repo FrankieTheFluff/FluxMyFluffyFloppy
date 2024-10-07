@@ -33,7 +33,7 @@ type
     GroupBox1: TGroupBox;
     Img: TImage;
     Label2: TLabel;
-    Label4: TLabel;
+    lblGW: TLabel;
     lblAbout: TLabel;
     lblAboutCopy: TLabel;
     lblAboutCopy1: TLabel;
@@ -91,6 +91,7 @@ end;
 procedure TFrmAbout.FormShow(Sender: TObject);
 begin
    lblAboutVer.Caption :=  sAppVersion + ' - ' + sAppDate;
+   lblGW.Caption := AboutGW;
 end;
 
 procedure TFrmAbout.lblAboutGithubClick(Sender: TObject);

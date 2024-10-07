@@ -3,7 +3,7 @@ object Form1: TForm1
   Height = 769
   Top = 41
   Width = 935
-  HorzScrollBar.Page = 845
+  HorzScrollBar.Page = 878
   VertScrollBar.Page = 765
   Align = alBottom
   AutoScroll = True
@@ -575,7 +575,7 @@ object Form1: TForm1
             OnChange = cbReadTplFormatSrcChange
           end
           object lblReadTplCyls: TLabel
-            Left = 655
+            Left = 688
             Height = 15
             Top = 0
             Width = 52
@@ -583,7 +583,7 @@ object Form1: TForm1
             ParentColor = False
           end
           object cbReadTplCyls: TComboBox
-            Left = 719
+            Left = 752
             Height = 23
             Top = 0
             Width = 79
@@ -639,7 +639,7 @@ object Form1: TForm1
             OnChange = cbReadTplRevsChange
           end
           object lblReadTplHeads: TLabel
-            Left = 655
+            Left = 688
             Height = 15
             Top = 32
             Width = 36
@@ -647,7 +647,7 @@ object Form1: TForm1
             ParentColor = False
           end
           object cbReadTplHeads: TComboBox
-            Left = 719
+            Left = 752
             Height = 23
             Top = 32
             Width = 63
@@ -692,7 +692,7 @@ object Form1: TForm1
             OnClick = cbReadTplRawClick
           end
           object lblReadTplSteps: TLabel
-            Left = 655
+            Left = 688
             Height = 15
             Top = 64
             Width = 31
@@ -700,7 +700,7 @@ object Form1: TForm1
             ParentColor = False
           end
           object cbReadTplSteps: TComboBox
-            Left = 719
+            Left = 752
             Height = 23
             Top = 64
             Width = 63
@@ -745,7 +745,7 @@ object Form1: TForm1
             OnChange = cbReadTplFakeIndexChange
           end
           object lblReadTplHSwap: TLabel
-            Left = 655
+            Left = 688
             Height = 15
             Top = 96
             Width = 40
@@ -753,7 +753,7 @@ object Form1: TForm1
             ParentColor = False
           end
           object cbReadTplHSwap: TCheckBox
-            Left = 719
+            Left = 752
             Height = 19
             Top = 96
             Width = 96
@@ -763,7 +763,7 @@ object Form1: TForm1
             OnChange = cbReadTplHSwapChange
           end
           object lblReadAdjustSpeed: TLabel
-            Left = 360
+            Left = 376
             Height = 15
             Top = 0
             Width = 74
@@ -771,7 +771,7 @@ object Form1: TForm1
             ParentColor = False
           end
           object cbReadTplAdjustSpeed: TComboBox
-            Left = 440
+            Left = 456
             Height = 23
             Hint = 'Scale track data to effective drive SPEED'
             Top = 0
@@ -789,7 +789,7 @@ object Form1: TForm1
             OnChange = cbReadTplAdjustSpeedChange
           end
           object lblReadTplFlippy: TLabel
-            Left = 655
+            Left = 688
             Height = 15
             Top = 128
             Width = 35
@@ -797,7 +797,7 @@ object Form1: TForm1
             ParentColor = False
           end
           object cbReadTplFlippy: TComboBox
-            Left = 719
+            Left = 752
             Height = 23
             Top = 128
             Width = 110
@@ -812,7 +812,7 @@ object Form1: TForm1
             OnChange = cbReadTplFlippyChange
           end
           object lblReadTplRetries: TLabel
-            Left = 360
+            Left = 376
             Height = 15
             Top = 32
             Width = 38
@@ -820,7 +820,7 @@ object Form1: TForm1
             ParentColor = False
           end
           object cbReadTplRetries: TComboBox
-            Left = 440
+            Left = 456
             Height = 23
             Hint = 'Number of retries per seek-retry'
             Top = 32
@@ -847,7 +847,7 @@ object Form1: TForm1
             OnChange = cbReadTplRetriesChange
           end
           object lblReadTplSeekRetries: TLabel
-            Left = 360
+            Left = 376
             Height = 15
             Top = 64
             Width = 67
@@ -855,7 +855,7 @@ object Form1: TForm1
             ParentColor = False
           end
           object cbReadTplSeekRetries: TComboBox
-            Left = 440
+            Left = 456
             Height = 23
             Hint = 'Number of seek retries'
             Top = 64
@@ -881,7 +881,7 @@ object Form1: TForm1
             OnChange = cbReadTplSeekRetriesChange
           end
           object lblReadTplPLL: TLabel
-            Left = 360
+            Left = 376
             Height = 15
             Top = 96
             Width = 22
@@ -889,7 +889,7 @@ object Form1: TForm1
             ParentColor = False
           end
           object cbReadTplPLL: TComboBox
-            Left = 440
+            Left = 456
             Height = 23
             Hint = 'Manual PLL parameter override'
             Top = 96
@@ -906,7 +906,7 @@ object Form1: TForm1
             OnChange = cbReadTplPLLChange
           end
           object lblReadTplDD: TLabel
-            Left = 360
+            Left = 376
             Height = 15
             Top = 128
             Width = 38
@@ -914,7 +914,7 @@ object Form1: TForm1
             ParentColor = False
           end
           object cbReadTplDD: TComboBox
-            Left = 440
+            Left = 456
             Height = 23
             Hint = 'Set interface pin 2 for 5.25" drives'
             Top = 128
@@ -932,7 +932,7 @@ object Form1: TForm1
             OnChange = cbReadTplDDChange
           end
           object lblReadTplFlippyReverse: TLabel
-            Left = 655
+            Left = 688
             Height = 15
             Top = 160
             Width = 43
@@ -940,7 +940,7 @@ object Form1: TForm1
             ParentColor = False
           end
           object cbReadTplFlippyReverse: TCheckBox
-            Left = 719
+            Left = 752
             Height = 17
             Hint = 'Reverse flippy'
             Top = 160

@@ -518,7 +518,7 @@ var
   FormatSpecs_Write, FormatSpecs_WriteDiskDefs: TStringList;
   FormatSpecs_Conv, FormatSpecs_ConvDiskDefs: TStringList;
   FormatDest_Ext : TStringList;
-  sAppName, sAppPath, sAppVersion, sAppDate, sAppVersion_ReadTmpl, sAppVersion_WriteTmpl : String;
+  sAppName, sAppPath, sAppVersion, sAppDate, AboutGW, sAppVersion_ReadTmpl, sAppVersion_WriteTmpl : String;
   dd : String; // Diskdefs.cfg
   aLine : String; // GreaseWeazle (frmGW)
 
@@ -626,10 +626,12 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.0.9';
-  sAppDate := '2024-09-29';
+  sAppVersion := 'v5.0.10';
+  sAppDate := '2024-10-07';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
+  AboutGW := 'Requires "Greaseweazle v1.20+" (and optional "diskdefs.cfg")';
+
   sAppPath := Dircheck(ExtractFilePath(ParamStr(0)));
   Form1.Caption := sAppName + sAppVersion;
   Form1.Top:=(( Screen.Height-Height)div 2);
@@ -1498,16 +1500,24 @@ end;
 
 procedure TForm1.btReadTplDelClick(Sender: TObject);
 var
- answer : Integer;
+  tmp : string;
+  answer : Integer;
 begin
+  tmp := INI.ReadString('FluxMyFluffyFloppy', 'FolderTemplates', '');
+  if DirectoryExists(tmp) = false then
+   begin
+    answer := MessageDlg('In options defined templates folder does not exist!' + chr(10) + 'Cannot delete the selected template!',mtWarning, [mbOK], 0);
+    if answer = mrOk then exit;
+   end;
+
   try
-    if fileexists(sAppPath + 'Templates\' + cbReadTplName.Text + '.inir') then
+    if fileexists(Dircheck(tmp) + cbReadTplName.Text + '.inir') then
     begin
-     answer := MessageDlg('Do you really want to delete the following template?',mtConfirmation, [mbYes,mbCancel], 0);
+     answer := MessageDlg('Do you really want to delete the selected template?',mtConfirmation, [mbYes,mbCancel], 0);
      if answer = mrCancel then exit;
      if answer = mrYes then
      begin
-      Deletefile(PChar(sAppPath + 'Templates\' + cbReadTplName.Text + '.inir'));
+      Deletefile(PChar(Dircheck(tmp) + cbReadTplName.Text + '.inir'));
       Refresh_Templates_Read_DropDown;
      end;
     end;
@@ -1525,6 +1535,7 @@ begin
  cbReadTplRevs.Text := '';
  cbReadTplRaw.Checked := false;
  cbReadTplFakeIndex.Text := '';
+ cbReadTplHardSec.Checked := false;
  cbReadTplAdjustSpeed.Text := '';
  cbReadTplRetries.Text := '';
  cbReadTplSeekRetries.Text := '';
@@ -1535,6 +1546,7 @@ begin
  cbReadTplSteps.Text := '';
  cbReadTplHSwap.Checked := false;
  cbReadTplFlippy.Text := '';
+ cbReadTplFlippyReverse.Checked := false;
  cbReadTplPLL.Text := '';
  cbReadTplDD.Text := '';
  //
@@ -1558,6 +1570,11 @@ begin
 
  tmp := INI.ReadString('FluxMyFluffyFloppy', 'FolderTemplates', '');
  if tmp = '' then CreateDir(sAppPath + 'Templates\');
+ if DirectoryExists(tmp) = false then
+  begin
+   answer := MessageDlg('In options defined templates folder does not exist.' + chr(10) + 'Please redefine! Template is not saved.',mtWarning, [mbOK], 0);
+   if answer = mrOk then exit;
+  end;
 
   if cbReadTplName.Text <> '' then
    begin
@@ -1573,6 +1590,7 @@ begin
       INIRead.WriteString('Settings', 'Revs', cbReadTplRevs.Text);
       INIRead.WriteBool('Settings', 'Raw', cbReadTplRaw.Checked);
       INIRead.WriteString('Settings', 'Fake-Index', cbReadTplFakeIndex.Text);
+      INIRead.WriteBool('Settings', 'Hard-Sectors', cbReadTplHardSec.Checked);
       INIRead.WriteString('Settings', 'Adjust-Speed',cbReadTplAdjustSpeed.Text);
       INIRead.WriteString('Settings', 'Retries', cbReadTplRetries.Text);
       INIRead.WriteString('Settings', 'Seek-Retries', cbReadTplSeekRetries.Text);
@@ -1584,6 +1602,7 @@ begin
       INIRead.WriteString('Settings', 'Steps', cbReadTplSteps.Text);
       INIRead.WriteBool('Settings', 'HSwap', cbReadTplHSwap.Checked);
       INIRead.WriteString('Settings', 'Flippy', cbReadTplFlippy.Text);
+      INIRead.WriteBool('Settings', 'FlippyReverse', cbReadTplFlippyReverse.Checked);
 
       INIRead.WriteBool('Settings', 'Log_Param', cbReadTplLogParam.Checked);
       INIRead.WriteBool('Settings', 'Log_Output', cbReadTplLogOutput.Checked);
@@ -1632,16 +1651,23 @@ end;
 
 procedure TForm1.BtWriteTplDelClick(Sender: TObject);
 var
+ tmp : string;
  answer : Integer;
 begin
+  tmp := INI.ReadString('FluxMyFluffyFloppy', 'FolderTemplates', '');
+  if DirectoryExists(tmp) = false then
+   begin
+    answer := MessageDlg('In options defined templates folder does not exist!' + chr(10) + 'Cannot delete the selected template!',mtWarning, [mbOK], 0);
+    if answer = mrOk then exit;
+   end;
   try
-    if fileexists(sAppPath + 'Templates\' + cbWriteTplName.Text + '.iniw') then
+    if fileexists(Dircheck(tmp) + cbWriteTplName.Text + '.iniw') then
     begin
      answer := MessageDlg('Do you really want to delete the following template?',mtConfirmation, [mbYes,mbCancel], 0);
      if answer = mrCancel then exit;
      if answer = mrYes then
      begin
-      Deletefile(PChar(sAppPath + 'Templates\' + cbWriteTplName.Text + '.iniw'));
+      Deletefile(PChar(Dircheck(tmp) + cbWriteTplName.Text + '.iniw'));
       Refresh_Templates_Write_DropDown;
      end;
     end;
@@ -1656,6 +1682,7 @@ begin
  cbWriteTplFormat.Text := '';
  cbWriteTplEraseEmpty.Checked := false;
  cbWriteTplFakeIndex.Text := '';
+ cbWriteTplHardSec.Checked := false;
  cbWriteTplNoVerify.Checked := false;
  cbWriteTplRetries.Text := '';
  cbWriteTplPrecomp.Text := '';
@@ -1669,6 +1696,7 @@ begin
  cbWriteTplSteps.Text := '';
  cbWriteTplHSwap.Checked := false;
  cbWriteTplFlippy.Text := '';
+ cbWriteTplFlippyReverse.Checked := false;
 
  CMD_Generate;
 end;
@@ -1687,6 +1715,11 @@ begin
 
  tmp := INI.ReadString('FluxMyFluffyFloppy', 'FolderTemplates', '');
  if tmp = '' then CreateDir(sAppPath + 'Templates\');
+ if DirectoryExists(tmp) = false then
+  begin
+   answer := MessageDlg('In options defined templates folder does not exist.' + chr(10) + 'Please redefine! Template is not saved.',mtWarning, [mbOK], 0);
+   if answer = mrOk then exit;
+  end;
 
  if cbWriteTplName.Text <> '' then
   begin
@@ -1703,6 +1736,7 @@ begin
     IniWrite.WriteString('Settings', 'FormatSpec', cbWriteTplFormat.Text);
     IniWrite.WriteBool('Settings', 'EraseEmpty', cbWriteTplEraseEmpty.Checked);
     IniWrite.WriteString('Settings', 'Fake-Index', cbWriteTplFakeIndex.Text);
+    IniWrite.WriteBool('Settings', 'Hard-Sectors', cbWriteTplHardSec.Checked);
     IniWrite.WriteBool('Settings', 'NoVerify', cbWriteTplNoVerify.Checked);
     IniWrite.WriteString('Settings', 'Retries', cbWriteTplRetries.Text);
     IniWrite.WriteString('Settings', 'Precomp', cbWriteTplPrecomp.Text);
@@ -1714,6 +1748,7 @@ begin
     IniWrite.WriteString('Settings', 'Steps', cbWriteTplSteps.Text);
     IniWrite.WriteBool('Settings', 'HSwap', cbWriteTplHSwap.Checked);
     IniWrite.WriteString('Settings', 'Flippy', cbWriteTplFlippy.Text);
+    IniWrite.WriteBool('Settings', 'FlippyReverse', cbWriteTplFlippyReverse.Checked);
 
     IniWrite.Free;
 
@@ -1790,6 +1825,7 @@ begin
     edWriteTplDesc.Text   := iniRefreshWrite.ReadString('FluxMyFluffyFloppy-Write-Template', 'Description', '');
     cbWriteTplEraseEmpty.checked := iniRefreshWrite.ReadBool('Settings', 'EraseEmpty', false);
     cbWriteTplFakeIndex.Text:= iniRefreshWrite.ReadString('Settings', 'Fake-Index', '');
+    cbWriteTplHardSec.checked := iniRefreshWrite.ReadBool('Settings', 'Hard-Sectors', false);
     cbWriteTplNoVerify.checked := iniRefreshWrite.ReadBool('Settings', 'NoVerify', false);
     cbWriteTplRetries.Text:= iniRefreshWrite.ReadString('Settings', 'Retries', '');
     cbWriteTplPrecomp.Text:= iniRefreshWrite.ReadString('Settings', 'Precomp', '');
@@ -1802,6 +1838,7 @@ begin
     cbWriteTplSteps.Text:= iniRefreshWrite.ReadString('Settings', 'Steps', '');
     cbWriteTplHSwap.Checked:= iniRefreshWrite.ReadBool('Settings', 'HSwap', false);
     cbWriteTplFlippy.Text:= iniRefreshWrite.ReadString('Settings', 'Flippy', '');
+    cbWriteTplFlippyReverse.checked := iniRefreshWrite.ReadBool('Settings', 'FlippyReverse', false);
 
     iniRefreshWrite.Free;
   finally
@@ -1862,26 +1899,28 @@ begin
   try
     edReadTplDesc.Text := iniRefreshRead.ReadString('FluxMyFluffyFloppy-Read-Template', 'Description', '');
 
-    cbReadTplFormatSrc.Text    := iniRefreshRead.ReadString('Settings', 'DiskDefs', 'Internal');
-    cbReadTplFormat.Text       := iniRefreshRead.ReadString('Settings', 'FormatSpec', '');
-    cbReadTplRevs.Text         := iniRefreshRead.ReadString('Settings', 'Revs', '');
-    cbReadTplRaw.Checked       := iniRefreshRead.ReadBool('Settings', 'Raw', false);
-    cbReadTplFakeIndex.Text    := iniRefreshRead.ReadString('Settings', 'Fake-Index', '');
-    cbReadTplAdjustSpeed.Text  := iniRefreshRead.ReadString('Settings', 'Adjust-Speed', '');
-    cbReadTplRetries.Text      := iniRefreshRead.ReadString('Settings', 'Retries', '');
-    cbReadTplSeekRetries.Text  := iniRefreshRead.ReadString('Settings', 'Seek-Retries', '');
-    cbReadTplPLL.Text          := iniRefreshRead.ReadString('Settings', 'PLL', '');
-    cbReadTplDD.Text           := iniRefreshRead.ReadString('Settings', 'DD', '');
+    cbReadTplFormatSrc.Text        := iniRefreshRead.ReadString('Settings', 'DiskDefs', 'Internal');
+    cbReadTplFormat.Text           := iniRefreshRead.ReadString('Settings', 'FormatSpec', '');
+    cbReadTplRevs.Text             := iniRefreshRead.ReadString('Settings', 'Revs', '');
+    cbReadTplRaw.Checked           := iniRefreshRead.ReadBool('Settings', 'Raw', false);
+    cbReadTplFakeIndex.Text        := iniRefreshRead.ReadString('Settings', 'Fake-Index', '');
+    cbReadTplHardSec.Checked       := iniRefreshRead.ReadBool('Settings', 'Hard-Sectors', false);
+    cbReadTplAdjustSpeed.Text      := iniRefreshRead.ReadString('Settings', 'Adjust-Speed', '');
+    cbReadTplRetries.Text          := iniRefreshRead.ReadString('Settings', 'Retries', '');
+    cbReadTplSeekRetries.Text      := iniRefreshRead.ReadString('Settings', 'Seek-Retries', '');
+    cbReadTplPLL.Text              := iniRefreshRead.ReadString('Settings', 'PLL', '');
+    cbReadTplDD.Text               := iniRefreshRead.ReadString('Settings', 'DD', '');
 
-    cbReadTplCyls.Text         := iniRefreshRead.ReadString('Settings', 'Cylinders', '');
-    cbReadTplHeads.Text        := iniRefreshRead.ReadString('Settings', 'Heads', '');
-    cbReadTplSteps.Text        := iniRefreshRead.ReadString('Settings', 'Steps', '');
-    cbReadTplHSwap.Checked     := iniRefreshRead.ReadBool('Settings', 'HSwap', false);
-    cbReadTplFlippy.Text       := iniRefreshRead.ReadString('Settings', 'Flippy', '');
+    cbReadTplCyls.Text             := iniRefreshRead.ReadString('Settings', 'Cylinders', '');
+    cbReadTplHeads.Text            := iniRefreshRead.ReadString('Settings', 'Heads', '');
+    cbReadTplSteps.Text            := iniRefreshRead.ReadString('Settings', 'Steps', '');
+    cbReadTplHSwap.Checked         := iniRefreshRead.ReadBool('Settings', 'HSwap', false);
+    cbReadTplFlippy.Text           := iniRefreshRead.ReadString('Settings', 'Flippy', '');
+    cbReadTplFlippyReverse.Checked := iniRefreshRead.ReadBool('Settings', 'FlippyReverse', false);
 
-    cbReadTplLogParam.Checked  := iniRefreshRead.ReadBool('Settings', 'Log_Param', false);
-    cbReadTplLogOutput.Checked := iniRefreshRead.ReadBool('Settings', 'Log_Output', false);
-    cbReadTplLogBoth.Checked   := iniRefreshRead.ReadBool('Settings', 'Log_InOneFile', false);
+    cbReadTplLogParam.Checked      := iniRefreshRead.ReadBool('Settings', 'Log_Param', false);
+    cbReadTplLogOutput.Checked     := iniRefreshRead.ReadBool('Settings', 'Log_Output', false);
+    cbReadTplLogBoth.Checked       := iniRefreshRead.ReadBool('Settings', 'Log_InOneFile', false);
 
     iniRefreshRead.Free;
   finally
