@@ -1,7 +1,7 @@
 object frmGW: TfrmGW
-  Left = 575
+  Left = 542
   Height = 476
-  Top = 328
+  Top = 254
   Width = 847
   Caption = 'Greaseweazle'
   ClientHeight = 476
@@ -9,7 +9,7 @@ object frmGW: TfrmGW
   OnClose = FormClose
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
+  LCLVersion = '3.6.0.0'
   object pnSides: TPanel
     Left = 0
     Height = 476

@@ -8,7 +8,7 @@ object FrmAbout: TFrmAbout
   ClientWidth = 585
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.4.0.0'
+  LCLVersion = '3.6.0.0'
   object GroupBox1: TGroupBox
     Left = 3
     Height = 414
@@ -38,8 +38,8 @@ object FrmAbout: TFrmAbout
       Left = 11
       Height = 13
       Top = 35
-      Width = 24
-      Caption = '5.00'
+      Width = 17
+      Caption = '5.1'
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Tahoma'
@@ -70,7 +70,7 @@ object FrmAbout: TFrmAbout
       Top = 72
       Width = 350
       AutoSize = False
-      Caption = 'Copyright (c) 2021-2024 Frank Böpple (FrankieTheFluff)'
+      Caption = 'Copyright (c) 2021-2025 Frank Böpple (FrankieTheFluff)'
       Font.CharSet = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -12

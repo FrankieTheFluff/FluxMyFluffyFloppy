@@ -9,7 +9,7 @@ object FrmOptions: TFrmOptions
   ClientWidth = 560
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.2.0.0'
+  LCLVersion = '3.6.0.0'
   object Cancel: TButton
     Left = 8
     Height = 25
@@ -41,27 +41,15 @@ object FrmOptions: TFrmOptions
       Left = 16
       Height = 15
       Top = 8
-      Width = 74
-      Caption = 'Diskdefs (file):'
+      Width = 89
+      Caption = 'Diskdefs (folder):'
       ParentColor = False
-    end
-    object fileDiskdefs: TFileNameEdit
-      Left = 24
-      Height = 23
-      Top = 32
-      Width = 504
-      FilterIndex = 0
-      HideDirectories = False
-      ButtonWidth = 23
-      NumGlyphs = 1
-      MaxLength = 0
-      TabOrder = 0
     end
     object lblTemplates: TLabel
       Left = 16
       Height = 15
       Top = 72
-      Width = 98
+      Width = 100
       Caption = 'Templates (folder):'
       ParentColor = False
     end
@@ -69,6 +57,17 @@ object FrmOptions: TFrmOptions
       Left = 24
       Height = 23
       Top = 95
+      Width = 506
+      ShowHidden = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 0
+    end
+    object fileDiskdefs: TDirectoryEdit
+      Left = 24
+      Height = 23
+      Top = 32
       Width = 506
       ShowHidden = False
       ButtonWidth = 23

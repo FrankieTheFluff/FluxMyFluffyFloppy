@@ -1,10 +1,9 @@
 -----------------------------------------------------------------
 
+
 FluxMyFluffyFloppy
 
-v5.0.10 - 2024-10-07 
-
------------------------------------------------------------------
+ v5.1.0 - 2025-01-04  -----------------------------------------------------------------
 
 
 
@@ -19,7 +18,7 @@ License: GNU General Public License v2.0
 
 
 
-(c) 2021-2024 FrankieTheFluff
+(c) 2021-2025 FrankieTheFluff
 
 
 Web: https://github.com/FrankieTheFluff/FluxMyFluffyFloppy

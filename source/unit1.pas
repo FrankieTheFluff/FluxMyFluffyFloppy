@@ -6,7 +6,7 @@ v5.xx
 A Microsoft(r) Windows(r) GUI for Greseaweazle Host Tools
 FREEWARE / OpenSource
 License: GNU General Public License v2.0
-(c) 2021-2024 FrankieTheFluff
+(c) 2021-2025 FrankieTheFluff
 Web: https://github.com/FrankieTheFluff/FluxMyFluffyFloppy
 Mail: fluxmyfluffyfloppy@mail.de
 -----------------------------------------------------------------
@@ -449,8 +449,7 @@ type
     procedure cbWriteTplStepsChange(Sender: TObject);
     procedure edConvDirDestChange(Sender: TObject);
     procedure edConvFilenameChange(Sender: TObject);
-    procedure edConvFileSourceAcceptFileName(Sender: TObject; var Value: String
-      );
+    procedure edConvFileSourceAcceptFileName(Sender: TObject; var Value: String);
     procedure edConvFileSourceChange(Sender: TObject);
     procedure EdGWFileChange(Sender: TObject);
     procedure edReadDigitsChange(Sender: TObject);
@@ -466,6 +465,7 @@ type
     procedure edWriteFileNameAcceptFileName(Sender: TObject; var Value: String);
     procedure edWriteFileNameChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Create_Filename;
     procedure CMD_Generate;
@@ -494,6 +494,7 @@ type
     procedure rbToolsEraseClick(Sender: TObject);
     procedure rbToolsRPMClick(Sender: TObject);
     procedure rbToolsSeekClick(Sender: TObject);
+    procedure Refresh_Diskdefs_DropDown;
     procedure Refresh_Templates_Read_DropDown;
     procedure Refresh_Templates_Read;
     procedure Refresh_Templates_Write_DropDown;
@@ -626,39 +627,41 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.0.10';
-  sAppDate := '2024-10-07';
+  sAppVersion := 'v5.1.0';
+  sAppDate := '2025-01-04';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
-  AboutGW := 'Requires "Greaseweazle v1.20+" (and optional "diskdefs.cfg")';
+  AboutGW := 'Requires "Greaseweazle v1.21+" (and optional "diskdefs_.cfg")';
 
   sAppPath := Dircheck(ExtractFilePath(ParamStr(0)));
   Form1.Caption := sAppName + sAppVersion;
   Form1.Top:=(( Screen.Height-Height)div 2);
   Form1.Left:=((Screen.Width-Width)div 2);
 
+  if DirectoryExists(sAppPath + 'Diskdefs\') = false then CreateDir(sAppPath + 'Diskdefs\');
   if DirectoryExists(sAppPath + 'Templates\') = false then CreateDir(sAppPath + 'Templates\');
   if DirectoryExists(sAppPath + 'Greaseweazle\') = false then CreateDir(sAppPath + 'Greaseweazle\');
 
   // No INI
   if FileExists(sAppPath + 'FluxMyFluffyFloppy.ini') = False then
     try
-      INI := TINIFile.Create(sAppPath + 'FluxMyFluffyFloppy.ini');
-      INI.WriteString('FluxMyFluffyFloppy', 'Version', sAppVersion);
-      INI.WriteString('FluxMyFluffyFloppy', 'Greaseweazle', '');
-      INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', '');
-      INI.WriteString('FluxMyFluffyFloppy', 'FolderTemplates', sAppPath + 'Templates\');
-      INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Read_Dest', AppendPathDelim(GetUserDir + 'Documents'));
-      INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Write_Source', AppendPathDelim(GetUserDir + 'Documents'));
-      INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Convert_Source', sAppPath);
-      INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Convert_Dest', sAppPath);
-      INI.WriteBool('FluxMyFluffyFloppy', 'Time', cbSetGlobalActionsTime.Checked);
-      INI.WriteBool('FluxMyFluffyFloppy', 'Backtrace', cbSetGlobalActionsBacktrace.Checked);
+     INI := TINIFile.Create(sAppPath + 'FluxMyFluffyFloppy.ini');
+     INI.WriteString('FluxMyFluffyFloppy', 'Version', sAppVersion);
+     INI.WriteString('FluxMyFluffyFloppy', 'Greaseweazle', '');
+     INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', sAppPath + 'Diskdefs\');
+     INI.WriteString('FluxMyFluffyFloppy', 'FolderTemplates', sAppPath + 'Templates\');
+     INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Read_Dest', AppendPathDelim(GetUserDir + 'Documents'));
+     INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Write_Source', AppendPathDelim(GetUserDir + 'Documents'));
+     INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Convert_Source', sAppPath);
+     INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Convert_Dest', sAppPath);
+     INI.WriteBool('FluxMyFluffyFloppy', 'Time', cbSetGlobalActionsTime.Checked);
+     INI.WriteBool('FluxMyFluffyFloppy', 'Backtrace', cbSetGlobalActionsBacktrace.Checked);
     finally
-      ; // end if
+     ; // end if
     end;
 
   INI := TINIFile.Create(sAppPath + 'FluxMyFluffyFloppy.ini');
+  If INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs','') = '' then INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', sAppPath + 'Diskdefs\');
   EdGWFile.Text:=INI.ReadString('FluxMyFluffyFloppy', 'Greaseweazle','');
   edReadDirDest.Directory := INI.ReadString('FluxMyFluffyFloppy', 'LastFolder_Read_Dest','');
   edWriteFilename.InitialDir := INI.ReadString('FluxMyFluffyFloppy', 'LastFolder_Write_Source','');
@@ -669,63 +672,38 @@ begin
   gw := INI.ReadString('FluxMyFluffyFloppy', 'Greaseweazle', '');
   If gw <> '' then
     begin
-      if FileExists(gw) = true then
+     if FileExists(gw) = true then
+      begin
+       edGWfile.Text := gw;
+      end;
+     if FileExists(gw) = False then
+      begin
+       edGWfile.Text := Selectfile('Select Greaseweazle (gw.exe)',sAppPath + 'greaseweazle\','Application|*.exe');
+       if edGWfile.Text <> '' then
         begin
-         edGWfile.Text := gw;
+         INI.WriteString('FluxMyFluffyFloppy', 'Greaseweazle', edGWfile.Text);
         end;
-      if FileExists(gw) = False then
-        begin
-          edGWfile.Text := Selectfile('Select Greaseweazle (gw.exe)',sAppPath + 'greaseweazle\','Application|*.exe');
-          if edGWfile.Text <> '' then
-           begin
-            INI.WriteString('FluxMyFluffyFloppy', 'Greaseweazle', edGWfile.Text);
-           end;
-        end;
+      end;
     end;
   If gw = '' then
     begin
-      if FileExists(sAppPath + 'greaseweazle\gw.exe') = true then
+     if FileExists(sAppPath + 'greaseweazle\gw.exe') = true then
+      begin
+       edGWfile.Text := sAppPath + 'greaseweazle\gw.exe';
+       INI.WriteString('FluxMyFluffyFloppy', 'Greaseweazle', sAppPath + 'greaseweazle\gw.exe');
+      end;
+     if FileExists(sAppPath + 'greaseweazle\gw.exe') = False then
+      begin
+       edGWfile.Text := Selectfile('Select Greaseweazle (gw.exe)',sAppPath + 'greaseweazle\','Application|*.exe');
+       if edGWfile.Text <> '' then
         begin
-         edGWfile.Text := sAppPath + 'greaseweazle\gw.exe';
-         INI.WriteString('FluxMyFluffyFloppy', 'Greaseweazle', sAppPath + 'greaseweazle\gw.exe');
+         INI.WriteString('FluxMyFluffyFloppy', 'Greaseweazle', edGWfile.Text);
         end;
-      if FileExists(sAppPath + 'greaseweazle\gw.exe') = False then
-        begin
-         edGWfile.Text := Selectfile('Select Greaseweazle (gw.exe)',sAppPath + 'greaseweazle\','Application|*.exe');
-         if edGWfile.Text <> '' then
-          begin
-           INI.WriteString('FluxMyFluffyFloppy', 'Greaseweazle', edGWfile.Text);
-          end;
-        end;
+      end;
     end;
 
-  // Where is diskdefs.cfg ?
-  dd := INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '');
-  If dd = '' then
-    begin
-      if FileExists(sAppPath + 'greaseweazle\diskdefs.cfg') = true then
-        begin
-         dd := sAppPath + 'greaseweazle\diskdefs.cfg';
-         INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', dd);
-        end;
-      if FileExists(sAppPath + 'greaseweazle\diskdefs.cfg') = False then
-        begin
-         dd := Selectfile('Select Diskdefs (e.g. diskdefs.cfg)',sAppPath + 'greaseweazle\','Diskdefs|*.cfg');
-         INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', dd);
-        end;
-    end;
-  If dd <> '' then
-    begin
-      if FileExists(dd) = true then
-        begin
-         FrmOptions.fileDiskdefs.Text:=dd;
-        end;
-      if FileExists(dd) = False then
-        begin
-          dd := Selectfile('Select Diskdefs (e.g. diskdefs.cfg)',sAppPath + 'greaseweazle\','Diskdefs|*.cfg');
-          INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', dd);
-        end;
-    end;
+  // Where are diskdefs_.cfg located?
+  Refresh_Diskdefs_DropDown;
 
   // Create StringLists Read/Conv Destination fileextension
   FormatDest_Ext := TStringList.Create;
@@ -845,6 +823,14 @@ begin
   FormatSpecs_Read.Add('ibm.scan');
   FormatSpecs_Read.Add('mac.400');
   FormatSpecs_Read.Add('mac.800');
+  FormatSpecs_Read.Add('micropolis.100tpi.ds');
+  FormatSpecs_Read.Add('micropolis.100tpi.ds.275');
+  FormatSpecs_Read.Add('micropolis.100tpi.ss');
+  FormatSpecs_Read.Add('micropolis.100tpi.ss.275');
+  FormatSpecs_Read.Add('micropolis.48tpi.ds');
+  FormatSpecs_Read.Add('micropolis.48tpi.ds.275');
+  FormatSpecs_Read.Add('micropolis.48tpi.ss');
+  FormatSpecs_Read.Add('micropolis.48tpi.ss.275');
   FormatSpecs_Read.Add('mm1.os9.80dshd_32');
   FormatSpecs_Read.Add('mm1.os9.80dshd_33');
   FormatSpecs_Read.Add('mm1.os9.80dshd_36');
@@ -950,6 +936,14 @@ begin
   FormatSpecs_Write.Add('ibm.scan');
   FormatSpecs_Write.Add('mac.400');
   FormatSpecs_Write.Add('mac.800');
+  FormatSpecs_Write.Add('micropolis.100tpi.ds');
+  FormatSpecs_Write.Add('micropolis.100tpi.ds.275');
+  FormatSpecs_Write.Add('micropolis.100tpi.ss');
+  FormatSpecs_Write.Add('micropolis.100tpi.ss.275');
+  FormatSpecs_Write.Add('micropolis.48tpi.ds');
+  FormatSpecs_Write.Add('micropolis.48tpi.ds.275');
+  FormatSpecs_Write.Add('micropolis.48tpi.ss');
+  FormatSpecs_Write.Add('micropolis.48tpi.ss.275');
   FormatSpecs_Write.Add('mm1.os9.80dshd_32');
   FormatSpecs_Write.Add('mm1.os9.80dshd_33');
   FormatSpecs_Write.Add('mm1.os9.80dshd_36');
@@ -1055,6 +1049,14 @@ begin
   FormatSpecs_Conv.Add('ibm.scan');
   FormatSpecs_Conv.Add('mac.400');
   FormatSpecs_Conv.Add('mac.800');
+  FormatSpecs_Conv.Add('micropolis.100tpi.ds');
+  FormatSpecs_Conv.Add('micropolis.100tpi.ds.275');
+  FormatSpecs_Conv.Add('micropolis.100tpi.ss');
+  FormatSpecs_Conv.Add('micropolis.100tpi.ss.275');
+  FormatSpecs_Conv.Add('micropolis.48tpi.ds');
+  FormatSpecs_Conv.Add('micropolis.48tpi.ds.275');
+  FormatSpecs_Conv.Add('micropolis.48tpi.ss');
+  FormatSpecs_Conv.Add('micropolis.48tpi.ss.275');
   FormatSpecs_Conv.Add('mm1.os9.80dshd_32');
   FormatSpecs_Conv.Add('mm1.os9.80dshd_33');
   FormatSpecs_Conv.Add('mm1.os9.80dshd_36');
@@ -1092,16 +1094,6 @@ begin
 
  Get_DeviceCOM;
 
- if dd <> '' then
-  begin
-   cbReadTplFormatSrc.items.Add(extractfilename(dd));
-   cbWriteTplFormatSrc.items.Add(extractfilename(dd));
-   cbConvDiskdefs.items.Add(extractfilename(dd));
-   Get_FormatSpecs_Read;   // Diskdefs.cfg
-   Get_FormatSpecs_Write;  // Diskdefs.cfg
-   Get_FormatSpecs_Conv;   // Diskdefs.cfg
-  end;
-
   cbReadTplFormat.items.Text := FormatSpecs_Read.Text;
   cbReadFormat.Items.Text := FormatDest_Ext.Text;        // bspw. .msa
   cbWriteTplFormat.items.Text := FormatSpecs_Write.Text;
@@ -1114,34 +1106,72 @@ begin
   CMD_Generate;
 end;
 
+// location diskdefs_.cfg - Refresh "format spec" dropdown
+procedure TForm1.Refresh_Diskdefs_DropDown;
+var
+  Diskdefs : TStringList;
+  i: integer;
+  TmplFolder : String;
+  INITmplFolder : TIniFile;
+begin
+  try
+    INITmplFolder := TINIFile.Create(sAppPath + 'FluxMyFluffyFloppy.ini');
+    TmplFolder := INITmplFolder.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '');
+    INITmplFolder.Free;
+    cbReadTplFormatSrc.Items.Clear;
+    cbReadTplFormatSrc.Items.Add('Internal');
+    cbWriteTplFormatSrc.items.Clear;
+    cbWriteTplFormatSrc.items.Add('Internal');
+    cbConvDiskdefs.items.Clear;
+    cbConvDiskdefs.items.Add('Internal');
+    i := 0;
+    Diskdefs := FindAllFiles(DirCheck(TmplFolder), '*.cfg', True);
+    if Diskdefs.Count = 0 then
+    begin
+      Diskdefs.Free;
+      exit;
+    end;
+    while i < Diskdefs.Count do
+    begin
+      cbReadTplFormatSrc.Items.Add(ExtractFilename(ExtractFileName_WithoutExt(Diskdefs.Strings[i])));
+      cbWriteTplFormatSrc.Items.Add(ExtractFilename(ExtractFileName_WithoutExt(Diskdefs.Strings[i])));
+      cbConvDiskdefs.Items.Add(ExtractFilename(ExtractFileName_WithoutExt(Diskdefs.Strings[i])));
+      Inc(i);
+    end;
+    Diskdefs.Free;
+    cbReadTplFormatSrc.ItemIndex:=0;
+    cbWriteTplFormatSrc.ItemIndex:=0;
+    cbConvDiskdefs.ItemIndex:=0;
+  finally
+  end;
+end;
+
+
 procedure TForm1.btGoClick(Sender: TObject);
 var
     LogDir, LogFilename : String;
-    answer, tmp : integer;
+    answer : integer;
 begin
    LogDir := '';
    LogFilename := '';
-   tmp := 0;
-
-    if edGWFile.Text = '' then
-     begin
-       answer := MessageDlg('Please define location of Greaseweazle (gw.exe)!',mtWarning, [mbOK], 0);
-       if answer = mrOk then
-        begin
-         edGWFile.SetFocus;
-         exit;
-        end;
-     end;
-
-    if Fileexists(edGWFile.Text) = false then
-     begin
-       answer := MessageDlg('Greaseweazle (gw.exe) not found!',mtWarning, [mbCancel], 0);
-       if answer = mrCancel then
-        begin
-         edGWFile.SetFocus;
-         exit;
-        end;
-     end;
+   if edGWFile.Text = '' then
+    begin
+      answer := MessageDlg('Please define location of Greaseweazle (gw.exe)!',mtWarning, [mbOK], 0);
+      if answer = mrOk then
+       begin
+        edGWFile.SetFocus;
+        exit;
+       end;
+    end;
+   if Fileexists(edGWFile.Text) = false then
+    begin
+     answer := MessageDlg('Greaseweazle (gw.exe) not found!',mtWarning, [mbCancel], 0);
+     if answer = mrCancel then
+      begin
+       edGWFile.SetFocus;
+       exit;
+      end;
+    end;
 
    // Read  ######################################################################
    if pcActions.ActivePageIndex = 0 then
@@ -1155,8 +1185,8 @@ begin
            exit;
           end;
         end;
-         if edReadDirDest.Text <> '' then
-          begin
+       if edReadDirDest.Text <> '' then
+        begin
          if Directoryexists(Dircheck(edReadDirDest.Text)) = false then
           begin
            answer := MessageDlg('Destination directory not found! Create directory?',mtWarning, [mbYes,mbCancel], 0);
@@ -1807,7 +1837,7 @@ end;
 procedure TForm1.Refresh_Templates_Write;
 var
   iniRefreshWrite, INITmplFolder: TiniFile;
-  TmplFolder, Tmp: String;
+  TmplFolder: String;
 begin
   //Read-Template
   INITmplFolder := TINIFile.Create(sAppPath + 'FluxMyFluffyFloppy.ini');
@@ -1951,20 +1981,19 @@ end;
 
 procedure TForm1.cbConvDiskdefsChange(Sender: TObject);
 begin
-    if cbConvDiskdefs.Focused then
-     begin
-      if cbConvDiskdefs.Text = 'Internal' then
-       begin
-        cbConvFormat.Clear;
-        cbConvFormat.items.Text := FormatSpecs_Conv.Text;
-       end;
-      if cbConvDiskdefs.Text <> 'Internal' then
-       begin
-        cbConvFormat.Clear;
-        cbConvFormat.items.Text := FormatSpecs_ConvDiskDefs.Text;
-       end;
-       CMD_Generate;
-      end;
+ if cbConvDiskdefs.Focused then
+  begin
+   if cbConvDiskdefs.Text = 'Internal' then
+    begin
+     cbConvFormat.Clear;
+     cbConvFormat.items.Text := FormatSpecs_Conv.Text;
+    end;
+   if cbConvDiskdefs.Text <> 'Internal' then
+    begin
+     Get_FormatSpecs_Conv;
+    end;
+   CMD_Generate;
+  end;
 end;
 
 procedure TForm1.cbConvFormatOptionChange(Sender: TObject);
@@ -2485,83 +2514,105 @@ begin
    end;
   if cbReadTplFormatSrc.Text <> 'Internal' then
    begin
-    cbReadTplFormat.Clear;
-    cbReadTplFormat.items.Text := FormatSpecs_ReadDiskDefs.Text;
-    cbReadTplFormat.ItemIndex:=0;
+    Get_FormatSpecs_Read;
    end;
   CMD_Generate;
 end;
 
 procedure TForm1.Get_FormatSpecs_Read;
 var
-   i, l : integer;
-   tmp : string;
+  i, l : integer;
+  tmp : string;
 begin
   FormatSpecs_ReadDiskDefs := TStringList.Create;
   FormatSpecs_ReadDiskDefs.Clear;
-   if fileexists(dd) then
-    begin
-       FormatSpecs_ReadDiskDefs.Add('');
-       Memo1.Clear;
-       Memo1.Lines.LoadFromFile(dd);
-       for i := 0 to Memo1.Lines.Count - 1 do
-        begin
-         if Memo1.Lines[i].StartsWith('disk ') = true then
-          begin
-           tmp := TrimLeft(Memo1.Lines[i]);
-           l := length(tmp);
-           FormatSpecs_ReadDiskDefs.Add(TrimRight(RightStr(tmp,l-5)));
-          end;
-         end;
-     end;
+  dd := INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '') + cbReadTplFormatSrc.Text + '.cfg';
+  if fileexists(dd) then
+   begin
+    FormatSpecs_ReadDiskDefs.Add('');
+    Memo1.Clear;
+    Memo1.Lines.LoadFromFile(dd);
+    for i := 0 to Memo1.Lines.Count - 1 do
+     begin
+      if Memo1.Lines[i].StartsWith('disk ') = true then
+       begin
+        tmp := TrimLeft(Memo1.Lines[i]);
+        l := length(tmp);
+        FormatSpecs_ReadDiskDefs.Add(TrimRight(RightStr(tmp,l-5)));
+       end;
+      end;
+     cbReadTplFormat.Clear;
+     cbReadTplFormat.items.Text := FormatSpecs_ReadDiskDefs.Text;
+     cbReadTplFormat.ItemIndex:=0;
+    end;
+  if fileexists(dd) = false then
+   begin
+    cbReadTplFormat.Clear;
+   end;
 end;
 
 procedure TForm1.Get_FormatSpecs_Write;
 var
-   i, i2, l, answer : integer;
-   tmp : string;
+  i, l  : integer;
+  tmp : string;
 begin
   FormatSpecs_WriteDiskDefs := TStringList.Create;
   FormatSpecs_WriteDiskDefs.Clear;
+  dd := INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '') + cbWriteTplFormatSrc.Text + '.cfg';
   if fileexists(dd) then
    begin
-      FormatSpecs_WriteDiskDefs.Add('');
-      Memo1.Clear;
-      Memo1.Lines.LoadFromFile(dd);
-      for i := 0 to Memo1.Lines.Count - 1 do
+    FormatSpecs_WriteDiskDefs.Add('');
+    Memo1.Clear;
+    Memo1.Lines.LoadFromFile(dd);
+    for i := 0 to Memo1.Lines.Count - 1 do
+     begin
+      if Memo1.Lines[i].StartsWith('disk ') = true then
        begin
-        if Memo1.Lines[i].StartsWith('disk ') = true then
-         begin
-          tmp := TrimLeft(Memo1.Lines[i]);
-          l := length(tmp);
-          FormatSpecs_WriteDiskDefs.Add(TrimRight(RightStr(tmp,l-5)));
-         end;
-        end;
+        tmp := TrimLeft(Memo1.Lines[i]);
+        l := length(tmp);
+        FormatSpecs_WriteDiskDefs.Add(TrimRight(RightStr(tmp,l-5)));
+       end;
+      end;
+     cbWriteTplFormat.Clear;
+     cbWriteTplFormat.items.Text := FormatSpecs_WriteDiskDefs.Text;
+     cbWriteTplFormat.ItemIndex:=0;
     end;
+  if fileexists(dd) = false then
+   begin
+    cbWriteTplFormat.Clear;
+   end;
 end;
 
 procedure TForm1.Get_FormatSpecs_Conv;
 var
-   i, i2, l : integer;
-   tmp : string;
+ i, l : integer;
+ tmp : string;
 begin
  FormatSpecs_ConvDiskDefs := TStringList.Create;
  FormatSpecs_ConvDiskDefs.Clear;
+ dd := INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '') + cbConvDiskdefs.Text + '.cfg';
  if fileexists(dd) then
   begin
-     FormatSpecs_ConvDiskDefs.Add('');
-     Memo1.Clear;
-     Memo1.Lines.LoadFromFile(dd);
-     for i := 0 to Memo1.Lines.Count - 1 do
+   FormatSpecs_ConvDiskDefs.Add('');
+   Memo1.Clear;
+   Memo1.Lines.LoadFromFile(dd);
+   for i := 0 to Memo1.Lines.Count - 1 do
+    begin
+     if Memo1.Lines[i].StartsWith('disk ') = true then
       begin
-       if Memo1.Lines[i].StartsWith('disk ') = true then
-        begin
-         tmp := TrimLeft(Memo1.Lines[i]);
-         l := length(tmp);
-         FormatSpecs_ConvDiskDefs.Add(TrimRight(RightStr(tmp,l-5)));
-        end;
-       end;
-   end;
+       tmp := TrimLeft(Memo1.Lines[i]);
+       l := length(tmp);
+       FormatSpecs_ConvDiskDefs.Add(TrimRight(RightStr(tmp,l-5)));
+      end;
+     end;
+   cbConvFormat.Clear;
+   cbConvFormat.items.Text := FormatSpecs_ConvDiskDefs.Text;
+   cbConvFormat.ItemIndex:=0;
+  end;
+ if fileexists(dd) = false then
+  begin
+   cbConvFormat.Clear;
+  end;
 end;
 
 procedure TForm1.lblToolsEraseHFreqClick(Sender: TObject);
@@ -3119,9 +3170,7 @@ begin
    end;
   if cbWriteTplFormatSrc.Text <> 'Internal' then
    begin
-    cbWriteTplFormat.Clear;
-    cbWriteTplFormat.items.Text := FormatSpecs_WriteDiskDefs.Text;
-    cbWriteTplFormat.ItemIndex:=0;
+    Get_FormatSpecs_Write;
    end;
    CMD_Generate;
 end;
@@ -3225,30 +3274,8 @@ begin
 end;
 
 procedure TForm1.EdGWFileChange(Sender: TObject);
-var
-   i, l : integer;
-   tmp : String;
 begin
   CMD_Generate;
-  if EdGWFile.Text <> '' then
-   begin
-   if fileexists(dd) then
-    begin
-       FormatSpecs_ReadDiskDefs := TStringList.Create;
-       FormatSpecs_ReadDiskDefs.Clear;
-       FormatSpecs_ReadDiskDefs.Add('');
-       Memo1.Lines.LoadFromFile(dd);
-       for i := 0 to Memo1.Lines.Count - 1 do
-         begin
-          if Memo1.Lines[i].StartsWith('disk ') = true then
-           begin
-            tmp := TrimLeft(Memo1.Lines[i]);
-            l := length(tmp);
-            FormatSpecs_ReadDiskDefs.Add(TrimRight(RightStr(tmp,l-5)));
-           end;
-         end;
-     end;
-   end;
 end;
 
 procedure TForm1.edReadDigitsChange(Sender: TObject);
@@ -3443,6 +3470,11 @@ begin
  INI.WriteBool('FluxMyFluffyFloppy', 'cbSetGlobalActionsShellWindow', false);
  INI.WriteBool('FluxMyFluffyFloppy', 'cbSetGlobalActionsBacktrace', cbSetGlobalActionsBacktrace.Checked);
  INI.Free;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+
 end;
 
 procedure TForm1.mnuCloseClick(Sender: TObject);

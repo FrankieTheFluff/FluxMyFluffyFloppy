@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 443
+  Left = 524
   Height = 769
-  Top = 41
+  Top = 47
   Width = 935
   HorzScrollBar.Page = 878
   VertScrollBar.Page = 765
@@ -12,9 +12,10 @@ object Form1: TForm1
   ClientWidth = 935
   Menu = MainMenu1
   OnClose = FormClose
+  OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '3.4.0.0'
+  LCLVersion = '3.6.0.0'
   object grpGW: TGroupBox
     Left = 2
     Height = 80

@@ -6,7 +6,7 @@ v5.xx
 A Microsoft(r) Windows(r) GUI for Greseaweazle Host Tools
 FREEWARE / OpenSource
 License: GNU General Public License v2.0
-(c) 2021-2024 FrankieTheFluff
+(c) 2021-2025 FrankieTheFluff
 Web: https://github.com/FrankieTheFluff/FluxMyFluffyFloppy
 Mail: fluxmyfluffyfloppy@mail.de
 -----------------------------------------------------------------
@@ -31,7 +31,7 @@ type
   TFrmOptions = class(TForm)
     Cancel: TButton;
     folderTemplates: TDirectoryEdit;
-    fileDiskdefs: TFileNameEdit;
+    fileDiskdefs: TDirectoryEdit;
     GroupBox1: TGroupBox;
     lblDiskdefs: TLabel;
     lblTemplates: TLabel;
@@ -69,27 +69,12 @@ end;
 
 procedure TFrmOptions.OKClick(Sender: TObject);
 begin
- dd := fileDiskdefs.Text;  // MainForm
- INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', dd);
+ INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', fileDiskdefs.Text);
  INI.WriteString('FluxMyFluffyFloppy', 'FolderTemplates', folderTemplates.Directory);
  if fileDiskdefs.Text <> '' then
- begin
-  Form1.cbReadTplFormatSrc.items.Clear;
-  Form1.cbReadTplFormatSrc.items.Add('Internal');
-  Form1.cbReadTplFormatSrc.items.Add(extractfilename(dd));
-  Form1.cbReadTplFormatSrc.ItemIndex:=0;
-  Form1.cbWriteTplFormatSrc.items.Clear;
-  Form1.cbWriteTplFormatSrc.items.Add('Internal');
-  Form1.cbWriteTplFormatSrc.items.Add(extractfilename(dd));
-  Form1.cbWriteTplFormatSrc.ItemIndex:=0;
-  Form1.cbConvDiskdefs.items.Clear;
-  Form1.cbConvDiskdefs.items.Add('Internal');
-  Form1.cbConvDiskdefs.items.Add(extractfilename(dd));
-  Form1.cbConvDiskdefs.ItemIndex:=0;
-  Form1.Get_FormatSpecs_Read;   // Diskdefs.cfg
-  Form1.Get_FormatSpecs_Write;  // Diskdefs.cfg
-  Form1.Get_FormatSpecs_Conv;   // Diskdefs.cfg
- end;
+  begin
+   Form1.Refresh_Diskdefs_DropDown;
+  end;
  Form1.Refresh_Templates_Read_DropDown;
  Form1.Refresh_Templates_Write_DropDown;
  Form1.btReadTplNew.Click;

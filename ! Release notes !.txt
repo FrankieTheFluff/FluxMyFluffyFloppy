@@ -5,7 +5,7 @@ v5.xx
 A Microsoft(r) Windows(r) GUI for Greseaweazle Host Tools
 FREEWARE / OpenSource
 License: GNU General Public License v2.0
-(c) 2021-2024 FrankieTheFluff
+(c) 2021-2025 FrankieTheFluff
 Web: https://github.com/FrankieTheFluff/FluxMyFluffyFloppy
 Mail: fluxmyfluffyfloppy@mail.de
 
@@ -24,6 +24,14 @@ https://github.com/t-edson/UnTerminal
 
 Release notes
 *new, +update, -bugfix, #unfixed
+
+v5.1.0 - 2025-01-04
+* Requires Greaseweazle 1.21
++ Options: former location of "diskdefs.cfg" is now a folder select !
+* Supports now the different "Diskdefs_.cfg" files (change options: "Diskdefs (folder)")
+* Diskdefs (2024-10-23) added (change options: "Diskdefs (folder)")
+* Read/Write: New disc formats: micropolis.*
+- Sourcecode: Removed unused variables
 
 v5.0.10 - 2024-10-07
 - Read/Write: Fixed save template if destination folder (options) doesn't exist

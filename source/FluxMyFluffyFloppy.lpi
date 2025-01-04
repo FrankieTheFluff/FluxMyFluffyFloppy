@@ -19,15 +19,15 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="5"/>
-      <RevisionNr Value="10"/>
-      <StringTable Comments="Freeware" CompanyName="FrankieTheFluff" FileDescription="FluxMyFluffyFloppy - A GUI for Greaseweazle" InternalName="FluxMyFluffyFloppy" LegalCopyright="(c) 2021-2024 FrankieTheFluff" OriginalFilename="fluxmyfluffyfloppy.exe" ProductName="FluxMyFluffyFloppy" ProductVersion="5"/>
+      <MinorVersionNr Value="1"/>
+      <StringTable Comments="Freeware" CompanyName="FrankieTheFluff" FileDescription="FluxMyFluffyFloppy - A GUI for Greaseweazle" InternalName="FluxMyFluffyFloppy" LegalCopyright="(c) 2021-2025 FrankieTheFluff" OriginalFilename="fluxmyfluffyfloppy.exe" ProductName="FluxMyFluffyFloppy" ProductVersion="5"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Default" Default="True"/>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
-      <DestinationDirectory Value="C:\Users\Don&apos;t Touch\fmff"/>
+      <DestinationDirectory Value=""/>
       <UseFileFilters Value="True"/>
     </PublishOptions>
     <RunParams>
