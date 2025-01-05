@@ -627,8 +627,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.1.0';
-  sAppDate := '2025-01-04';
+  sAppVersion := 'v5.1.1';
+  sAppDate := '2025-01-05';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   AboutGW := 'Requires "Greaseweazle v1.21+" (and optional "diskdefs_.cfg")';
@@ -2522,11 +2522,12 @@ end;
 procedure TForm1.Get_FormatSpecs_Read;
 var
   i, l : integer;
-  tmp : string;
+  prefix, tmp : string;
 begin
+  prefix := '';
   FormatSpecs_ReadDiskDefs := TStringList.Create;
   FormatSpecs_ReadDiskDefs.Clear;
-  dd := INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '') + cbReadTplFormatSrc.Text + '.cfg';
+  dd := DirCheck(INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '')) + cbReadTplFormatSrc.Text + '.cfg';
   if fileexists(dd) then
    begin
     FormatSpecs_ReadDiskDefs.Add('');
@@ -2534,11 +2535,20 @@ begin
     Memo1.Lines.LoadFromFile(dd);
     for i := 0 to Memo1.Lines.Count - 1 do
      begin
+      if Memo1.Lines[i].StartsWith('# prefix: ') = true then
+       begin
+        tmp := TrimLeft(Memo1.Lines[i]);
+        l := length(tmp);
+        prefix := TrimRight(RightStr(tmp,l-10));
+       end;
+     end;
+    for i := 0 to Memo1.Lines.Count - 1 do
+     begin
       if Memo1.Lines[i].StartsWith('disk ') = true then
        begin
         tmp := TrimLeft(Memo1.Lines[i]);
         l := length(tmp);
-        FormatSpecs_ReadDiskDefs.Add(TrimRight(RightStr(tmp,l-5)));
+        FormatSpecs_ReadDiskDefs.Add(prefix + TrimRight(RightStr(tmp,l-5)));
        end;
       end;
      cbReadTplFormat.Clear;
@@ -2554,11 +2564,12 @@ end;
 procedure TForm1.Get_FormatSpecs_Write;
 var
   i, l  : integer;
-  tmp : string;
+  prefix, tmp : string;
 begin
+  prefix := '';
   FormatSpecs_WriteDiskDefs := TStringList.Create;
   FormatSpecs_WriteDiskDefs.Clear;
-  dd := INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '') + cbWriteTplFormatSrc.Text + '.cfg';
+  dd := DirCheck(INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '')) + cbWriteTplFormatSrc.Text + '.cfg';
   if fileexists(dd) then
    begin
     FormatSpecs_WriteDiskDefs.Add('');
@@ -2566,11 +2577,20 @@ begin
     Memo1.Lines.LoadFromFile(dd);
     for i := 0 to Memo1.Lines.Count - 1 do
      begin
+      if Memo1.Lines[i].StartsWith('# prefix: ') = true then
+       begin
+        tmp := TrimLeft(Memo1.Lines[i]);
+        l := length(tmp);
+        prefix := TrimRight(RightStr(tmp,l-10));
+       end;
+     end;
+    for i := 0 to Memo1.Lines.Count - 1 do
+     begin
       if Memo1.Lines[i].StartsWith('disk ') = true then
        begin
         tmp := TrimLeft(Memo1.Lines[i]);
         l := length(tmp);
-        FormatSpecs_WriteDiskDefs.Add(TrimRight(RightStr(tmp,l-5)));
+        FormatSpecs_WriteDiskDefs.Add(prefix + TrimRight(RightStr(tmp,l-5)));
        end;
       end;
      cbWriteTplFormat.Clear;
@@ -2586,11 +2606,12 @@ end;
 procedure TForm1.Get_FormatSpecs_Conv;
 var
  i, l : integer;
- tmp : string;
+ prefix, tmp : string;
 begin
+ prefix := '';
  FormatSpecs_ConvDiskDefs := TStringList.Create;
  FormatSpecs_ConvDiskDefs.Clear;
- dd := INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '') + cbConvDiskdefs.Text + '.cfg';
+ dd := DirCheck(INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '')) + cbConvDiskdefs.Text + '.cfg';
  if fileexists(dd) then
   begin
    FormatSpecs_ConvDiskDefs.Add('');
@@ -2598,11 +2619,20 @@ begin
    Memo1.Lines.LoadFromFile(dd);
    for i := 0 to Memo1.Lines.Count - 1 do
     begin
+     if Memo1.Lines[i].StartsWith('# prefix: ') = true then
+      begin
+       tmp := TrimLeft(Memo1.Lines[i]);
+       l := length(tmp);
+       prefix := TrimRight(RightStr(tmp,l-10));
+      end;
+    end;
+   for i := 0 to Memo1.Lines.Count - 1 do
+    begin
      if Memo1.Lines[i].StartsWith('disk ') = true then
       begin
        tmp := TrimLeft(Memo1.Lines[i]);
        l := length(tmp);
-       FormatSpecs_ConvDiskDefs.Add(TrimRight(RightStr(tmp,l-5)));
+       FormatSpecs_ConvDiskDefs.Add(prefix + TrimRight(RightStr(tmp,l-5)));
       end;
      end;
    cbConvFormat.Clear;

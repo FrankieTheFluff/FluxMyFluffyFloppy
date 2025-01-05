@@ -25,6 +25,9 @@ https://github.com/t-edson/UnTerminal
 Release notes
 *new, +update, -bugfix, #unfixed
 
+v5.1.1 - 2025-01-05
+- Fixes missing prefix in the diskdefs form spec selection
+
 v5.1.0 - 2025-01-04
 * Requires Greaseweazle 1.21
 + Options: former location of "diskdefs.cfg" is now a folder select !
