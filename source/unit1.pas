@@ -170,16 +170,16 @@ type
     edToolsFWTag: TEdit;
     edWriteFileName: TFileNameEdit;
     edWriteTplDesc: TEdit;
-    GroupBox1: TGroupBox;
-    GroupBox10: TGroupBox;
-    GroupBox11: TGroupBox;
-    GroupBox2: TGroupBox;
-    GroupBox3: TGroupBox;
-    GroupBox4: TGroupBox;
-    GroupBox5: TGroupBox;
-    GroupBox7: TGroupBox;
-    GroupBox8: TGroupBox;
-    GroupBox9: TGroupBox;
+    gbCmd: TGroupBox;
+    gbConvArg: TGroupBox;
+    gbConvDest: TGroupBox;
+    grbToolsOptions: TGroupBox;
+    gbReadDest: TGroupBox;
+    gbReadArg: TGroupBox;
+    gbReadTpl: TGroupBox;
+    gbWriteTpl: TGroupBox;
+    gbWriteArg: TGroupBox;
+    gbConvSrc: TGroupBox;
     grpFW: TGroupBox;
     grpGW: TGroupBox;
     grpPIN: TGroupBox;
@@ -291,24 +291,33 @@ type
     lblWriteTplTP43Pin2: TLabel;
     MainMenu1: TMainMenu;
     Memo1: TMemo;
-    MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
+    mnuFile: TMenuItem;
+    mnuView: TMenuItem;
+    mnuOptions: TMenuItem;
+    mnuHelp: TMenuItem;
+    mnuClose: TMenuItem;
+    mnuAbout: TMenuItem;
+    mnuGitHub: TMenuItem;
+    mnuArguments: TMenuItem;
     mnuFMFF: TMenuItem;
     mnuGWDownload: TMenuItem;
     mnuWebsite: TMenuItem;
     mnuGWGettingStarted: TMenuItem;
+    pnConvAllArg: TPanel;
+    pnWriteAllArg: TPanel;
+    pnGW: TPanel;
+    pnReadAllArg: TPanel;
+    sbRead: TScrollBox;
+    sbWrite: TScrollBox;
+    sbConv: TScrollBox;
     Separator1: TMenuItem;
-    mnuClose: TMenuItem;
-    mnuFile: TMenuItem;
     NewDB: TOpenDialog;
     OpenDialog1: TOpenDialog;
     opSetFWFile: TRadioButton;
     opSetFWOnline: TRadioButton;
     opSetFWTag: TRadioButton;
-    Panel1: TPanel;
-    Panel2: TPanel;
+    pnMain: TPanel;
+    pnCmd: TPanel;
     Panel3: TPanel;
     pcActions: TPageControl;
     pnToolsFWSelect: TPanel;
@@ -324,7 +333,7 @@ type
     SQLite3Connection1: TSQLite3Connection;
     SQLQueryDir: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
-    TabSheet1: TTabSheet;
+    tbSettings: TTabSheet;
     tbConv: TTabSheet;
     tbRead: TTabSheet;
     tbTools: TTabSheet;
@@ -465,7 +474,7 @@ type
     procedure edWriteFileNameAcceptFileName(Sender: TObject; var Value: String);
     procedure edWriteFileNameChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
-    procedure FormCreate(Sender: TObject);
+    procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Create_Filename;
     procedure CMD_Generate;
@@ -474,16 +483,17 @@ type
     procedure Get_FormatSpecs_Write;
     procedure Get_FormatSpecs_Conv;
     procedure lblToolsEraseHFreqClick(Sender: TObject);
-    procedure MenuItem2Click(Sender: TObject);
-    procedure MenuItem3Click(Sender: TObject);
+    procedure mnuAboutClick(Sender: TObject);
+    procedure mnuOptionsClick(Sender: TObject);
+    procedure mnuArgumentsClick(Sender: TObject);
     procedure mnuFMFFClick(Sender: TObject);
     procedure mnuGWDownloadClick(Sender: TObject);
     procedure mnuGWGettingStartedClick(Sender: TObject);
     procedure mnuWebsiteClick(Sender: TObject);
+    procedure mnuCloseClick(Sender: TObject);
     procedure opSetFWFileClick(Sender: TObject);
     procedure opSetFWOnlineClick(Sender: TObject);
     procedure opSetFWTagClick(Sender: TObject);
-    procedure Panel2Resize(Sender: TObject);
     procedure pcActionsChange(Sender: TObject);
     procedure rbGetPINClick(Sender: TObject);
     procedure rbSetDelaysClick(Sender: TObject);
@@ -499,7 +509,7 @@ type
     procedure Refresh_Templates_Read;
     procedure Refresh_Templates_Write_DropDown;
     procedure Refresh_Templates_Write;
-    procedure mnuCloseClick(Sender: TObject);
+    procedure Set_View;
   private
 
   public
@@ -627,27 +637,31 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.1.1';
-  sAppDate := '2025-01-05';
+  sAppVersion := 'v5.2.0';
+  sAppDate := '2025-01-09';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   AboutGW := 'Requires "Greaseweazle v1.21+" (and optional "diskdefs_.cfg")';
+  Form1.Caption := sAppName + sAppVersion;
 
   sAppPath := Dircheck(ExtractFilePath(ParamStr(0)));
-  Form1.Caption := sAppName + sAppVersion;
-  Form1.Top:=(( Screen.Height-Height)div 2);
-  Form1.Left:=((Screen.Width-Width)div 2);
-
-  if DirectoryExists(sAppPath + 'Diskdefs\') = false then CreateDir(sAppPath + 'Diskdefs\');
-  if DirectoryExists(sAppPath + 'Templates\') = false then CreateDir(sAppPath + 'Templates\');
-  if DirectoryExists(sAppPath + 'Greaseweazle\') = false then CreateDir(sAppPath + 'Greaseweazle\');
+  if DirectoryExists(sAppPath + 'Diskdefs') = false then CreateDir(sAppPath + 'Diskdefs');
+  if DirectoryExists(sAppPath + 'Templates') = false then CreateDir(sAppPath + 'Templates');
+  if DirectoryExists(sAppPath + 'Greaseweazle') = false then CreateDir(sAppPath + 'Greaseweazle');
 
   // No INI
   if FileExists(sAppPath + 'FluxMyFluffyFloppy.ini') = False then
     try
      INI := TINIFile.Create(sAppPath + 'FluxMyFluffyFloppy.ini');
      INI.WriteString('FluxMyFluffyFloppy', 'Version', sAppVersion);
+     INI.WriteInteger('FluxMyFluffyFloppy', 'Height', 770);
+     INI.WriteInteger('FluxMyFluffyFloppy', 'Width', 935);
+     INI.WriteBool('FluxMyFluffyFloppy', 'ShowArg', true);
      INI.WriteString('FluxMyFluffyFloppy', 'Greaseweazle', '');
+     INI.WriteBool('FluxMyFluffyFloppy', 'SaveBoolGWDevCom', false);
+     INI.WriteString('FluxMyFluffyFloppy', 'SaveGWDevice', '');
+     INI.WriteBool('FluxMyFluffyFloppy', 'SaveBoolGWDrive', false);
+     INI.WriteString('FluxMyFluffyFloppy', 'SaveGWDrive', '');
      INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', sAppPath + 'Diskdefs\');
      INI.WriteString('FluxMyFluffyFloppy', 'FolderTemplates', sAppPath + 'Templates\');
      INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Read_Dest', AppendPathDelim(GetUserDir + 'Documents'));
@@ -662,11 +676,20 @@ begin
 
   INI := TINIFile.Create(sAppPath + 'FluxMyFluffyFloppy.ini');
   If INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs','') = '' then INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', sAppPath + 'Diskdefs\');
-  EdGWFile.Text:=INI.ReadString('FluxMyFluffyFloppy', 'Greaseweazle','');
+  EdGWFile.Text := INI.ReadString('FluxMyFluffyFloppy', 'Greaseweazle','');
+  mnuArguments.Checked := INI.ReadBool('FluxMyFluffyFloppy', 'ShowArg', true);
   edReadDirDest.Directory := INI.ReadString('FluxMyFluffyFloppy', 'LastFolder_Read_Dest','');
   edWriteFilename.InitialDir := INI.ReadString('FluxMyFluffyFloppy', 'LastFolder_Write_Source','');
-  edConvFileSource.InitialDir :=INI.ReadString('FluxMyFluffyFloppy', 'LastFolder_Convert_Source','');
-  edConvDirDest.Directory :=INI.ReadString('FluxMyFluffyFloppy', 'LastFolder_Convert_Dest','');
+  edConvFileSource.InitialDir := INI.ReadString('FluxMyFluffyFloppy', 'LastFolder_Convert_Source','');
+  edConvDirDest.Directory := INI.ReadString('FluxMyFluffyFloppy', 'LastFolder_Convert_Dest','');
+
+  // Form size height/width
+  Form1.Height := INI.ReadInteger('FluxMyFluffyFloppy', 'Height', 770);
+  Form1.Width := INI.ReadInteger('FluxMyFluffyFloppy', 'Width', 935);
+  Set_View;
+  // Center
+  Form1.Top:=(( Screen.Height-Height)div 2);
+  Form1.Left:=((Screen.Width-Width)div 2);
 
   // Where is gw.exe ?
   gw := INI.ReadString('FluxMyFluffyFloppy', 'Greaseweazle', '');
@@ -701,6 +724,17 @@ begin
         end;
       end;
     end;
+
+  // Get possible Greaseweazle Device/COM ports
+  Get_DeviceCOM;
+  If INI.ReadBool('FluxMyFluffyFloppy', 'SaveBoolGWDevCom', false) = true then
+   begin
+    cbGWDevCOM.Text := INI.ReadString('FluxMyFluffyFloppy', 'SaveGWDevice', '');
+   end;
+  If INI.ReadBool('FluxMyFluffyFloppy', 'SaveBoolGWDrive', false) = true then
+   begin
+    cbGWDrive.Text := INI.ReadString('FluxMyFluffyFloppy', 'SaveGWDrive', '');
+   end;
 
   // Where are diskdefs_.cfg located?
   Refresh_Diskdefs_DropDown;
@@ -1091,8 +1125,6 @@ begin
   FormatSpecs_Conv.Add('tsc.flex.ssdd');
   FormatSpecs_Conv.Add('zx.quorum.800');
   FormatSpecs_Conv.Add('zx.trdos.640');
-
- Get_DeviceCOM;
 
   cbReadTplFormat.items.Text := FormatSpecs_Read.Text;
   cbReadFormat.Items.Text := FormatDest_Ext.Text;        // bspw. .msa
@@ -2650,14 +2682,87 @@ begin
   CMD_Generate;
 end;
 
-procedure TForm1.MenuItem2Click(Sender: TObject);
+procedure TForm1.mnuAboutClick(Sender: TObject);
 begin
   FrmAbout.showmodal;
 end;
 
-procedure TForm1.MenuItem3Click(Sender: TObject);
+procedure TForm1.mnuOptionsClick(Sender: TObject);
 begin
   FrmOptions.showmodal;
+end;
+
+procedure TForm1.mnuArgumentsClick(Sender: TObject);
+begin
+  If mnuArguments.Checked = true then
+   begin
+    mnuArguments.Checked:=false;
+    Set_View;
+    exit;
+   end;
+
+  If mnuArguments.Checked = false then
+   begin
+    mnuArguments.Checked:=true;
+    Set_View;
+    exit;
+   end;
+end;
+
+procedure TForm1.Set_View;
+begin
+ // Show all arguments
+
+  If mnuArguments.Checked = true then
+  begin
+
+   // Read
+   gbReadArg.Caption:= 'Arguments (All):';
+   gbReadArg.Height := 248;
+   pnReadAllArg.Visible := true;
+   gbReadDest.Top := 330;
+
+   // Write
+   gbWriteArg.Caption:= 'Arguments (All):';
+   gbWriteArg.Height := 288;
+   pnWriteAllArg.Visible := true;
+   lblWriteFile.Top := 232;
+   edWriteFileName.Top := 232;
+
+   //Conv
+   gbConvArg.Caption:= 'Arguments (All):';
+   gbConvArg.Height := 272;
+   pnConvAllArg.Visible := true;
+   gbConvDest.Top := 352;
+
+   exit;
+  end; // true
+
+ If mnuArguments.Checked = False then
+  begin
+
+   // Read
+   gbReadArg.Caption:= 'Arguments (Only "format spec"):';
+   gbReadArg.Height := 50;
+   pnReadAllArg.Visible := false;
+   gbReadDest.Top := 130;
+   //pnMain.Height := 400;
+
+   // Write
+   gbWriteArg.Caption:= 'Arguments (Only "format spec"):';
+   gbWriteArg.Height := 80;
+   pnWriteAllArg.Visible := false;
+   lblWriteFile.Top := 30;
+   edWriteFileName.Top := 30;
+
+   //Conv
+   gbConvArg.Caption:= 'Arguments (Only "format spec"):';
+   gbConvArg.Height := 50;
+   pnConvAllArg.Visible := false;
+   gbConvDest.Top := 130;
+   exit;
+  end; // false
+
 end;
 
 procedure TForm1.mnuFMFFClick(Sender: TObject);
@@ -2695,14 +2800,9 @@ begin
   CMD_Generate;
 end;
 
-procedure TForm1.Panel2Resize(Sender: TObject);
-
-begin
-
-end;
-
 procedure TForm1.pcActionsChange(Sender: TObject);
 begin
+  Set_View;
   btGo.Default:=false;
   if pcActions.ActivePageIndex = 0 then
    begin
@@ -2758,7 +2858,6 @@ begin
       if rbSetPIN.Checked then btGo.Caption:='Set PIN';
      end;
    end;
-
   CMD_Generate;
  end;
 
@@ -3489,22 +3588,33 @@ end;
 procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
  INI := TINIFile.Create(sAppPath + 'FluxMyFluffyFloppy.ini');
+ INI.WriteInteger('FluxMyFluffyFloppy', 'Height', Form1.Height);
+ INI.WriteInteger('FluxMyFluffyFloppy', 'Width', Form1.Width);
+ INI.WriteBool('FluxMyFluffyFloppy', 'ShowArg', mnuArguments.Checked);
  INI.WriteString('FluxMyFluffyFloppy', 'Greaseweazle', EdGWFile.Text);
-
+ If INI.ReadBool('FluxMyFluffyFloppy', 'SaveBoolGWDevCom', false) = true then
+  begin
+   INI.WriteString('FluxMyFluffyFloppy', 'SaveGWDevice', cbGWDevCOM.Text);
+  end
+ else INI.WriteString('FluxMyFluffyFloppy', 'SaveGWDevice', '');
+ If INI.ReadBool('FluxMyFluffyFloppy', 'SaveBoolGWDrive', false) = true then
+  begin
+   INI.WriteString('FluxMyFluffyFloppy', 'SaveGWDrive', cbGWDrive.Text);
+  end
+ else INI.WriteString('FluxMyFluffyFloppy', 'SaveGWDrive', '');
  INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Read_Dest', edReadDirDest.Directory);
  INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Write_Source',ExtractFilePath(edWriteFilename.Text));
  INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Convert_Source',ExtractFilePath(edConvFileSource.Text));
  INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Convert_Dest',edConvDirDest.Directory);
-
  INI.WriteBool('FluxMyFluffyFloppy', 'cbSetGlobalActionsTime', cbSetGlobalActionsTime.Checked);
  INI.WriteBool('FluxMyFluffyFloppy', 'cbSetGlobalActionsShellWindow', false);
  INI.WriteBool('FluxMyFluffyFloppy', 'cbSetGlobalActionsBacktrace', cbSetGlobalActionsBacktrace.Checked);
  INI.Free;
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TForm1.FormResize(Sender: TObject);
 begin
-
+  Set_View;
 end;
 
 procedure TForm1.mnuCloseClick(Sender: TObject);

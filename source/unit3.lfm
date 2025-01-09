@@ -1,46 +1,46 @@
 object FrmOptions: TFrmOptions
-  Left = 751
-  Height = 183
-  Top = 395
-  Width = 560
+  Left = 612
+  Height = 257
+  Top = 235
+  Width = 623
   BorderStyle = bsDialog
   Caption = 'Options'
-  ClientHeight = 183
-  ClientWidth = 560
+  ClientHeight = 257
+  ClientWidth = 623
   OnShow = FormShow
   Position = poMainFormCenter
   LCLVersion = '3.6.0.0'
   object Cancel: TButton
     Left = 8
     Height = 25
-    Top = 152
+    Top = 224
     Width = 75
     Caption = 'Cancel'
     TabOrder = 0
     OnClick = CancelClick
   end
   object OK: TButton
-    Left = 477
+    Left = 541
     Height = 25
-    Top = 152
+    Top = 224
     Width = 75
     Caption = 'OK'
     TabOrder = 1
     OnClick = OKClick
   end
-  object GroupBox1: TGroupBox
+  object gbLocations: TGroupBox
     Left = 8
-    Height = 148
-    Top = 0
-    Width = 544
-    Caption = 'Location:'
-    ClientHeight = 128
-    ClientWidth = 540
+    Height = 136
+    Top = 80
+    Width = 608
+    Caption = 'Locations:'
+    ClientHeight = 116
+    ClientWidth = 604
     TabOrder = 2
     object lblDiskdefs: TLabel
       Left = 16
       Height = 15
-      Top = 8
+      Top = 0
       Width = 89
       Caption = 'Diskdefs (folder):'
       ParentColor = False
@@ -48,7 +48,7 @@ object FrmOptions: TFrmOptions
     object lblTemplates: TLabel
       Left = 16
       Height = 15
-      Top = 72
+      Top = 56
       Width = 100
       Caption = 'Templates (folder):'
       ParentColor = False
@@ -56,8 +56,8 @@ object FrmOptions: TFrmOptions
     object folderTemplates: TDirectoryEdit
       Left = 24
       Height = 23
-      Top = 95
-      Width = 506
+      Top = 80
+      Width = 570
       ShowHidden = False
       ButtonWidth = 23
       NumGlyphs = 1
@@ -67,12 +67,38 @@ object FrmOptions: TFrmOptions
     object fileDiskdefs: TDirectoryEdit
       Left = 24
       Height = 23
-      Top = 32
-      Width = 506
+      Top = 24
+      Width = 570
       ShowHidden = False
       ButtonWidth = 23
       NumGlyphs = 1
       MaxLength = 0
+      TabOrder = 1
+    end
+  end
+  object gbStart: TGroupBox
+    Left = 8
+    Height = 72
+    Top = 8
+    Width = 608
+    Caption = 'Greaseweazle:'
+    ClientHeight = 52
+    ClientWidth = 604
+    TabOrder = 3
+    object cbSaveGWDevCom: TCheckBox
+      Left = 16
+      Height = 19
+      Top = 0
+      Width = 242
+      Caption = 'Save selected Greaseweazle "Device/COM"'
+      TabOrder = 0
+    end
+    object cbSaveGWDrive: TCheckBox
+      Left = 16
+      Height = 19
+      Top = 24
+      Width = 201
+      Caption = 'Save selected Greaseweazle "Drive"'
       TabOrder = 1
     end
   end

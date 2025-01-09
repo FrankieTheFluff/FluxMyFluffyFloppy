@@ -25,6 +25,17 @@ https://github.com/t-edson/UnTerminal
 Release notes
 *new, +update, -bugfix, #unfixed
 
+# flag templates (issue 6)
+
+v5.2.0 - 2025-01-09
+* Menu: New "View" "Show all arguments" (y/n)
+* Options: Save selected Greaseweazle "Device/COM" & "Drive" setting (issue 6)
+* Read/Write/Convert: Cylinders preselection "0-76" (issue 6)
+* GUI: Remember size (height/width) of main window
+* GUI: New behaviour of resizing/scrolling
++ Diskdefs: Updated "diskdefs_zx.cfg" (2025-01-01)
+- Sourcecode: Small cleanups
+
 v5.1.1 - 2025-01-05
 - Fixes missing prefix in the diskdefs form spec selection
 
