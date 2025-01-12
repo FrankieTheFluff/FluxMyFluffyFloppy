@@ -3,7 +3,7 @@
 FluxMyFluffyFloppy v5.2.1 - 2025-01-12
 -
 
-A Microsoft(r) Windows(r) GUI for Greaseweazle Host Tools
+A Microsoft(r) Windows(r) GUI for the "Greaseweazle Host Tools"
 
 FREEWARE / OpenSource
 
