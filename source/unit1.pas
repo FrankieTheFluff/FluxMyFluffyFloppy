@@ -474,7 +474,6 @@ type
     procedure edWriteFileNameAcceptFileName(Sender: TObject; var Value: String);
     procedure edWriteFileNameChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
-    procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Create_Filename;
     procedure CMD_Generate;
@@ -507,8 +506,10 @@ type
     procedure Refresh_Diskdefs_DropDown;
     procedure Refresh_Templates_Read_DropDown;
     procedure Refresh_Templates_Read;
+    procedure Refresh_ReadFormSpec;
     procedure Refresh_Templates_Write_DropDown;
     procedure Refresh_Templates_Write;
+    procedure Refresh_WriteFormSpec;
     procedure Set_View;
   private
 
@@ -637,8 +638,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.2.0';
-  sAppDate := '2025-01-09';
+  sAppVersion := 'v5.2.1';
+  sAppDate := '2025-01-12';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   AboutGW := 'Requires "Greaseweazle v1.21+" (and optional "diskdefs_.cfg")';
@@ -1178,7 +1179,6 @@ begin
   end;
 end;
 
-
 procedure TForm1.btGoClick(Sender: TObject);
 var
     LogDir, LogFilename : String;
@@ -1280,7 +1280,6 @@ begin
        end;
       end;
     end;
-
 
    if FileExists(DirCheck(edReadDirDest.Text) + cbReadPreview.Text) then
      begin
@@ -1615,6 +1614,7 @@ begin
  cbReadTplLogParam.checked := false;
  cbReadTplLogOutput.checked := false;
  cbReadTplLogBoth.checked := false;
+ Refresh_ReadFormSpec;
  CMD_Generate;
 end;
 
@@ -1741,6 +1741,7 @@ procedure TForm1.BtWriteTplNewClick(Sender: TObject);
 begin
  cbWriteTplName.Text := '';
  edWriteTplDesc.Text := '';
+ cbWriteTplFormatSrc.ItemIndex:=0;
  cbWriteTplFormat.Text := '';
  cbWriteTplEraseEmpty.Checked := false;
  cbWriteTplFakeIndex.Text := '';
@@ -1759,7 +1760,7 @@ begin
  cbWriteTplHSwap.Checked := false;
  cbWriteTplFlippy.Text := '';
  cbWriteTplFlippyReverse.Checked := false;
-
+ Refresh_WriteFormSpec;
  CMD_Generate;
 end;
 
@@ -1794,7 +1795,7 @@ begin
     IniWrite.WriteString('FluxMyFluffyFloppy-Write-Template', 'Name', cbWriteTplName.Text);
     //IniWrite.WriteString('FluxMyFluffyFloppy-Write-Template', 'Creator', '');
     IniWrite.WriteString('FluxMyFluffyFloppy-Write-Template', 'Description', edWriteTplDesc.Text);
-
+    INIWrite.WriteString('Settings', 'Diskdefs', cbWriteTplFormatSrc.Text);
     IniWrite.WriteString('Settings', 'FormatSpec', cbWriteTplFormat.Text);
     IniWrite.WriteBool('Settings', 'EraseEmpty', cbWriteTplEraseEmpty.Checked);
     IniWrite.WriteString('Settings', 'Fake-Index', cbWriteTplFakeIndex.Text);
@@ -1883,6 +1884,7 @@ begin
     //name := iniRefreshRead.ReadString('FluxMyFluffyFloppy-Write-Template', 'Name', '');
     //creator := iniRefreshRead.ReadString('FluxMyFluffyFloppy-Write-Template', 'Creator', '');
     cbWriteTplFormatSrc.Text := iniRefreshWrite.ReadString('Settings', 'DiskDefs', 'Internal');
+    Refresh_WriteFormSpec;
     cbWriteTplFormat.Text := iniRefreshWrite.ReadString('Settings', 'FormatSpec', '');
     edWriteTplDesc.Text   := iniRefreshWrite.ReadString('FluxMyFluffyFloppy-Write-Template', 'Description', '');
     cbWriteTplEraseEmpty.checked := iniRefreshWrite.ReadBool('Settings', 'EraseEmpty', false);
@@ -1962,6 +1964,7 @@ begin
     edReadTplDesc.Text := iniRefreshRead.ReadString('FluxMyFluffyFloppy-Read-Template', 'Description', '');
 
     cbReadTplFormatSrc.Text        := iniRefreshRead.ReadString('Settings', 'DiskDefs', 'Internal');
+    Refresh_ReadFormSpec;
     cbReadTplFormat.Text           := iniRefreshRead.ReadString('Settings', 'FormatSpec', '');
     cbReadTplRevs.Text             := iniRefreshRead.ReadString('Settings', 'Revs', '');
     cbReadTplRaw.Checked           := iniRefreshRead.ReadBool('Settings', 'Raw', false);
@@ -1988,7 +1991,6 @@ begin
   finally
     CMD_Generate;
   end;
-
 end;
 
 procedure TForm1.cbConvAdjustSpeedChange(Sender: TObject);
@@ -2538,6 +2540,11 @@ end;
 
 procedure TForm1.cbReadTplFormatSrcChange(Sender: TObject);
 begin
+ Refresh_ReadFormSpec;
+end;
+
+procedure TForm1.Refresh_ReadFormSpec;
+begin
   if cbReadTplFormatSrc.Text = 'Internal' then
    begin
     cbReadTplFormat.Clear;
@@ -2746,7 +2753,6 @@ begin
    gbReadArg.Height := 50;
    pnReadAllArg.Visible := false;
    gbReadDest.Top := 130;
-   //pnMain.Height := 400;
 
    // Write
    gbWriteArg.Caption:= 'Arguments (Only "format spec"):';
@@ -2861,12 +2867,12 @@ begin
   CMD_Generate;
  end;
 
- procedure TForm1.rbGetPINClick(Sender: TObject);
- begin
+procedure TForm1.rbGetPINClick(Sender: TObject);
+begin
    if rbGetPIN.Checked = true then BtGo.Caption:= 'Get PIN';
    if rbSetPIN.Checked = true then BtGo.Caption:= 'Set PIN';
    CMD_Generate;
- end;
+end;
 
 procedure TForm1.rbSetPINClick(Sender: TObject);
 begin
@@ -2875,8 +2881,8 @@ begin
   CMD_Generate;
 end;
 
- procedure TForm1.rbSetDelaysClick(Sender: TObject);
- begin
+procedure TForm1.rbSetDelaysClick(Sender: TObject);
+begin
    rbSetGetPIN.Checked:=false;
    rbSetFirmware.Checked:=false;
 
@@ -3291,6 +3297,11 @@ end;
 
 procedure TForm1.cbWriteTplFormatSrcChange(Sender: TObject);
 begin
+ Refresh_WriteFormSpec;
+end;
+
+procedure TForm1.Refresh_WriteFormSpec;
+begin
   if cbWriteTplFormatSrc.Text = 'Internal' then
    begin
     cbWriteTplFormat.Clear;
@@ -3610,11 +3621,6 @@ begin
  INI.WriteBool('FluxMyFluffyFloppy', 'cbSetGlobalActionsShellWindow', false);
  INI.WriteBool('FluxMyFluffyFloppy', 'cbSetGlobalActionsBacktrace', cbSetGlobalActionsBacktrace.Checked);
  INI.Free;
-end;
-
-procedure TForm1.FormResize(Sender: TObject);
-begin
-  Set_View;
 end;
 
 procedure TForm1.mnuCloseClick(Sender: TObject);

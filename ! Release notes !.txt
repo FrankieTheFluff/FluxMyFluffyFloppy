@@ -27,6 +27,12 @@ Release notes
 
 # flag templates (issue 6)
 
+v5.2.1 - 2025-01-12
+- Read/Write: Fixed empty format spec after changing template
+- Write: Fixed Refresh/save template with format spec discdefs always "internal"
+- Sourcecode: Removed "FormResize"
+- Sourcecode: Resizing fixes
+
 v5.2.0 - 2025-01-09
 * Menu: New "View" "Show all arguments" (y/n)
 * Options: Save selected Greaseweazle "Device/COM" & "Drive" setting (issue 6)
