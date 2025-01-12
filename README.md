@@ -19,6 +19,9 @@ Requirements:
 - Microsoft(r)Windows(r)
 - Greaseweazle Host Tools
 - Greaseweazle 'diskdefs.cfg' files optional
+
+![20250112_FMFF521](https://github.com/user-attachments/assets/3e8a767b-c851-46ba-9545-646c81fd6f1b)
+  
 -----------------------------------------------------------------
 
 Greaseweazle Host Tools (c) Keir Fraser
