@@ -26,6 +26,12 @@ Release notes
 *new, +update, -bugfix, #unfixed
 
 # flag templates (issue 6)
+# Email: Would it be possible to have an option, either checkbox or command, to have your program make a sound when the current task is finished.
+
+v5.2.2 - 2025-01-19
++ Read/Write/Convert: Usage of all arguments now only if "View|Show all arguments" is checked
++ Menu: Renamed "View" "Show/Use all arguments"
+- GUI: Host scaling setting (e.g. 125%) fixes
 
 v5.2.1 - 2025-01-12
 - Read/Write: Fixed empty format spec after changing template

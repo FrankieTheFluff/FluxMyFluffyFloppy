@@ -20,7 +20,7 @@
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="5"/>
       <MinorVersionNr Value="2"/>
-      <RevisionNr Value="1"/>
+      <RevisionNr Value="2"/>
       <StringTable Comments="Freeware" CompanyName="FrankieTheFluff" FileDescription="FluxMyFluffyFloppy - A GUI for Greaseweazle" InternalName="FluxMyFluffyFloppy" LegalCopyright="(c) 2021-2025 FrankieTheFluff" OriginalFilename="fluxmyfluffyfloppy.exe" ProductName="FluxMyFluffyFloppy" ProductVersion="5"/>
     </VersionInfo>
     <BuildModes>

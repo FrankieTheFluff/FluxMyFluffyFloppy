@@ -173,13 +173,13 @@ type
     gbCmd: TGroupBox;
     gbConvArg: TGroupBox;
     gbConvDest: TGroupBox;
-    grbToolsOptions: TGroupBox;
-    gbReadDest: TGroupBox;
-    gbReadArg: TGroupBox;
-    gbReadTpl: TGroupBox;
-    gbWriteTpl: TGroupBox;
-    gbWriteArg: TGroupBox;
     gbConvSrc: TGroupBox;
+    gbReadArg: TGroupBox;
+    gbReadDest: TGroupBox;
+    gbReadTpl: TGroupBox;
+    gbWriteArg: TGroupBox;
+    gbWriteTpl: TGroupBox;
+    grbToolsOptions: TGroupBox;
     grpFW: TGroupBox;
     grpGW: TGroupBox;
     grpPIN: TGroupBox;
@@ -219,8 +219,6 @@ type
     lblGWDrive: TLabel;
     lblGWDevice: TLabel;
     lblGW: TLabel;
-    lblReadAdjustSpeed: TLabel;
-    lblReadDescr: TLabel;
     lblReadDestDigits: TLabel;
     lblReadDestDir: TLabel;
     lblReadDestDiskNr: TLabel;
@@ -231,6 +229,8 @@ type
     lblReadDestFormatExtOpt2: TLabel;
     lblReadDestFormatExtOpt3: TLabel;
     lblReadDestPreview: TLabel;
+    lblReadTplAdjustSpeed: TLabel;
+    lblReadDescr: TLabel;
     lblReadTpl: TLabel;
     lblReadTplCyls: TLabel;
     lblReadTplDD: TLabel;
@@ -303,24 +303,26 @@ type
     mnuGWDownload: TMenuItem;
     mnuWebsite: TMenuItem;
     mnuGWGettingStarted: TMenuItem;
-    pnConvAllArg: TPanel;
-    pnWriteAllArg: TPanel;
-    pnGW: TPanel;
-    pnReadAllArg: TPanel;
-    sbRead: TScrollBox;
-    sbWrite: TScrollBox;
-    sbConv: TScrollBox;
-    Separator1: TMenuItem;
-    NewDB: TOpenDialog;
-    OpenDialog1: TOpenDialog;
     opSetFWFile: TRadioButton;
     opSetFWOnline: TRadioButton;
     opSetFWTag: TRadioButton;
-    pnMain: TPanel;
-    pnCmd: TPanel;
+    Panel1: TPanel;
+    pnConvSource: TPanel;
+    pnConvFormatSpec: TPanel;
+    pnReadDest: TPanel;
+    pnReadFormatSpec: TPanel;
+    pnTplRead: TPanel;
     Panel3: TPanel;
     pcActions: TPageControl;
+    pnConvAllArg: TPanel;
+    pnGW: TPanel;
+    pnMain: TPanel;
+    pnReadAllArg: TPanel;
     pnToolsFWSelect: TPanel;
+    pnWriteAllArg: TPanel;
+    pnWriteFormSpec: TPanel;
+    pnWriteSourceFile: TPanel;
+    pnWriteTpl: TPanel;
     rbGetPIN: TRadioButton;
     rbSetDelays: TRadioButton;
     rbSetFirmware: TRadioButton;
@@ -330,12 +332,19 @@ type
     rbToolsErase: TRadioButton;
     rbToolsRPM: TRadioButton;
     rbToolsSeek: TRadioButton;
+    sbConv: TScrollBox;
+    sbRead: TScrollBox;
+    sbWrite: TScrollBox;
+    Separator1: TMenuItem;
+    NewDB: TOpenDialog;
+    OpenDialog1: TOpenDialog;
+    pnCmd: TPanel;
     SQLite3Connection1: TSQLite3Connection;
     SQLQueryDir: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
-    tbSettings: TTabSheet;
     tbConv: TTabSheet;
     tbRead: TTabSheet;
+    tbSettings: TTabSheet;
     tbTools: TTabSheet;
     tbWrite: TTabSheet;
     procedure btConvClearClick(Sender: TObject);
@@ -638,8 +647,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.2.1';
-  sAppDate := '2025-01-12';
+  sAppVersion := 'v5.2.2';
+  sAppDate := '2025-01-19';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   AboutGW := 'Requires "Greaseweazle v1.21+" (and optional "diskdefs_.cfg")';
@@ -2705,6 +2714,7 @@ begin
    begin
     mnuArguments.Checked:=false;
     Set_View;
+    CMD_Generate;
     exit;
    end;
 
@@ -2712,6 +2722,7 @@ begin
    begin
     mnuArguments.Checked:=true;
     Set_View;
+    CMD_Generate;
     exit;
    end;
 end;
@@ -2725,22 +2736,15 @@ begin
 
    // Read
    gbReadArg.Caption:= 'Arguments (All):';
-   gbReadArg.Height := 248;
    pnReadAllArg.Visible := true;
-   gbReadDest.Top := 330;
 
    // Write
    gbWriteArg.Caption:= 'Arguments (All):';
-   gbWriteArg.Height := 288;
    pnWriteAllArg.Visible := true;
-   lblWriteFile.Top := 232;
-   edWriteFileName.Top := 232;
 
    //Conv
    gbConvArg.Caption:= 'Arguments (All):';
-   gbConvArg.Height := 272;
    pnConvAllArg.Visible := true;
-   gbConvDest.Top := 352;
 
    exit;
   end; // true
@@ -2750,22 +2754,15 @@ begin
 
    // Read
    gbReadArg.Caption:= 'Arguments (Only "format spec"):';
-   gbReadArg.Height := 50;
    pnReadAllArg.Visible := false;
-   gbReadDest.Top := 130;
 
    // Write
    gbWriteArg.Caption:= 'Arguments (Only "format spec"):';
-   gbWriteArg.Height := 80;
    pnWriteAllArg.Visible := false;
-   lblWriteFile.Top := 30;
-   edWriteFileName.Top := 30;
 
    //Conv
    gbConvArg.Caption:= 'Arguments (Only "format spec"):';
-   gbConvArg.Height := 50;
    pnConvAllArg.Visible := false;
-   gbConvDest.Top := 130;
    exit;
   end; // false
 
@@ -4022,7 +4019,6 @@ end;
 procedure TForm1.CMD_Generate;
 var
   cmd : String;
-  //tmp : integer;
 begin
  edGWCMD.Lines.Clear;
 
@@ -4073,70 +4069,75 @@ begin
    begin
     if cbReadTplFormat.Text <> '' then cmd := cmd + ' --format ' + cbReadTplFormat.Text;
    end;
-  if cbReadTplCyls.Text <> '' then                       //Trackset
+
+  // Use all arguments ?
+  If mnuArguments.Checked = true then
    begin
-    cbReadTplHeads.Enabled := true;
-    cbReadTplSteps.Enabled := true;
-    cbReadTplHSwap.Enabled := true;
-    cbReadTplFlippy.Enabled := true;
-    cmd := cmd + Trackset(' --tracks=',cbReadTplCyls.Text,cbReadTplHeads.Text,cbReadTplSteps.Text,cbReadTplHSwap.Checked,cbReadTplFlippy.Text);
-    if cbReadTplFlippy.Text <> '' then
+    if cbReadTplCyls.Text <> '' then                       //Trackset
      begin
-      cbReadTplFlippyReverse.Enabled := true;
-      if cbReadTplFlippyReverse.Checked = true then cmd := cmd + ' --reverse';
-     end
-    else
-     cbReadTplFlippyReverse.Enabled := false;
-    end;
-  if cbReadTplCyls.Text = '' then                       //Trackset
-   begin
-    cbReadTplHeads.Enabled := false;
-    cbReadTplSteps.Enabled := false;
-    cbReadTplHSwap.Enabled := false;
-    cbReadTplFlippy.Enabled := false;
-    cbReadTplFlippyReverse.Enabled := false;
+      cbReadTplHeads.Enabled := true;
+      cbReadTplSteps.Enabled := true;
+      cbReadTplHSwap.Enabled := true;
+      cbReadTplFlippy.Enabled := true;
+      cmd := cmd + Trackset(' --tracks=',cbReadTplCyls.Text,cbReadTplHeads.Text,cbReadTplSteps.Text,cbReadTplHSwap.Checked,cbReadTplFlippy.Text);
+      if cbReadTplFlippy.Text <> '' then
+       begin
+        cbReadTplFlippyReverse.Enabled := true;
+        if cbReadTplFlippyReverse.Checked = true then cmd := cmd + ' --reverse';
+       end
+      else
+       cbReadTplFlippyReverse.Enabled := false;
+      end;
+    if cbReadTplCyls.Text = '' then                       //Trackset
+     begin
+      cbReadTplHeads.Enabled := false;
+      cbReadTplSteps.Enabled := false;
+      cbReadTplHSwap.Enabled := false;
+      cbReadTplFlippy.Enabled := false;
+      cbReadTplFlippyReverse.Enabled := false;
+     end;
+    if cbReadTplRevs.Text <> '' then
+     begin
+      cmd := cmd + ' --revs=' + cbReadTplRevs.Text;
+     end;
+    if cbReadTplRaw.Checked = true then
+     begin
+      cmd := cmd + ' --raw ';
+     end;
+    if cbReadTplFakeIndex.Text <> '' then
+     begin
+      cmd := cmd + ' --fake-index=' + cbReadTplFakeIndex.Text;
+     end;
+    if cbReadTplHardSec.Checked = true then
+     begin
+      cmd := cmd + ' --hard-sectors ';
+     end;
+    if cbReadTplAdjustSpeed.Text <> '' then
+     begin
+      cmd := cmd + ' --adjust-speed=' + cbReadTplAdjustSpeed.Text ;
+     end;
+    if cbReadTplRetries.Text <> '' then
+     begin
+      cmd := cmd + ' --retries=' + cbReadTplRetries.Text;
+     end;
+    if cbReadTplSeekRetries.Text <> '' then
+     begin
+      cmd := cmd + ' --seek-retries=' + cbReadTplSeekRetries.Text;
+     end;
+    if cbReadNoOverwrite.Checked = true then
+     begin
+      cmd := cmd + ' -n ';
+     end;
+    if cbReadTplPLL.Text <> '' then
+     begin
+      cmd := cmd + ' --pll ' + cbReadTplPLL.Text;
+     end;
+    if cbReadTplDD.Text <> '' then
+     begin
+      cmd := cmd + ' --densel ' + cbReadTplDD.Text;
+     end;
    end;
-  if cbReadTplRevs.Text <> '' then
-   begin
-    cmd := cmd + ' --revs=' + cbReadTplRevs.Text;
-   end;
-  if cbReadTplRaw.Checked = true then
-   begin
-    cmd := cmd + ' --raw ';
-   end;
-  if cbReadTplFakeIndex.Text <> '' then
-   begin
-    cmd := cmd + ' --fake-index=' + cbReadTplFakeIndex.Text;
-   end;
-  if cbReadTplHardSec.Checked = true then
-   begin
-    cmd := cmd + ' --hard-sectors ';
-   end;
-  if cbReadTplAdjustSpeed.Text <> '' then
-   begin
-    cmd := cmd + ' --adjust-speed=' + cbReadTplAdjustSpeed.Text ;
-   end;
-  if cbReadTplRetries.Text <> '' then
-   begin
-    cmd := cmd + ' --retries=' + cbReadTplRetries.Text;
-   end;
-  if cbReadTplSeekRetries.Text <> '' then
-   begin
-    cmd := cmd + ' --seek-retries=' + cbReadTplSeekRetries.Text;
-   end;
-  if cbReadNoOverwrite.Checked = true then
-   begin
-    cmd := cmd + ' -n ';
-   end;
-  if cbReadTplPLL.Text <> '' then
-   begin
-    cmd := cmd + ' --pll ' + cbReadTplPLL.Text;
-   end;
-  if cbReadTplDD.Text <> '' then
-   begin
-    cmd := cmd + ' --densel ' + cbReadTplDD.Text;
-   end;
-  if cbReadPreview.text <> '' then cmd := cmd + ' "' + Dircheck(edReadDirDest.Text) + cbReadPreview.text + '"';
+   if cbReadPreview.text <> '' then cmd := cmd + ' "' + Dircheck(edReadDirDest.Text) + cbReadPreview.text + '"';
  end;
 
  // Write options
@@ -4160,54 +4161,58 @@ begin
      begin
       if cbWriteTplFormat.Text <> '' then cmd := cmd + ' --format ' + cbWriteTplFormat.Text;
      end;
-    if cbWriteTplCyls.Text <> '' then
-     begin
-      cmd := cmd + Trackset(' --tracks=',cbWriteTplCyls.Text,cbWriteTplHeads.Text,cbWriteTplSteps.Text,cbWriteTplHSwap.Checked,cbWriteTplFlippy.Text);
-      if cbWriteTplFlippy.Text <> '' then
-       begin
-        cbWriteTplFlippyReverse.Enabled := true;
-        if cbWriteTplFlippyReverse.Checked = true then cmd := cmd + ' --reverse';
-       end
-      else
-       cbWriteTplFlippyReverse.Enabled := false;
-     end;
-    if cbWriteTplPreErase.Checked = true then
-     begin
-      cmd := cmd + ' --pre-erase ';
-     end;
-    if cbWriteTplEraseEmpty.Checked = true then
-     begin
-      cmd := cmd + ' --erase-empty ';
-     end;
-    if cbWriteTplFakeIndex.Text <> '' then
-     begin
-      cmd := cmd + ' --fake-index=' + cbWriteTplFakeIndex.Text;
-     end;
-    if cbWriteTplHardSec.Checked = true then
-     begin
-      cmd := cmd + ' --hard-sectors ';
-     end;
-    if cbWriteTplNoVerify.Checked = true then
-     begin
-      cmd := cmd + ' --no-verify ';
-     end;
-    if cbWriteTplRetries.Text <> '' then
-     begin
-      cmd := cmd + ' --retries=' + cbWriteTplRetries.Text;
-     end;
-    if cbWriteTplPrecomp.Text <> '' then
-     begin
-      cmd := cmd + ' --precomp=' + cbWriteTplPrecomp.Text;
-     end;
-    if cbWriteTplDensel.Text <> '' then
-     begin
-      cmd := cmd + ' --densel ' + cbWriteTplDensel.Text;
-     end;
-    if cbWriteTplTplTP43Pin2.Checked then
-     begin
-      cmd := cmd + ' --gen-tg43';
-     end;
 
+   // Use all arguments ?
+   If mnuArguments.Checked = true then
+    begin
+      if cbWriteTplCyls.Text <> '' then
+       begin
+        cmd := cmd + Trackset(' --tracks=',cbWriteTplCyls.Text,cbWriteTplHeads.Text,cbWriteTplSteps.Text,cbWriteTplHSwap.Checked,cbWriteTplFlippy.Text);
+        if cbWriteTplFlippy.Text <> '' then
+         begin
+          cbWriteTplFlippyReverse.Enabled := true;
+          if cbWriteTplFlippyReverse.Checked = true then cmd := cmd + ' --reverse';
+         end
+        else
+         cbWriteTplFlippyReverse.Enabled := false;
+       end;
+      if cbWriteTplPreErase.Checked = true then
+       begin
+        cmd := cmd + ' --pre-erase ';
+       end;
+      if cbWriteTplEraseEmpty.Checked = true then
+       begin
+        cmd := cmd + ' --erase-empty ';
+       end;
+      if cbWriteTplFakeIndex.Text <> '' then
+       begin
+        cmd := cmd + ' --fake-index=' + cbWriteTplFakeIndex.Text;
+       end;
+      if cbWriteTplHardSec.Checked = true then
+       begin
+        cmd := cmd + ' --hard-sectors ';
+       end;
+      if cbWriteTplNoVerify.Checked = true then
+       begin
+        cmd := cmd + ' --no-verify ';
+       end;
+      if cbWriteTplRetries.Text <> '' then
+       begin
+        cmd := cmd + ' --retries=' + cbWriteTplRetries.Text;
+       end;
+      if cbWriteTplPrecomp.Text <> '' then
+       begin
+        cmd := cmd + ' --precomp=' + cbWriteTplPrecomp.Text;
+       end;
+      if cbWriteTplDensel.Text <> '' then
+       begin
+        cmd := cmd + ' --densel ' + cbWriteTplDensel.Text;
+       end;
+      if cbWriteTplTplTP43Pin2.Checked then
+       begin
+        cmd := cmd + ' --gen-tg43';
+       end;
+    end;
     btGo.Default:=false;
     if edWriteFileName.Text <> '' then
      begin
@@ -4215,6 +4220,7 @@ begin
       btGo.Default:=true;
      end;
    end;
+
 
   // Convert options
    if pcActions.ActivePageIndex = 2 then
@@ -4229,41 +4235,46 @@ begin
       begin
        if cbConvFormat.Text <> '' then cmd := cmd + ' --format ' + cbConvFormat.Text;
       end;
-     if cbConvTracksetCyls.Text <> '' then
-      begin
-        cmd := cmd + Trackset(' --tracks=',cbConvTracksetCyls.Text,cbConvTracksetHeads.Text,cbConvTracksetSteps.Text,cbConvTracksetHSwap.Checked,cbConvTracksetFlippy.Text);
-      end;
-     if cbConvOutTracksetCyls.Text <> '' then
-      begin
-       cmd := cmd + Trackset(' --out-tracks=',cbConvOutTracksetCyls.Text,cbConvOutTracksetHeads.Text,cbConvOutTracksetSteps.Text,cbConvOutTracksetHSwap.Checked,cbConvOutTracksetFlippy.Text);
-       if cbConvOutTracksetFlippy.Text <> '' then
+
+    // Use all arguments ?
+    If mnuArguments.Checked = true then
+     begin
+       if cbConvTracksetCyls.Text <> '' then
         begin
-         cbConvTplFlippyReverse.Enabled := true;
-         if cbConvTplFlippyReverse.Checked = true then cmd := cmd + ' --reverse';
-        end
-       else
-        cbConvTplFlippyReverse.Enabled := false;
-      end;
-     if cbConvAdjustSpeed.Text <> '' then
-      begin
-       cmd := cmd + ' --adjust-speed=' + cbConvAdjustSpeed.Text;
-      end;
-     if cbConvNoOverwrite.Checked = true then
-      begin
-       cmd := cmd + ' -n';
-      end;
-    if cbConvPLL.Text <> '' then
-     begin
-      cmd := cmd + ' --pll ' + cbConvPLL.Text;
-     end;
-    if cbConvIndexMarks.Text <> '' then
-     begin
-      cmd := cmd + ' ' + cbConvIndexMarks.Text;
-     end;
-    if edConvFileSource.Text <> '' then
-     begin
-      cmd := cmd + ' "' + edConvFileSource.Text + '"';
-     end;
+          cmd := cmd + Trackset(' --tracks=',cbConvTracksetCyls.Text,cbConvTracksetHeads.Text,cbConvTracksetSteps.Text,cbConvTracksetHSwap.Checked,cbConvTracksetFlippy.Text);
+        end;
+       if cbConvOutTracksetCyls.Text <> '' then
+        begin
+         cmd := cmd + Trackset(' --out-tracks=',cbConvOutTracksetCyls.Text,cbConvOutTracksetHeads.Text,cbConvOutTracksetSteps.Text,cbConvOutTracksetHSwap.Checked,cbConvOutTracksetFlippy.Text);
+         if cbConvOutTracksetFlippy.Text <> '' then
+          begin
+           cbConvTplFlippyReverse.Enabled := true;
+           if cbConvTplFlippyReverse.Checked = true then cmd := cmd + ' --reverse';
+          end
+         else
+          cbConvTplFlippyReverse.Enabled := false;
+        end;
+       if cbConvAdjustSpeed.Text <> '' then
+        begin
+         cmd := cmd + ' --adjust-speed=' + cbConvAdjustSpeed.Text;
+        end;
+       if cbConvNoOverwrite.Checked = true then
+        begin
+         cmd := cmd + ' -n';
+        end;
+      if cbConvPLL.Text <> '' then
+       begin
+        cmd := cmd + ' --pll ' + cbConvPLL.Text;
+       end;
+      if cbConvIndexMarks.Text <> '' then
+       begin
+        cmd := cmd + ' ' + cbConvIndexMarks.Text;
+       end;
+      if edConvFileSource.Text <> '' then
+       begin
+        cmd := cmd + ' "' + edConvFileSource.Text + '"';
+       end;
+    end;
     if edConvFileName.text <> '' then
      begin
       if cbSrcAsDesDir.Checked then edConvDirDest.Directory:= DirCheck(ExtractfileDir(edConvFileSource.Text));
