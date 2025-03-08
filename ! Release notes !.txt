@@ -28,6 +28,10 @@ Release notes
 # flag templates (issue 6)
 # Email: Would it be possible to have an option, either checkbox or command, to have your program make a sound when the current task is finished.
 
+v5.2.3 - 2025-03-08
+* Greaseweazle: Hardware select: Support for Adafruit RP2040 for e.g. "--device COM6" (issue #8)
++ GUI: Resizing to minimum values
+
 v5.2.2 - 2025-01-19
 + Read/Write/Convert: Usage of all arguments now only if "View|Show all arguments" is checked
 + Menu: Renamed "View" "Show/Use all arguments"

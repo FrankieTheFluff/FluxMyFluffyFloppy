@@ -73,6 +73,7 @@ type
     cbConvTracksetHeads: TComboBox;
     cbConvTracksetHSwap: TCheckBox;
     cbConvTracksetSteps: TComboBox;
+    cbGWHW: TComboBox;
     cbReadFormat: TComboBox;
     cbReadFormatOption: TComboBox;
     cbReadFormatOptionHFEEnc: TComboBox;
@@ -219,6 +220,7 @@ type
     lblGWDrive: TLabel;
     lblGWDevice: TLabel;
     lblGW: TLabel;
+    lblGWHW: TLabel;
     lblReadDestDigits: TLabel;
     lblReadDestDir: TLabel;
     lblReadDestDiskNr: TLabel;
@@ -372,6 +374,7 @@ type
     procedure cbConvDiskdefsChange(Sender: TObject);
     procedure cbConvFormatOptionChange(Sender: TObject);
     procedure cbConvIndexMarksChange(Sender: TObject);
+    procedure cbGWHWChange(Sender: TObject);
     procedure cbReadTplDDChange(Sender: TObject);
     procedure cbReadTplFlippyReverseClick(Sender: TObject);
     procedure cbReadTplHardSecClick(Sender: TObject);
@@ -483,6 +486,7 @@ type
     procedure edWriteFileNameAcceptFileName(Sender: TObject; var Value: String);
     procedure edWriteFileNameChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Create_Filename;
     procedure CMD_Generate;
@@ -647,8 +651,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.2.2';
-  sAppDate := '2025-01-19';
+  sAppVersion := 'v5.2.3';
+  sAppDate := '2025-03-08';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   AboutGW := 'Requires "Greaseweazle v1.21+" (and optional "diskdefs_.cfg")';
@@ -745,6 +749,7 @@ begin
    begin
     cbGWDrive.Text := INI.ReadString('FluxMyFluffyFloppy', 'SaveGWDrive', '');
    end;
+  cbGWHW.Text := INI.ReadString('FluxMyFluffyFloppy', 'GWHW', 'Greaseweazle');
 
   // Where are diskdefs_.cfg located?
   Refresh_Diskdefs_DropDown;
@@ -2047,6 +2052,11 @@ end;
 procedure TForm1.cbConvIndexMarksChange(Sender: TObject);
 begin
  if cbConvIndexMarks.Focused then CMD_Generate;
+end;
+
+procedure TForm1.cbGWHWChange(Sender: TObject);
+begin
+ CMD_Generate;
 end;
 
 procedure TForm1.cbReadTplDDChange(Sender: TObject);
@@ -3610,6 +3620,7 @@ begin
    INI.WriteString('FluxMyFluffyFloppy', 'SaveGWDrive', cbGWDrive.Text);
   end
  else INI.WriteString('FluxMyFluffyFloppy', 'SaveGWDrive', '');
+ INI.WriteString('FluxMyFluffyFloppy', 'GWHW', cbGWHW.Text);
  INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Read_Dest', edReadDirDest.Directory);
  INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Write_Source',ExtractFilePath(edWriteFilename.Text));
  INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Convert_Source',ExtractFilePath(edConvFileSource.Text));
@@ -3618,6 +3629,15 @@ begin
  INI.WriteBool('FluxMyFluffyFloppy', 'cbSetGlobalActionsShellWindow', false);
  INI.WriteBool('FluxMyFluffyFloppy', 'cbSetGlobalActionsBacktrace', cbSetGlobalActionsBacktrace.Checked);
  INI.Free;
+end;
+
+procedure TForm1.FormResize(Sender: TObject);
+const
+  MinWidth = 950;
+  MinHeight = 500;
+begin
+   if Width < MinWidth then Width := MinWidth;
+   if Height < MinHeight then Height := MinHeight;
 end;
 
 procedure TForm1.mnuCloseClick(Sender: TObject);
@@ -4054,7 +4074,8 @@ begin
   cmd := cmd + ' read';
   if cbGWDevCOM.Text <> '' then
    begin
-     cmd := cmd + ' --device=' + cbGWDevCOM.Text;
+     if cbGWHW.Text = 'Greaseweazle' then cmd := cmd + ' --device=' + cbGWDevCOM.Text;
+     if cbGWHW.Text = 'Adafruit RP2040' then cmd := cmd + ' --device ' + cbGWDevCOM.Text;
    end;
   if cbGWDrive.Text <> '' then
    begin

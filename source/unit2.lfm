@@ -8,7 +8,7 @@ object FrmAbout: TFrmAbout
   ClientWidth = 585
   OnShow = FormShow
   Position = poMainFormCenter
-  LCLVersion = '3.6.0.0'
+  LCLVersion = '3.8.0.0'
   object GroupBox1: TGroupBox
     Left = 3
     Height = 414
@@ -38,8 +38,8 @@ object FrmAbout: TFrmAbout
       Left = 11
       Height = 13
       Top = 35
-      Width = 17
-      Caption = '5.1'
+      Width = 7
+      Caption = '5'
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Tahoma'

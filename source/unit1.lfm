@@ -1,42 +1,43 @@
 object Form1: TForm1
-  Left = 434
+  Left = 430
   Height = 738
-  Top = 68
-  Width = 1026
+  Top = 78
+  Width = 1063
   Caption = 'FluxMyFluffyFloppy'
   ClientHeight = 738
-  ClientWidth = 1026
+  ClientWidth = 1063
   Menu = MainMenu1
   OnClose = FormClose
+  OnResize = FormResize
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '3.6.0.0'
+  LCLVersion = '3.8.0.0'
   object pnCmd: TPanel
     Left = 0
     Height = 100
     Top = 638
-    Width = 1026
+    Width = 1063
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 100
-    ClientWidth = 1026
+    ClientWidth = 1063
     TabOrder = 0
     object gbCmd: TGroupBox
       Left = 6
       Height = 96
       Top = 1
-      Width = 1012
+      Width = 1049
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 2
       Caption = 'Commandline:'
       ClientHeight = 76
-      ClientWidth = 1008
+      ClientWidth = 1045
       TabOrder = 0
       object EdGWCmd: TMemo
         Left = 14
         Height = 40
         Top = 0
-        Width = 987
+        Width = 1024
         Anchors = [akTop, akLeft, akRight]
         Lines.Strings = (
           ''
@@ -45,7 +46,7 @@ object Form1: TForm1
         TabOrder = 0
       end
       object btGo: TButton
-        Left = 915
+        Left = 952
         Height = 25
         Hint = 'Run the commandline'
         Top = 46
@@ -92,23 +93,23 @@ object Form1: TForm1
     Left = 0
     Height = 85
     Top = 0
-    Width = 1026
+    Width = 1063
     Align = alTop
     Caption = 'pnGW'
     ClientHeight = 85
-    ClientWidth = 1026
+    ClientWidth = 1063
     TabOrder = 1
     object grpGW: TGroupBox
       Left = 2
       Height = 80
       Top = 0
-      Width = 1022
+      Width = 1059
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Left = 2
       BorderSpacing.Right = 2
       Caption = 'Greaseweazle:'
       ClientHeight = 60
-      ClientWidth = 1018
+      ClientWidth = 1055
       TabOrder = 0
       object lblGW: TLabel
         Left = 12
@@ -123,7 +124,7 @@ object Form1: TForm1
         Height = 23
         Hint = 'Select Greaseweazle (gw.exe)'
         Top = 0
-        Width = 810
+        Width = 847
         FilterIndex = 0
         HideDirectories = False
         ButtonWidth = 23
@@ -184,7 +185,7 @@ object Form1: TForm1
         OnChange = cbGWDriveChange
       end
       object btGWCMDDir: TButton
-        Left = 925
+        Left = 962
         Height = 25
         Hint = 'Open location'
         Top = 0
@@ -197,7 +198,7 @@ object Form1: TForm1
         OnClick = btGWCMDDirClick
       end
       object btGWReset: TButton
-        Left = 752
+        Left = 789
         Height = 25
         Hint = 'Reset'
         Top = 28
@@ -206,11 +207,11 @@ object Form1: TForm1
         Caption = 'Reset'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 4
+        TabOrder = 5
         OnClick = btGWResetClick
       end
       object btGWInfo: TButton
-        Left = 925
+        Left = 962
         Height = 25
         Hint = 'Info'
         Top = 28
@@ -219,11 +220,11 @@ object Form1: TForm1
         Caption = 'Info'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 6
+        TabOrder = 7
         OnClick = btGWInfoClick
       end
       object btGWBandwidth: TButton
-        Left = 837
+        Left = 874
         Height = 25
         Hint = 'Bandwitdh'
         Top = 28
@@ -232,8 +233,36 @@ object Form1: TForm1
         Caption = 'Bandwidth'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 5
+        TabOrder = 6
         OnClick = btGWBandwidthClick
+      end
+      object lblGWHW: TLabel
+        Left = 392
+        Height = 15
+        Top = 28
+        Width = 54
+        Caption = 'Hardware:'
+        ParentColor = False
+      end
+      object cbGWHW: TComboBox
+        Left = 464
+        Height = 23
+        Hint = 'Select hardware'
+        Top = 28
+        Width = 136
+        DropDownCount = 3
+        ItemHeight = 15
+        ItemIndex = 0
+        Items.Strings = (
+          'Greaseweazle'
+          'Adafruit RP2040'
+        )
+        ParentShowHint = False
+        ShowHint = True
+        Style = csDropDownList
+        TabOrder = 4
+        Text = 'Greaseweazle'
+        OnChange = cbGWHWChange
       end
     end
   end
@@ -241,17 +270,17 @@ object Form1: TForm1
     Left = 0
     Height = 553
     Top = 85
-    Width = 1026
+    Width = 1063
     Align = alClient
     Caption = 'pnMain'
     ClientHeight = 553
-    ClientWidth = 1026
+    ClientWidth = 1063
     TabOrder = 2
     object pcActions: TPageControl
       Left = 3
       Height = 551
       Top = 1
-      Width = 1022
+      Width = 1059
       ActivePage = tbRead
       Align = alClient
       BorderSpacing.Left = 2
@@ -262,42 +291,42 @@ object Form1: TForm1
         AutoSize = True
         Caption = 'Read'
         ClientHeight = 523
-        ClientWidth = 1014
+        ClientWidth = 1051
         object sbRead: TScrollBox
           Left = 0
           Height = 523
           Top = 0
-          Width = 1014
+          Width = 1051
           HorzScrollBar.Page = 874
           VertScrollBar.Page = 482
           Align = alClient
           BorderStyle = bsNone
           ClientHeight = 523
-          ClientWidth = 1014
+          ClientWidth = 1051
           TabOrder = 0
           object gbReadTpl: TGroupBox
             Left = 0
             Height = 77
             Top = 0
-            Width = 1012
+            Width = 1049
             Align = alTop
             AutoSize = True
             BorderSpacing.Right = 2
             Caption = 'Template:'
             ClientHeight = 57
-            ClientWidth = 1008
+            ClientWidth = 1045
             TabOrder = 0
             object pnTplRead: TPanel
               Left = 4
               Height = 49
               Top = 4
-              Width = 1000
+              Width = 1037
               Align = alTop
               AutoSize = True
               BorderSpacing.Around = 4
               BevelOuter = bvNone
               ClientHeight = 49
-              ClientWidth = 1000
+              ClientWidth = 1037
               TabOrder = 0
               object lblReadTpl: TLabel
                 Left = 0
@@ -311,7 +340,7 @@ object Form1: TForm1
                 Left = 90
                 Height = 23
                 Top = 0
-                Width = 632
+                Width = 669
                 Anchors = [akTop, akLeft, akRight]
                 ItemHeight = 15
                 TabOrder = 0
@@ -330,12 +359,12 @@ object Form1: TForm1
                 Left = 90
                 Height = 23
                 Top = 26
-                Width = 906
+                Width = 943
                 Anchors = [akTop, akLeft, akRight]
                 TabOrder = 1
               end
               object btReadTplNew: TButton
-                Left = 737
+                Left = 774
                 Height = 25
                 Hint = 'Clear options / New template'
                 Top = 0
@@ -348,7 +377,7 @@ object Form1: TForm1
                 OnClick = btReadTplNewClick
               end
               object btReadTplSave: TButton
-                Left = 829
+                Left = 866
                 Height = 25
                 Hint = 'Save/Overwrite template'
                 Top = 0
@@ -362,7 +391,7 @@ object Form1: TForm1
                 OnClick = btReadTplSaveClick
               end
               object btReadTplDel: TButton
-                Left = 921
+                Left = 958
                 Height = 25
                 Hint = 'Delete template'
                 Top = 0
@@ -381,25 +410,25 @@ object Form1: TForm1
             Left = 0
             Height = 200
             Top = 77
-            Width = 1012
+            Width = 1049
             Align = alTop
             AutoSize = True
             BorderSpacing.Right = 2
             Caption = 'Arguments:'
             ClientHeight = 180
-            ClientWidth = 1008
+            ClientWidth = 1045
             TabOrder = 1
             object pnReadAllArg: TPanel
               Left = 4
               Height = 145
               Top = 31
-              Width = 1000
+              Width = 1037
               Align = alTop
               AutoSize = True
               BorderSpacing.Around = 4
               BevelOuter = bvNone
               ClientHeight = 145
-              ClientWidth = 1000
+              ClientWidth = 1037
               TabOrder = 0
               object lblReadTplRevs: TLabel
                 Left = 0
@@ -794,13 +823,13 @@ object Form1: TForm1
               Left = 4
               Height = 23
               Top = 4
-              Width = 1000
+              Width = 1037
               Align = alTop
               AutoSize = True
               BorderSpacing.Around = 4
               BevelOuter = bvNone
               ClientHeight = 23
-              ClientWidth = 1000
+              ClientWidth = 1037
               TabOrder = 1
               object lblReadTplFormat: TLabel
                 Left = 0
@@ -841,25 +870,25 @@ object Form1: TForm1
             Left = 0
             Height = 205
             Top = 277
-            Width = 1012
+            Width = 1049
             Align = alTop
             AutoSize = True
             BorderSpacing.Right = 2
             Caption = 'Destination:'
             ClientHeight = 185
-            ClientWidth = 1008
+            ClientWidth = 1045
             TabOrder = 2
             object pnReadDest: TPanel
               Left = 4
               Height = 177
               Top = 4
-              Width = 1000
+              Width = 1037
               Align = alTop
               AutoSize = True
               BorderSpacing.Around = 4
               BevelOuter = bvNone
               ClientHeight = 177
-              ClientWidth = 1000
+              ClientWidth = 1037
               TabOrder = 0
               object lblReadDestDir: TLabel
                 Left = 0
@@ -873,7 +902,7 @@ object Form1: TForm1
                 Left = 90
                 Height = 23
                 Top = 0
-                Width = 823
+                Width = 860
                 ShowHidden = False
                 ButtonWidth = 23
                 NumGlyphs = 1
@@ -883,7 +912,7 @@ object Form1: TForm1
                 OnChange = edReadDirDestChange
               end
               object btReadDestExplore: TButton
-                Left = 1084
+                Left = 1121
                 Height = 25
                 Hint = 'Explore destination'
                 Top = 4
@@ -907,14 +936,14 @@ object Form1: TForm1
                 Left = 90
                 Height = 23
                 Top = 26
-                Width = 906
+                Width = 943
                 Anchors = [akTop, akLeft, akRight]
                 MaxLength = 200
                 TabOrder = 2
                 OnChange = EdReadFilenameChange
               end
               object btReadDiskReset: TButton
-                Left = 921
+                Left = 958
                 Height = 25
                 Hint = 'Clear file settings'
                 Top = 0
@@ -1129,7 +1158,7 @@ object Form1: TForm1
                 Left = 90
                 Height = 23
                 Top = 154
-                Width = 906
+                Width = 943
                 Anchors = [akTop, akLeft, akRight]
                 Enabled = False
                 TabOrder = 15
@@ -1143,19 +1172,19 @@ object Form1: TForm1
         AutoSize = True
         Caption = 'Write'
         ClientHeight = 523
-        ClientWidth = 1014
+        ClientWidth = 1051
         object sbWrite: TScrollBox
           Left = 0
           Height = 523
           Top = 0
-          Width = 1014
+          Width = 1051
           HorzScrollBar.Page = 874
           VertScrollBar.Page = 304
           Align = alClient
           AutoSize = True
           BorderStyle = bsNone
           ClientHeight = 523
-          ClientWidth = 1014
+          ClientWidth = 1051
           TabOrder = 0
           object Memo1: TMemo
             Left = 0
@@ -1172,25 +1201,25 @@ object Form1: TForm1
             Left = 0
             Height = 77
             Top = 0
-            Width = 1012
+            Width = 1049
             Align = alTop
             AutoSize = True
             BorderSpacing.Right = 2
             Caption = 'Template:'
             ClientHeight = 57
-            ClientWidth = 1008
+            ClientWidth = 1045
             TabOrder = 0
             object pnWriteTpl: TPanel
               Left = 4
               Height = 49
               Top = 4
-              Width = 1000
+              Width = 1037
               Align = alTop
               AutoSize = True
               BorderSpacing.Around = 4
               BevelOuter = bvNone
               ClientHeight = 49
-              ClientWidth = 1000
+              ClientWidth = 1037
               TabOrder = 0
               object lblWriteTemplate: TLabel
                 Left = 0
@@ -1206,7 +1235,7 @@ object Form1: TForm1
                 Left = 90
                 Height = 23
                 Top = 0
-                Width = 632
+                Width = 669
                 Anchors = [akTop, akLeft, akRight]
                 Font.Color = clBlack
                 ItemHeight = 15
@@ -1216,7 +1245,7 @@ object Form1: TForm1
                 OnSelect = cbWriteTplNameSelect
               end
               object BtWriteTplNew: TButton
-                Left = 735
+                Left = 772
                 Height = 25
                 Hint = 'Clear options / New template'
                 Top = 0
@@ -1229,7 +1258,7 @@ object Form1: TForm1
                 OnClick = BtWriteTplNewClick
               end
               object BtWriteTplSave: TButton
-                Left = 829
+                Left = 866
                 Height = 25
                 Hint = 'Save/Overwrite template'
                 Top = 0
@@ -1243,7 +1272,7 @@ object Form1: TForm1
                 OnClick = BtWriteTplSaveClick
               end
               object BtWriteTplDel: TButton
-                Left = 921
+                Left = 958
                 Height = 25
                 Hint = 'Delete template'
                 Top = 0
@@ -1270,7 +1299,7 @@ object Form1: TForm1
                 Left = 90
                 Height = 23
                 Top = 26
-                Width = 906
+                Width = 943
                 Anchors = [akTop, akLeft, akRight]
                 Font.Color = clBlack
                 ParentFont = False
@@ -1282,25 +1311,25 @@ object Form1: TForm1
             Left = 0
             Height = 227
             Top = 77
-            Width = 1012
+            Width = 1049
             Align = alTop
             AutoSize = True
             BorderSpacing.Right = 2
             Caption = 'Arguments:'
             ClientHeight = 207
-            ClientWidth = 1008
+            ClientWidth = 1045
             TabOrder = 1
             object pnWriteAllArg: TPanel
               Left = 4
               Height = 145
               Top = 31
-              Width = 1000
+              Width = 1037
               Align = alTop
               AutoSize = True
               BorderSpacing.Around = 4
               BevelOuter = bvNone
               ClientHeight = 145
-              ClientWidth = 1000
+              ClientWidth = 1037
               TabOrder = 1
               object lblWriteTplPreErase: TLabel
                 Left = 0
@@ -1660,13 +1689,13 @@ object Form1: TForm1
               Left = 4
               Height = 23
               Top = 180
-              Width = 1000
+              Width = 1037
               Align = alTop
               AutoSize = True
               BorderSpacing.Around = 4
               BevelOuter = bvNone
               ClientHeight = 23
-              ClientWidth = 1000
+              ClientWidth = 1037
               TabOrder = 0
               object lblWriteFile: TLabel
                 Left = 0
@@ -1683,7 +1712,7 @@ object Form1: TForm1
                 Height = 23
                 Hint = 'Select source file'
                 Top = 0
-                Width = 905
+                Width = 942
                 OnAcceptFileName = edWriteFileNameAcceptFileName
                 FilterIndex = 0
                 HideDirectories = False
@@ -1701,13 +1730,13 @@ object Form1: TForm1
               Left = 4
               Height = 23
               Top = 4
-              Width = 1000
+              Width = 1037
               Align = alTop
               AutoSize = True
               BorderSpacing.Around = 4
               BevelOuter = bvNone
               ClientHeight = 23
-              ClientWidth = 1000
+              ClientWidth = 1037
               TabOrder = 2
               object lblWriteTplFormat: TLabel
                 Left = 0
@@ -1751,42 +1780,42 @@ object Form1: TForm1
         AutoSize = True
         Caption = 'Convert'
         ClientHeight = 523
-        ClientWidth = 1014
+        ClientWidth = 1051
         object sbConv: TScrollBox
           Left = 0
           Height = 523
           Top = 0
-          Width = 1014
+          Width = 1051
           HorzScrollBar.Page = 874
           VertScrollBar.Page = 502
           Align = alClient
           BorderStyle = bsNone
           ClientHeight = 523
-          ClientWidth = 1014
+          ClientWidth = 1051
           TabOrder = 0
           object gbConvSrc: TGroupBox
             Left = 0
             Height = 73
             Top = 0
-            Width = 1012
+            Width = 1049
             Align = alTop
             AutoSize = True
             BorderSpacing.Right = 2
             Caption = 'Source file:'
             ClientHeight = 53
-            ClientWidth = 1008
+            ClientWidth = 1045
             TabOrder = 0
             object pnConvSource: TPanel
               Left = 4
               Height = 45
               Top = 4
-              Width = 1000
+              Width = 1037
               Align = alTop
               AutoSize = True
               BorderSpacing.Around = 4
               BevelOuter = bvNone
               ClientHeight = 45
-              ClientWidth = 1000
+              ClientWidth = 1037
               TabOrder = 0
               object lblConvertSourcefile: TLabel
                 Left = 0
@@ -1803,7 +1832,7 @@ object Form1: TForm1
                 Left = 90
                 Height = 23
                 Top = 0
-                Width = 902
+                Width = 939
                 OnAcceptFileName = edConvFileSourceAcceptFileName
                 FilterIndex = 0
                 HideDirectories = False
@@ -1838,25 +1867,25 @@ object Form1: TForm1
             Left = 0
             Height = 224
             Top = 73
-            Width = 1012
+            Width = 1049
             Align = alTop
             AutoSize = True
             BorderSpacing.Right = 2
             Caption = 'Arguments:'
             ClientHeight = 204
-            ClientWidth = 1008
+            ClientWidth = 1045
             TabOrder = 1
             object pnConvAllArg: TPanel
               Left = 4
               Height = 169
               Top = 31
-              Width = 1000
+              Width = 1037
               Align = alTop
               AutoSize = True
               BorderSpacing.Around = 4
               BevelOuter = bvNone
               ClientHeight = 169
-              ClientWidth = 1000
+              ClientWidth = 1037
               TabOrder = 0
               object lblConvertAdjustSpeed: TLabel
                 Left = 0
@@ -2218,13 +2247,13 @@ object Form1: TForm1
               Left = 4
               Height = 23
               Top = 4
-              Width = 1000
+              Width = 1037
               Align = alTop
               AutoSize = True
               BorderSpacing.Around = 4
               BevelOuter = bvNone
               ClientHeight = 23
-              ClientWidth = 1000
+              ClientWidth = 1037
               TabOrder = 1
               object lblConvertFormat: TLabel
                 Left = 0
@@ -2265,25 +2294,25 @@ object Form1: TForm1
             Left = 0
             Height = 205
             Top = 297
-            Width = 1012
+            Width = 1049
             Align = alTop
             AutoSize = True
             BorderSpacing.Right = 2
             Caption = 'Destination:'
             ClientHeight = 185
-            ClientWidth = 1008
+            ClientWidth = 1045
             TabOrder = 2
             object Panel1: TPanel
               Left = 4
               Height = 177
               Top = 4
-              Width = 1000
+              Width = 1037
               Align = alTop
               AutoSize = True
               BorderSpacing.Around = 4
               BevelOuter = bvNone
               ClientHeight = 177
-              ClientWidth = 1000
+              ClientWidth = 1037
               TabOrder = 0
               object lblConvertDestfile: TLabel
                 Left = 0
@@ -2302,7 +2331,7 @@ object Form1: TForm1
                 Height = 23
                 Hint = 'Select destination directory'
                 Top = 0
-                Width = 813
+                Width = 850
                 ShowHidden = False
                 ButtonWidth = 23
                 NumGlyphs = 1
@@ -2312,7 +2341,7 @@ object Form1: TForm1
                 OnChange = edConvDirDestChange
               end
               object btConvExplorer: TButton
-                Left = 917
+                Left = 954
                 Height = 25
                 Hint = 'Go to selected directory'
                 Top = 0
@@ -2336,14 +2365,14 @@ object Form1: TForm1
                 Left = 90
                 Height = 23
                 Top = 26
-                Width = 813
+                Width = 850
                 Anchors = [akTop, akLeft, akRight]
                 MaxLength = 200
                 TabOrder = 2
                 OnChange = edConvFilenameChange
               end
               object btConvClear: TButton
-                Left = 917
+                Left = 954
                 Height = 25
                 Hint = 'Clear file settings'
                 Top = 26
@@ -2559,7 +2588,7 @@ object Form1: TForm1
                 Left = 90
                 Height = 23
                 Top = 154
-                Width = 905
+                Width = 942
                 Anchors = [akTop, akLeft, akRight]
                 Enabled = False
                 MaxLength = 255
@@ -2573,16 +2602,16 @@ object Form1: TForm1
       object tbTools: TTabSheet
         Caption = 'Tools'
         ClientHeight = 523
-        ClientWidth = 1014
+        ClientWidth = 1051
         object grbToolsOptions: TGroupBox
           Left = 0
           Height = 72
           Top = 368
-          Width = 1009
+          Width = 1046
           Anchors = [akTop, akLeft, akRight]
           Caption = 'Options:'
           ClientHeight = 52
-          ClientWidth = 1005
+          ClientWidth = 1042
           TabOrder = 0
           object cbSetGlobalActionsBacktrace: TCheckBox
             Left = 16
@@ -2607,11 +2636,11 @@ object Form1: TForm1
           Left = 0
           Height = 160
           Top = 0
-          Width = 1009
+          Width = 1046
           Anchors = [akTop, akLeft, akRight]
           Caption = 'Erase:'
           ClientHeight = 140
-          ClientWidth = 1005
+          ClientWidth = 1042
           TabOrder = 1
           object lblToolsEraseCyl: TLabel
             Left = 139
@@ -2832,11 +2861,11 @@ object Form1: TForm1
           Left = 0
           Height = 72
           Top = 160
-          Width = 1009
+          Width = 1046
           Anchors = [akTop, akLeft, akRight]
           Caption = 'Seek:'
           ClientHeight = 52
-          ClientWidth = 1005
+          ClientWidth = 1042
           TabOrder = 2
           object lblToolsSeek: TLabel
             Left = 139
@@ -2909,11 +2938,11 @@ object Form1: TForm1
           Left = 0
           Height = 88
           Top = 232
-          Width = 1009
+          Width = 1046
           Anchors = [akTop, akLeft, akRight]
           Caption = 'Clean:'
           ClientHeight = 68
-          ClientWidth = 1005
+          ClientWidth = 1042
           TabOrder = 3
           object lblToolsCleanCyl: TLabel
             Left = 139
@@ -3027,11 +3056,11 @@ object Form1: TForm1
           Left = 0
           Height = 48
           Top = 320
-          Width = 1009
+          Width = 1046
           Anchors = [akTop, akLeft, akRight]
           Caption = 'RPM:'
           ClientHeight = 28
-          ClientWidth = 1005
+          ClientWidth = 1042
           TabOrder = 4
           object lblToolsRPMNumbIter: TLabel
             Left = 139
@@ -3077,16 +3106,16 @@ object Form1: TForm1
       object tbSettings: TTabSheet
         Caption = 'Settings'
         ClientHeight = 523
-        ClientWidth = 1014
+        ClientWidth = 1051
         object grpSetDelays: TGroupBox
           Left = 0
           Height = 136
           Top = 0
-          Width = 1009
+          Width = 1046
           Anchors = [akTop, akLeft, akRight]
           Caption = 'Delays:'
           ClientHeight = 116
-          ClientWidth = 1005
+          ClientWidth = 1042
           TabOrder = 0
           object lblSetDelaySelect: TLabel
             Left = 140
@@ -3240,7 +3269,7 @@ object Form1: TForm1
             Value = 750
           end
           object btSetDelaysInfo: TButton
-            Left = 921
+            Left = 958
             Height = 25
             Top = 0
             Width = 75
@@ -3250,7 +3279,7 @@ object Form1: TForm1
             OnClick = btSetDelaysInfoClick
           end
           object btSetDelaysDefault: TButton
-            Left = 921
+            Left = 958
             Height = 25
             Top = 28
             Width = 75
@@ -3348,11 +3377,11 @@ object Form1: TForm1
           Left = 0
           Height = 112
           Top = 136
-          Width = 1009
+          Width = 1046
           Anchors = [akTop, akLeft, akRight]
           Caption = 'PIN:'
           ClientHeight = 92
-          ClientWidth = 1005
+          ClientWidth = 1042
           TabOrder = 1
           object lblSetPINNumber: TLabel
             Left = 140
@@ -3451,11 +3480,11 @@ object Form1: TForm1
           Left = 0
           Height = 169
           Top = 248
-          Width = 1009
+          Width = 1046
           Anchors = [akTop, akLeft, akRight]
           Caption = 'Firmware:'
           ClientHeight = 149
-          ClientWidth = 1005
+          ClientWidth = 1042
           TabOrder = 2
           object lblSetFirmwareHint: TLabel
             Left = 140
@@ -3483,11 +3512,11 @@ object Form1: TForm1
             Left = 126
             Height = 83
             Top = 30
-            Width = 867
+            Width = 904
             Anchors = [akTop, akLeft, akRight]
             BevelOuter = bvNone
             ClientHeight = 83
-            ClientWidth = 867
+            ClientWidth = 904
             TabOrder = 1
             object opSetFWOnline: TRadioButton
               Left = 13
@@ -3534,7 +3563,7 @@ object Form1: TForm1
               Left = 120
               Height = 23
               Top = 27
-              Width = 743
+              Width = 780
               FilterIndex = 0
               HideDirectories = False
               ButtonWidth = 23
@@ -3570,8 +3599,7 @@ object Form1: TForm1
     KeepConnection = False
     Transaction = SQLTransaction1
     AlwaysUseBigint = False
-    Left = 504
-    Top = 8
+    Left = 624
   end
   object SQLQueryDir: TSQLQuery
     FieldDefs = <>
@@ -3579,31 +3607,25 @@ object Form1: TForm1
     Transaction = SQLTransaction1
     Params = <>
     Macros = <>
-    Left = 424
-    Top = 8
+    Left = 544
   end
   object DataSource1: TDataSource
     DataSet = SQLQueryDir
-    Left = 464
-    Top = 8
+    Left = 584
   end
   object NewDB: TOpenDialog
-    Left = 576
-    Top = 8
+    Left = 696
   end
   object SQLTransaction1: TSQLTransaction
     Active = False
     Database = SQLite3Connection1
-    Left = 544
-    Top = 8
+    Left = 664
   end
   object OpenDialog1: TOpenDialog
-    Left = 384
-    Top = 8
+    Left = 504
   end
   object MainMenu1: TMainMenu
-    Left = 608
-    Top = 8
+    Left = 728
     object mnuFile: TMenuItem
       Caption = '&File'
       object mnuClose: TMenuItem
