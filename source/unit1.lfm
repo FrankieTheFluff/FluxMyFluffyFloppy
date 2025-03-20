@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 430
+  Left = 528
   Height = 738
-  Top = 78
+  Top = 116
   Width = 1063
   Caption = 'FluxMyFluffyFloppy'
   ClientHeight = 738
@@ -157,7 +157,7 @@ object Form1: TForm1
         OnChange = cbGWDevCOMChange
       end
       object lblGWDrive: TLabel
-        Left = 264
+        Left = 288
         Height = 15
         Top = 28
         Width = 30
@@ -165,7 +165,7 @@ object Form1: TForm1
         ParentColor = False
       end
       object cbGWDrive: TComboBox
-        Left = 312
+        Left = 336
         Height = 23
         Hint = 'Select drive'
         Top = 28
@@ -181,7 +181,7 @@ object Form1: TForm1
         )
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 3
+        TabOrder = 4
         OnChange = cbGWDriveChange
       end
       object btGWCMDDir: TButton
@@ -207,7 +207,7 @@ object Form1: TForm1
         Caption = 'Reset'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 5
+        TabOrder = 6
         OnClick = btGWResetClick
       end
       object btGWInfo: TButton
@@ -220,7 +220,7 @@ object Form1: TForm1
         Caption = 'Info'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 7
+        TabOrder = 8
         OnClick = btGWInfoClick
       end
       object btGWBandwidth: TButton
@@ -233,11 +233,11 @@ object Form1: TForm1
         Caption = 'Bandwidth'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 6
+        TabOrder = 7
         OnClick = btGWBandwidthClick
       end
       object lblGWHW: TLabel
-        Left = 392
+        Left = 416
         Height = 15
         Top = 28
         Width = 54
@@ -245,7 +245,7 @@ object Form1: TForm1
         ParentColor = False
       end
       object cbGWHW: TComboBox
-        Left = 464
+        Left = 488
         Height = 23
         Hint = 'Select hardware'
         Top = 28
@@ -260,9 +260,21 @@ object Form1: TForm1
         ParentShowHint = False
         ShowHint = True
         Style = csDropDownList
-        TabOrder = 4
+        TabOrder = 5
         Text = 'Greaseweazle'
         OnChange = cbGWHWChange
+      end
+      object btGWRefreshUSB: TButton
+        Left = 248
+        Height = 25
+        Hint = 'Refresh COM ports'
+        Top = 28
+        Width = 19
+        Caption = '?'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 3
+        OnClick = btGWRefreshUSBClick
       end
     end
   end

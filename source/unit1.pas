@@ -47,6 +47,7 @@ type
     BtWriteTplDel: TButton;
     BtWriteTplNew: TButton;
     BtWriteTplSave: TButton;
+    btGWRefreshUSB: TButton;
     cbConvAdjustSpeed: TComboBox;
     cbConvDigits: TSpinEdit;
     cbConvDisk1: TSpinEdit;
@@ -366,6 +367,7 @@ type
     procedure BtWriteTplDelClick(Sender: TObject);
     procedure BtWriteTplNewClick(Sender: TObject);
     procedure BtWriteTplSaveClick(Sender: TObject);
+    procedure btGWRefreshUSBClick(Sender: TObject);
     procedure cbConvTplFlippyReverseClick(Sender: TObject);
     procedure cbConvAdjustSpeedChange(Sender: TObject);
     procedure cbConvDigitsChange(Sender: TObject);
@@ -651,8 +653,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.2.3';
-  sAppDate := '2025-03-08';
+  sAppVersion := 'v5.2.4';
+  sAppDate := '2025-03-20';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   AboutGW := 'Requires "Greaseweazle v1.21+" (and optional "diskdefs_.cfg")';
@@ -1477,9 +1479,9 @@ begin
   if fileexists(edGWFile.Text) = true then
   begin
    aLine := '"' + Form1.EdGWFile.Text + '" bandwidth';
+   if cbGWDevCOM.Text <> '' then aLine := aLine + ' --device ' + cbGWDevCOM.Text + '"';
    frmGW.Caption:= 'Greaseweazle - Bandwidth';
    frmGW.showmodal;
-   Get_DeviceCOM;
   end
   else
   begin
@@ -1510,9 +1512,9 @@ begin
   if fileexists(edGWFile.Text) = true then
   begin
    aLine := '"' + Form1.EdGWFile.Text + '" info';
+   if cbGWDevCOM.Text <> '' then aLine := aLine + ' --device ' + cbGWDevCOM.Text + '"';
    frmGW.Caption:= 'Greaseweazle - Info';
    frmGW.showmodal;
-   Get_DeviceCOM;
   end
   else
   begin
@@ -1528,9 +1530,9 @@ begin
   if fileexists(edGWFile.Text) = true then
   begin
    aLine := '"' + Form1.EdGWFile.Text + '" reset';
+   if cbGWDevCOM.Text <> '' then aLine := aLine + ' --device ' + cbGWDevCOM.Text + '"';
    frmGW.Caption:= 'Greaseweazle - Reset';
    frmGW.showmodal;
-   Get_DeviceCOM;
   end
   else
   begin
@@ -1714,9 +1716,9 @@ begin
   if fileexists(edGWFile.Text) = true then
   begin
    aLine := '"' + Form1.EdGWFile.Text + '" delays';
+   if cbGWDevCOM.Text <> '' then aLine := aLine + ' --device ' + cbGWDevCOM.Text + '"';
    frmGW.Caption:= 'Greaseweazle - Info Delays';
    frmGW.showmodal;
-   Get_DeviceCOM;
   end
   else
   begin
@@ -1836,6 +1838,11 @@ begin
    finally
    end;
   end;
+end;
+
+procedure TForm1.btGWRefreshUSBClick(Sender: TObject);
+begin
+ Get_DeviceCOM;
 end;
 
 procedure TForm1.cbConvTplFlippyReverseClick(Sender: TObject);

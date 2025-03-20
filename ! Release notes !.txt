@@ -28,6 +28,10 @@ Release notes
 # flag templates (issue 6)
 # Email: Would it be possible to have an option, either checkbox or command, to have your program make a sound when the current task is finished.
 
+v5.2.4 - 2025-03-20
+* Device/COM: Refresh button "?"
++ Multiple connected "devices/COM" (e.g. COM3 and COM4 available): Buttons "Reset", "Bandwidth", "Info" and delays "Info"
+
 v5.2.3 - 2025-03-08
 * Greaseweazle: Hardware select: Support for Adafruit RP2040 for e.g. "--device COM6" (issue #8)
 + GUI: Resizing to minimum values
