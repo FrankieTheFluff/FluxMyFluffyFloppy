@@ -20,7 +20,7 @@ Requirements:
 - Greaseweazle Host Tools
 - Greaseweazle 'diskdefs.cfg' files optional
 
-![20250112_FMFF521](https://github.com/user-attachments/assets/3e8a767b-c851-46ba-9545-646c81fd6f1b)
+![20250320_FMFF524](https://github.com/user-attachments/assets/4dd081f5-4b8e-4b0c-8a85-bc24c3b002d9)
   
 -----------------------------------------------------------------
 
