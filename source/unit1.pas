@@ -653,11 +653,11 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.2.4';
-  sAppDate := '2025-03-20';
+  sAppVersion := 'v5.2.5';
+  sAppDate := '2025-10-13';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
-  AboutGW := 'Requires "Greaseweazle v1.21+" (and optional "diskdefs_.cfg")';
+  AboutGW := 'Requires "Greaseweazle v1.22+" (and optional "diskdefs_.cfg")';
   Form1.Caption := sAppName + sAppVersion;
 
   sAppPath := Dircheck(ExtractFilePath(ParamStr(0)));
@@ -2587,9 +2587,8 @@ end;
 procedure TForm1.Get_FormatSpecs_Read;
 var
   i, l : integer;
-  prefix, tmp : string;
+  tmp : string;
 begin
-  prefix := '';
   FormatSpecs_ReadDiskDefs := TStringList.Create;
   FormatSpecs_ReadDiskDefs.Clear;
   dd := DirCheck(INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '')) + cbReadTplFormatSrc.Text + '.cfg';
@@ -2600,20 +2599,11 @@ begin
     Memo1.Lines.LoadFromFile(dd);
     for i := 0 to Memo1.Lines.Count - 1 do
      begin
-      if Memo1.Lines[i].StartsWith('# prefix: ') = true then
-       begin
-        tmp := TrimLeft(Memo1.Lines[i]);
-        l := length(tmp);
-        prefix := TrimRight(RightStr(tmp,l-10));
-       end;
-     end;
-    for i := 0 to Memo1.Lines.Count - 1 do
-     begin
       if Memo1.Lines[i].StartsWith('disk ') = true then
        begin
         tmp := TrimLeft(Memo1.Lines[i]);
         l := length(tmp);
-        FormatSpecs_ReadDiskDefs.Add(prefix + TrimRight(RightStr(tmp,l-5)));
+        FormatSpecs_ReadDiskDefs.Add(TrimRight(RightStr(tmp,l-5)));
        end;
       end;
      cbReadTplFormat.Clear;
@@ -2629,9 +2619,8 @@ end;
 procedure TForm1.Get_FormatSpecs_Write;
 var
   i, l  : integer;
-  prefix, tmp : string;
+  tmp : string;
 begin
-  prefix := '';
   FormatSpecs_WriteDiskDefs := TStringList.Create;
   FormatSpecs_WriteDiskDefs.Clear;
   dd := DirCheck(INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '')) + cbWriteTplFormatSrc.Text + '.cfg';
@@ -2642,20 +2631,11 @@ begin
     Memo1.Lines.LoadFromFile(dd);
     for i := 0 to Memo1.Lines.Count - 1 do
      begin
-      if Memo1.Lines[i].StartsWith('# prefix: ') = true then
-       begin
-        tmp := TrimLeft(Memo1.Lines[i]);
-        l := length(tmp);
-        prefix := TrimRight(RightStr(tmp,l-10));
-       end;
-     end;
-    for i := 0 to Memo1.Lines.Count - 1 do
-     begin
       if Memo1.Lines[i].StartsWith('disk ') = true then
        begin
         tmp := TrimLeft(Memo1.Lines[i]);
         l := length(tmp);
-        FormatSpecs_WriteDiskDefs.Add(prefix + TrimRight(RightStr(tmp,l-5)));
+        FormatSpecs_WriteDiskDefs.Add(TrimRight(RightStr(tmp,l-5)));
        end;
       end;
      cbWriteTplFormat.Clear;
@@ -2671,9 +2651,8 @@ end;
 procedure TForm1.Get_FormatSpecs_Conv;
 var
  i, l : integer;
- prefix, tmp : string;
+ tmp : string;
 begin
- prefix := '';
  FormatSpecs_ConvDiskDefs := TStringList.Create;
  FormatSpecs_ConvDiskDefs.Clear;
  dd := DirCheck(INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '')) + cbConvDiskdefs.Text + '.cfg';
@@ -2684,20 +2663,11 @@ begin
    Memo1.Lines.LoadFromFile(dd);
    for i := 0 to Memo1.Lines.Count - 1 do
     begin
-     if Memo1.Lines[i].StartsWith('# prefix: ') = true then
-      begin
-       tmp := TrimLeft(Memo1.Lines[i]);
-       l := length(tmp);
-       prefix := TrimRight(RightStr(tmp,l-10));
-      end;
-    end;
-   for i := 0 to Memo1.Lines.Count - 1 do
-    begin
      if Memo1.Lines[i].StartsWith('disk ') = true then
       begin
        tmp := TrimLeft(Memo1.Lines[i]);
        l := length(tmp);
-       FormatSpecs_ConvDiskDefs.Add(prefix + TrimRight(RightStr(tmp,l-5)));
+       FormatSpecs_ConvDiskDefs.Add(TrimRight(RightStr(tmp,l-5)));
       end;
      end;
    cbConvFormat.Clear;

@@ -7,11 +7,11 @@ object Form1: TForm1
   ClientHeight = 738
   ClientWidth = 1063
   Menu = MainMenu1
+  Position = poScreenCenter
+  LCLVersion = '4.2.0.0'
   OnClose = FormClose
   OnResize = FormResize
   OnShow = FormShow
-  Position = poScreenCenter
-  LCLVersion = '3.8.0.0'
   object pnCmd: TPanel
     Left = 0
     Height = 100
@@ -983,8 +983,8 @@ object Form1: TForm1
                 Width = 66
                 Enabled = False
                 MaxValue = 99999
-                OnChange = edReadDisk1Change
                 TabOrder = 4
+                OnChange = edReadDisk1Change
               end
               object edReadDiskOf: TEdit
                 Left = 166
@@ -1004,8 +1004,8 @@ object Form1: TForm1
                 Width = 64
                 Enabled = False
                 MaxValue = 99999
-                OnChange = edReadDisk2Change
                 TabOrder = 6
+                OnChange = edReadDisk2Change
               end
               object lblReadDestDigits: TLabel
                 Left = 330
@@ -1023,9 +1023,9 @@ object Form1: TForm1
                 Enabled = False
                 MaxValue = 5
                 MinValue = 1
-                OnChange = edReadDigitsChange
                 TabOrder = 7
                 Value = 1
+                OnChange = edReadDigitsChange
               end
               object cbReadIncremental: TCheckBox
                 Left = 660
@@ -2412,8 +2412,8 @@ object Form1: TForm1
                 Width = 65
                 Enabled = False
                 MaxValue = 99999
-                OnChange = cbConvDisk1Change
                 TabOrder = 4
+                OnChange = cbConvDisk1Change
               end
               object edConvDiskOf: TEdit
                 Left = 162
@@ -2434,8 +2434,8 @@ object Form1: TForm1
                 Width = 65
                 Enabled = False
                 MaxValue = 99999
-                OnChange = cbConvDisk2Change
                 TabOrder = 6
+                OnChange = cbConvDisk2Change
               end
               object Label5: TLabel
                 Left = 336
@@ -2453,9 +2453,9 @@ object Form1: TForm1
                 Enabled = False
                 MaxValue = 5
                 MinValue = 1
-                OnChange = cbConvDigitsChange
                 TabOrder = 7
                 Value = 1
+                OnChange = cbConvDigitsChange
               end
               object cbConvIncrement: TCheckBox
                 Left = 646
@@ -2910,10 +2910,10 @@ object Form1: TForm1
             Enabled = False
             MaxValue = 85
             MinValue = -8
-            OnChange = cbToolsSeekTrackChange
-            OnEnter = cbToolsSeekTrackEnter
             ParentFont = False
             TabOrder = 1
+            OnChange = cbToolsSeekTrackChange
+            OnEnter = cbToolsSeekTrackEnter
           end
           object cbToolsSeekTrackForce: TCheckBox
             Left = 387
@@ -3013,10 +3013,10 @@ object Form1: TForm1
             Enabled = False
             MaxValue = 85
             MinValue = -8
-            OnChange = cbToolsCleanCylChange
             ParentFont = False
             TabOrder = 1
             Value = 80
+            OnChange = cbToolsCleanCylChange
           end
           object cbToolsCleanPasses: TComboBox
             Left = 252
@@ -3107,11 +3107,11 @@ object Form1: TForm1
             Font.Height = -11
             Font.Name = 'Tahoma'
             MaxValue = 99
-            OnChange = cbToolsRPMNumbIterChange
-            OnEnter = cbToolsRPMNumbIterEnter
             ParentFont = False
             TabOrder = 1
             Value = 1
+            OnChange = cbToolsRPMNumbIterChange
+            OnEnter = cbToolsRPMNumbIterEnter
           end
         end
       end
@@ -3211,10 +3211,10 @@ object Form1: TForm1
             Font.Name = 'Tahoma'
             MaxValue = 999999
             MinValue = 1
-            OnChange = cbSetDelaySelectChange
             ParentFont = False
             TabOrder = 1
             Value = 10
+            OnChange = cbSetDelaySelectChange
           end
           object cbSetDelayStep: TSpinEdit
             Left = 244
@@ -3227,10 +3227,10 @@ object Form1: TForm1
             Font.Name = 'Tahoma'
             MaxValue = 99999
             MinValue = 1
-            OnChange = cbSetDelayStepChange
             ParentFont = False
             TabOrder = 2
             Value = 5000
+            OnChange = cbSetDelayStepChange
           end
           object cbSetDelayAutoOff: TSpinEdit
             Left = 244
@@ -3243,10 +3243,10 @@ object Form1: TForm1
             Font.Name = 'Tahoma'
             MaxValue = 999999
             MinValue = 1
-            OnChange = cbSetDelayAutoOffChange
             ParentFont = False
             TabOrder = 3
             Value = 10000
+            OnChange = cbSetDelayAutoOffChange
           end
           object cbSetDelaySettle: TSpinEdit
             Left = 482
@@ -3259,10 +3259,10 @@ object Form1: TForm1
             Font.Name = 'Tahoma'
             MaxValue = 999
             MinValue = 1
-            OnChange = cbSetDelaySettleChange
             ParentFont = False
             TabOrder = 5
             Value = 15
+            OnChange = cbSetDelaySettleChange
           end
           object cbSetDelayMotor: TSpinEdit
             Left = 482
@@ -3275,10 +3275,10 @@ object Form1: TForm1
             Font.Name = 'Tahoma'
             MaxValue = 9999
             MinValue = 1
-            OnChange = cbSetDelayMotorChange
             ParentFont = False
             TabOrder = 6
             Value = 750
+            OnChange = cbSetDelayMotorChange
           end
           object btSetDelaysInfo: TButton
             Left = 958
@@ -3323,10 +3323,10 @@ object Form1: TForm1
             Font.Name = 'Tahoma'
             MaxValue = 999999
             MinValue = 1
-            OnChange = cbSetDelayIndexMaskChange
             ParentFont = False
             TabOrder = 4
             Value = 200
+            OnChange = cbSetDelayIndexMaskChange
           end
           object lblSetDelayPreWrite: TLabel
             Left = 370
@@ -3363,10 +3363,10 @@ object Form1: TForm1
             Font.Name = 'Tahoma'
             MaxValue = 9999
             MinValue = 1
-            OnChange = cbSetDelayPreWriteChange
             ParentFont = False
             TabOrder = 7
             Value = 100
+            OnChange = cbSetDelayPreWriteChange
           end
           object cbSetDelayPostWrite: TSpinEdit
             Left = 482
@@ -3379,10 +3379,10 @@ object Form1: TForm1
             Font.Name = 'Tahoma'
             MaxValue = 9999
             MinValue = 1
-            OnChange = cbSetDelayPostWriteChange
             ParentFont = False
             TabOrder = 8
             Value = 1000
+            OnChange = cbSetDelayPostWriteChange
           end
         end
         object grpPIN: TGroupBox
@@ -3429,10 +3429,10 @@ object Form1: TForm1
             Font.Name = 'Tahoma'
             MaxValue = 32
             MinValue = 1
-            OnChange = cbSetPINNumberChange
             ParentFont = False
             TabOrder = 1
             Value = 2
+            OnChange = cbSetPINNumberChange
           end
           object Panel3: TPanel
             Left = 234
