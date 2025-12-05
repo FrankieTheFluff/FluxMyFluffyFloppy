@@ -1,105 +1,124 @@
 object FrmOptions: TFrmOptions
-  Left = 612
-  Height = 257
-  Top = 235
-  Width = 623
+  Left = 848
+  Height = 457
+  Top = 327
+  Width = 934
   BorderStyle = bsDialog
   Caption = 'Options'
-  ClientHeight = 257
-  ClientWidth = 623
-  OnShow = FormShow
+  ClientHeight = 457
+  ClientWidth = 934
+  DesignTimePPI = 144
   Position = poMainFormCenter
-  LCLVersion = '3.6.0.0'
+  LCLVersion = '4.4.0.0'
+  OnShow = FormShow
   object Cancel: TButton
-    Left = 8
-    Height = 25
-    Top = 224
-    Width = 75
+    Left = 12
+    Height = 38
+    Top = 408
+    Width = 112
     Caption = 'Cancel'
     TabOrder = 0
     OnClick = CancelClick
   end
   object OK: TButton
-    Left = 541
-    Height = 25
-    Top = 224
-    Width = 75
+    Left = 812
+    Height = 38
+    Top = 408
+    Width = 112
     Caption = 'OK'
     TabOrder = 1
     OnClick = OKClick
   end
   object gbLocations: TGroupBox
-    Left = 8
-    Height = 136
-    Top = 80
-    Width = 608
+    Left = 12
+    Height = 204
+    Top = 192
+    Width = 912
     Caption = 'Locations:'
-    ClientHeight = 116
-    ClientWidth = 604
+    ClientHeight = 174
+    ClientWidth = 908
     TabOrder = 2
     object lblDiskdefs: TLabel
-      Left = 16
-      Height = 15
+      Left = 24
+      Height = 25
       Top = 0
-      Width = 89
+      Width = 134
       Caption = 'Diskdefs (folder):'
       ParentColor = False
     end
     object lblTemplates: TLabel
-      Left = 16
-      Height = 15
-      Top = 56
-      Width = 100
+      Left = 24
+      Height = 25
+      Top = 84
+      Width = 147
       Caption = 'Templates (folder):'
       ParentColor = False
     end
     object folderTemplates: TDirectoryEdit
-      Left = 24
-      Height = 23
-      Top = 80
-      Width = 570
+      Left = 36
+      Height = 33
+      Top = 120
+      Width = 855
       ShowHidden = False
-      ButtonWidth = 23
+      ButtonWidth = 34
       NumGlyphs = 1
       MaxLength = 0
       TabOrder = 0
     end
     object fileDiskdefs: TDirectoryEdit
-      Left = 24
-      Height = 23
-      Top = 24
-      Width = 570
+      Left = 36
+      Height = 33
+      Top = 36
+      Width = 855
       ShowHidden = False
-      ButtonWidth = 23
+      ButtonWidth = 34
       NumGlyphs = 1
       MaxLength = 0
       TabOrder = 1
     end
   end
   object gbStart: TGroupBox
-    Left = 8
-    Height = 72
-    Top = 8
-    Width = 608
+    Left = 12
+    Height = 108
+    Top = 12
+    Width = 912
     Caption = 'Greaseweazle:'
-    ClientHeight = 52
-    ClientWidth = 604
+    ClientHeight = 78
+    ClientWidth = 908
     TabOrder = 3
     object cbSaveGWDevCom: TCheckBox
-      Left = 16
-      Height = 19
+      Left = 24
+      Height = 29
       Top = 0
-      Width = 242
+      Width = 360
       Caption = 'Save selected Greaseweazle "Device/COM"'
       TabOrder = 0
     end
     object cbSaveGWDrive: TCheckBox
-      Left = 16
-      Height = 19
-      Top = 24
-      Width = 201
+      Left = 24
+      Height = 29
+      Top = 36
+      Width = 301
       Caption = 'Save selected Greaseweazle "Drive"'
       TabOrder = 1
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 12
+    Height = 72
+    Top = 120
+    Width = 912
+    Caption = 'Console/CMD:'
+    ClientHeight = 42
+    ClientWidth = 908
+    TabOrder = 4
+    object cbCodepageCMD: TCheckBox
+      Left = 24
+      Height = 29
+      Top = 0
+      Width = 356
+      Caption = 'Use default system codepage (e.g. cp850)'
+      TabOrder = 0
     end
   end
 end

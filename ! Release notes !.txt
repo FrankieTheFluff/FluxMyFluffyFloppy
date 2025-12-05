@@ -28,6 +28,13 @@ Release notes
 # flag templates (issue 6)
 # Email: Would it be possible to have an option, either checkbox or command, to have your program make a sound when the current task is finished.
 
+v5.2.6 - 2025-12-05
+* FluxMyFluffyFloppy is now 64bit
+* INI file versioning (v10)
+* Options: Use default system codepage (e.g. cp850)
+- Bugfix: Codepage issues (deutsche Umlaute ä,ö,ü etc.)
+- Bugfix: Log output error (issue #9)
+
 v5.2.5 - 2025-10-13
 + Diskdefs updated (2025-07-23)
 - Diskdefs: Fixes select formats (e.g. "1440")

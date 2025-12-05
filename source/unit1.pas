@@ -653,8 +653,8 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.2.5';
-  sAppDate := '2025-10-13';
+  sAppVersion := 'v5.2.6';
+  sAppDate := '2025-12-05';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
   AboutGW := 'Requires "Greaseweazle v1.22+" (and optional "diskdefs_.cfg")';
@@ -670,6 +670,7 @@ begin
     try
      INI := TINIFile.Create(sAppPath + 'FluxMyFluffyFloppy.ini');
      INI.WriteString('FluxMyFluffyFloppy', 'Version', sAppVersion);
+     INI.WriteInteger('FluxMyFluffyFloppy', 'VersionINI', 10);
      INI.WriteInteger('FluxMyFluffyFloppy', 'Height', 770);
      INI.WriteInteger('FluxMyFluffyFloppy', 'Width', 935);
      INI.WriteBool('FluxMyFluffyFloppy', 'ShowArg', true);
@@ -678,6 +679,7 @@ begin
      INI.WriteString('FluxMyFluffyFloppy', 'SaveGWDevice', '');
      INI.WriteBool('FluxMyFluffyFloppy', 'SaveBoolGWDrive', false);
      INI.WriteString('FluxMyFluffyFloppy', 'SaveGWDrive', '');
+     INI.WriteBool('FluxMyFluffyFloppy', 'CodepageCMD', true);
      INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', sAppPath + 'Diskdefs\');
      INI.WriteString('FluxMyFluffyFloppy', 'FolderTemplates', sAppPath + 'Templates\');
      INI.WriteString('FluxMyFluffyFloppy', 'LastFolder_Read_Dest', AppendPathDelim(GetUserDir + 'Documents'));
@@ -691,6 +693,11 @@ begin
     end;
 
   INI := TINIFile.Create(sAppPath + 'FluxMyFluffyFloppy.ini');
+  If INI.ReadInteger('FluxMyFluffyFloppy', 'VersionINI', 00) < 10 then
+   begin
+    INI.WriteInteger('FluxMyFluffyFloppy', 'VersionINI', 10);
+    INI.WriteBool('FluxMyFluffyFloppy', 'CodepageCMD', true);
+   end;
   If INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs','') = '' then INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', sAppPath + 'Diskdefs\');
   EdGWFile.Text := INI.ReadString('FluxMyFluffyFloppy', 'Greaseweazle','');
   mnuArguments.Checked := INI.ReadBool('FluxMyFluffyFloppy', 'ShowArg', true);
@@ -1304,10 +1311,10 @@ begin
      end;
 
    //Log parameter
+   LogDir := DirCheck(edReadDirDest.Text);
+   LogFilename := ExtractFileName_WithoutExt(cbReadPreview.Text) + '.txt';
    if cbReadTplLogParam.Checked = true then
      begin
-      LogDir := DirCheck(edReadDirDest.Text);
-      LogFilename := ExtractFileName_WithoutExt(cbReadPreview.Text) + '.txt';
      with TStringList.Create do
       try
        Add('Filename: ' + cbReadPreview.Text);
@@ -1346,13 +1353,13 @@ begin
        begin
         if cbReadTplLogBoth.Checked = false then
          begin
-          aLine := '"' + EdGWCMD.Lines.Text + ' 2> "' + LogDir + ExtractFileName_WithoutExt(LogFilename) + '_output.txt"';
+          aLine := '' + EdGWCMD.Lines.Text + ' 2> "' + LogDir + LogFileName + '_output.txt"';
           frmGW.Caption:= 'Greaseweazle - Read';
           frmGW.showmodal;
          end;
         if cbReadTplLogBoth.Checked = true then
          begin
-          aLine := '"' + EdGWCMD.Lines.Text + ' 2>> "' + LogDir + LogFilename + '"';
+          aLine := '' + EdGWCMD.Lines.Text + ' 2>> "' + LogDir + LogFilename + '"';
           frmGW.Caption:= 'Greaseweazle - Read';
           frmGW.showmodal;
          end;

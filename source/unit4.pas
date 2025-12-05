@@ -23,7 +23,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Grids,
-  ExtCtrls, UnTerminal, TermVT;
+  ExtCtrls, LConvEncoding, UnTerminal, TermVT;
 
 type
 
@@ -77,6 +77,11 @@ end;
 
 procedure TfrmGW.FormShow(Sender: TObject);
 begin
+ if INI.ReadBool('FluxMyFluffyFloppy', 'CodepageCMD', false) = true then
+  begin
+   //aLine := ConvertEncoding(aLine, 'utf8', 'cp850');
+   aLine := ConvertEncoding(aLine, 'utf8', GetConsoleTextEncoding);
+  end;
   proc:= TConsoleProc.Create(nil);
   proc.OnInitScreen :=@procInitScreen;
   proc.OnRefreshLine:=@procRefreshLine;

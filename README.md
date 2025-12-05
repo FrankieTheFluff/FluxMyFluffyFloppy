@@ -1,6 +1,6 @@
 -----------------------------------------------------------------
 
-FluxMyFluffyFloppy v5.2.5 - 2025-10-13
+FluxMyFluffyFloppy v5.2.6 - 2025-12-05
 -
 
 A Microsoft(r) Windows(r) GUI for the "Greaseweazle Host Tools"

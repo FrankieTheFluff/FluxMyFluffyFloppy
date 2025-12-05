@@ -32,10 +32,12 @@ type
     Cancel: TButton;
     cbSaveGWDevCom: TCheckBox;
     cbSaveGWDrive: TCheckBox;
+    cbCodepageCMD: TCheckBox;
     folderTemplates: TDirectoryEdit;
     fileDiskdefs: TDirectoryEdit;
     gbLocations: TGroupBox;
     gbStart: TGroupBox;
+    GroupBox1: TGroupBox;
     lblDiskdefs: TLabel;
     lblTemplates: TLabel;
     OK: TButton;
@@ -68,6 +70,7 @@ procedure TFrmOptions.FormShow(Sender: TObject);
 begin
  cbSaveGWDevCom.Checked := INI.ReadBool('FluxMyFluffyFloppy', 'SaveBoolGWDevCom', false);
  cbSaveGWDrive.Checked := INI.ReadBool('FluxMyFluffyFloppy', 'SaveBoolGWDrive', false);
+ cbCodepageCMD.Checked := INI.ReadBool('FluxMyFluffyFloppy', 'CodepageCMD', true);
  fileDiskdefs.Text := INI.ReadString('FluxMyFluffyFloppy', 'Diskdefs', '');
  folderTemplates.Directory := INI.ReadString('FluxMyFluffyFloppy', 'FolderTemplates', '');
 end;
@@ -76,6 +79,7 @@ procedure TFrmOptions.OKClick(Sender: TObject);
 begin
  INI.WriteBool('FluxMyFluffyFloppy', 'SaveBoolGWDevCom', cbSaveGWDevCom.Checked);
  INI.WriteBool('FluxMyFluffyFloppy', 'SaveBoolGWDrive', cbSaveGWDrive.Checked);
+ INI.WriteBool('FluxMyFluffyFloppy', 'CodepageCMD', cbCodepageCMD.Checked);
  INI.WriteString('FluxMyFluffyFloppy', 'Diskdefs', fileDiskdefs.Text);
  INI.WriteString('FluxMyFluffyFloppy', 'FolderTemplates', folderTemplates.Directory);
  if fileDiskdefs.Text <> '' then
