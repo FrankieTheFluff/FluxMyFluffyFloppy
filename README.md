@@ -10,6 +10,7 @@ FREEWARE / OpenSource
 License: GNU General Public License v2.0
 
 (c) 2021-2026 FrankieTheFluff
+Updates Feb 2026 by Matt nistunedev@gmail.com
 
 Web: https://github.com/FrankieTheFluff/FluxMyFluffyFloppy
 
@@ -37,3 +38,4 @@ UnTerminal 1.0 by Tito Hinostroza 02/10/2020
 https://github.com/t-edson/UnTerminal
 
 -----------------------------------------------------------------
+
