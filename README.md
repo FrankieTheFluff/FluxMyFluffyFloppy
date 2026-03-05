@@ -2,6 +2,7 @@
  
 
 !! 2026-03-05 The project is closed/private - No further development !!
+
 !! No responsibilty for e.g. forks !!
   
 ----------------------------------------
@@ -21,6 +22,7 @@ GNU General Public License v2.0
 (c) 2021-2026 FrankieTheFluff
 
 Web: https://github.com/FrankieTheFluff
+
 
 
 
