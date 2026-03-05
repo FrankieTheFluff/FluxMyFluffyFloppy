@@ -3,6 +3,10 @@
 
 !! 2026-03-05 The project is closed/private - No further development !!
 
+!! The software was provided 'as is', without warranty of any kind !!
+
+!! Use at your own risk. No liability for any damages whatsoever !!
+
 !! No responsibilty for e.g. forks !!
   
 ----------------------------------------
@@ -24,6 +28,7 @@ GNU General Public License v2.0
 Web: https://github.com/FrankieTheFluff
 
 Mail: fluxmyfluffyfloppy@mail.de
+
 
 
 
