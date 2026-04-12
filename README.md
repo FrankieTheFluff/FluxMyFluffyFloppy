@@ -35,6 +35,18 @@ Mail: fluxmyfluffyfloppy@mail.de
 
 ![20250320_FMFF524](https://github.com/user-attachments/assets/4dd081f5-4b8e-4b0c-8a85-bc24c3b002d9)
 
+----------------------------------------
 
+Greaseweazle Host Tools (c) Keir Fraser
+
+Web: https://github.com/keirf/Greaseweazle
+
+----------------------------------------
+
+Contains code from the following project:
+
+UnTerminal 1.0 by Tito Hinostroza 02/10/2020
+
+https://github.com/t-edson/UnTerminal
 
 
