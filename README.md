@@ -1,7 +1,7 @@
 
  
 
-!! 2026-03-06 The project is paused/private !!
+!! 2026-03-06 The project is paused !!
 
 !! The software was provided 'as is', without warranty of any kind !!
 
