@@ -1,0 +1,124 @@
+object FrmOptions: TFrmOptions
+  Left = 1553
+  Height = 533
+  Top = 720
+  Width = 1090
+  BorderStyle = bsDialog
+  Caption = 'Options'
+  ClientHeight = 533
+  ClientWidth = 1090
+  DesignTimePPI = 168
+  Position = poMainFormCenter
+  LCLVersion = '4.4.0.0'
+  OnShow = FormShow
+  object Cancel: TButton
+    Left = 14
+    Height = 44
+    Top = 476
+    Width = 131
+    Caption = 'Cancel'
+    TabOrder = 0
+    OnClick = CancelClick
+  end
+  object OK: TButton
+    Left = 947
+    Height = 44
+    Top = 476
+    Width = 131
+    Caption = 'OK'
+    TabOrder = 1
+    OnClick = OKClick
+  end
+  object gbLocations: TGroupBox
+    Left = 14
+    Height = 238
+    Top = 224
+    Width = 1064
+    Caption = 'Locations:'
+    ClientHeight = 203
+    ClientWidth = 1060
+    TabOrder = 2
+    object lblDiskdefs: TLabel
+      Left = 28
+      Height = 30
+      Top = 0
+      Width = 155
+      Caption = 'Diskdefs (folder):'
+      ParentColor = False
+    end
+    object lblTemplates: TLabel
+      Left = 28
+      Height = 30
+      Top = 98
+      Width = 170
+      Caption = 'Templates (folder):'
+      ParentColor = False
+    end
+    object folderTemplates: TDirectoryEdit
+      Left = 42
+      Height = 38
+      Top = 140
+      Width = 998
+      ShowHidden = False
+      ButtonWidth = 40
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 0
+    end
+    object fileDiskdefs: TDirectoryEdit
+      Left = 42
+      Height = 38
+      Top = 42
+      Width = 998
+      ShowHidden = False
+      ButtonWidth = 40
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 1
+    end
+  end
+  object gbStart: TGroupBox
+    Left = 14
+    Height = 126
+    Top = 14
+    Width = 1064
+    Caption = 'Greaseweazle:'
+    ClientHeight = 91
+    ClientWidth = 1060
+    TabOrder = 3
+    object cbSaveGWDevCom: TCheckBox
+      Left = 28
+      Height = 34
+      Top = 0
+      Width = 425
+      Caption = 'Save selected Greaseweazle "Device/COM"'
+      TabOrder = 0
+    end
+    object cbSaveGWDrive: TCheckBox
+      Left = 28
+      Height = 34
+      Top = 42
+      Width = 355
+      Caption = 'Save selected Greaseweazle "Drive"'
+      TabOrder = 1
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 14
+    Height = 84
+    Top = 140
+    Width = 1064
+    Caption = 'Console/CMD:'
+    ClientHeight = 49
+    ClientWidth = 1060
+    TabOrder = 4
+    object cbCodepageCMD: TCheckBox
+      Left = 28
+      Height = 34
+      Top = 0
+      Width = 412
+      Caption = 'Use default system codepage (e.g. cp850)'
+      TabOrder = 0
+    end
+  end
+end
