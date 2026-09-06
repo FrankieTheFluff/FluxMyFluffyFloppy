@@ -22,7 +22,7 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, SQLite3Conn, SQLDB, DB, Forms, Controls, Graphics, Dialogs,
+  Classes, SysUtils, DB, Forms, Controls, Graphics, Dialogs,
   ComCtrls, DBGrids, StdCtrls, DBCtrls, Menus, EditBtn, Spin, ExtCtrls,
   IniFiles, Process, Registry, Fileutil, LazFileUtils, LCLIntf;
 type
@@ -339,12 +339,8 @@ type
     sbRead: TScrollBox;
     sbWrite: TScrollBox;
     Separator1: TMenuItem;
-    NewDB: TOpenDialog;
     OpenDialog1: TOpenDialog;
     pnCmd: TPanel;
-    SQLite3Connection1: TSQLite3Connection;
-    SQLQueryDir: TSQLQuery;
-    SQLTransaction1: TSQLTransaction;
     tbConv: TTabSheet;
     tbRead: TTabSheet;
     tbSettings: TTabSheet;
@@ -653,11 +649,11 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.2.7';
-  sAppDate := '2026-01-13';
+  sAppVersion := 'v5.2.8';
+  sAppDate := '2026-09-06';
   sAppVersion_ReadTmpl := 'v4.00';
   sAppVersion_WriteTmpl := 'v4.00';
-  AboutGW := 'Requires "Greaseweazle v1.22+" (and optional "diskdefs_.cfg")';
+  AboutGW := 'Requires "Greaseweazle v1.23+" (and optional "diskdefs_.cfg")';
   Form1.Caption := sAppName + sAppVersion;
 
   sAppPath := Dircheck(ExtractFilePath(ParamStr(0)));
@@ -1286,9 +1282,12 @@ begin
     end;
     while i < Diskdefs.Count do
     begin
-      cbReadTplFormatSrc.Items.Add(ExtractFilename(ExtractFileName_WithoutExt(Diskdefs.Strings[i])));
-      cbWriteTplFormatSrc.Items.Add(ExtractFilename(ExtractFileName_WithoutExt(Diskdefs.Strings[i])));
-      cbConvDiskdefs.Items.Add(ExtractFilename(ExtractFileName_WithoutExt(Diskdefs.Strings[i])));
+      if ExtractFilename(ExtractFileName_WithoutExt(Diskdefs.Strings[i])) <> 'diskdefs' then
+      begin
+       cbReadTplFormatSrc.Items.Add(ExtractFilename(ExtractFileName_WithoutExt(Diskdefs.Strings[i])));
+       cbWriteTplFormatSrc.Items.Add(ExtractFilename(ExtractFileName_WithoutExt(Diskdefs.Strings[i])));
+       cbConvDiskdefs.Items.Add(ExtractFilename(ExtractFileName_WithoutExt(Diskdefs.Strings[i])));
+      end;
       Inc(i);
     end;
     Diskdefs.Free;

@@ -28,6 +28,10 @@ Release notes
 # flag templates (issue 6)
 # Email: Would it be possible to have an option, either checkbox or command, to have your program make a sound when the current task is finished.
 
+v5.2.8 - 2026-09-06
+- Bugfix: Removed useless entry "discdefs" in Format spec. Dropdown
+- Bugfix: Removed unused SQL-Code-Snippets
+
 v5.2.7 - 2026-01-13
 * Requires Greaseweazle 1.23
 + Update FormatSpecs/Diskdefs
