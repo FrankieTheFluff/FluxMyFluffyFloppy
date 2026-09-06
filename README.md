@@ -25,7 +25,7 @@ Mail: fluxmyfluffyfloppy@mail.de
 ![20250320_FMFF524](https://github.com/user-attachments/assets/4dd081f5-4b8e-4b0c-8a85-bc24c3b002d9)
 
 
-!! The software was provided 'as is', without warranty of any kind !!
+!! The software is provided 'as is', without warranty of any kind !!
 
 !! Use at your own risk. No liability for any damages whatsoever !!
 
