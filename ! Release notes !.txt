@@ -28,6 +28,9 @@ Release notes
 # flag templates (issue 6)
 # Email: Would it be possible to have an option, either checkbox or command, to have your program make a sound when the current task is finished.
 
+v5.2.9 - 2026-09-12
++ Read-Template v5.00: Added file destination parameters
+
 v5.2.8 - 2026-09-06
 - Bugfix: Removed useless entry "discdefs" in Format spec. Dropdown
 - Bugfix: Removed unused SQL-Code-Snippets

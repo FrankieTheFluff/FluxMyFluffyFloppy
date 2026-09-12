@@ -486,6 +486,8 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure AddItemsSCP;
+    procedure AddItemsHFE;
     procedure Create_Filename;
     procedure CMD_Generate;
     procedure Get_DeviceCOM;
@@ -649,9 +651,9 @@ var
   gw :string;
 begin
   sAppName := 'FluxMyFluffyFloppy ';
-  sAppVersion := 'v5.2.8';
-  sAppDate := '2026-09-06';
-  sAppVersion_ReadTmpl := 'v4.00';
+  sAppVersion := 'v5.2.9';
+  sAppDate := '2026-09-12';
+  sAppVersion_ReadTmpl := 'v5.00';
   sAppVersion_WriteTmpl := 'v4.00';
   AboutGW := 'Requires "Greaseweazle v1.23+" (and optional "diskdefs_.cfg")';
   Form1.Caption := sAppName + sAppVersion;
@@ -1676,6 +1678,11 @@ begin
  cbReadFormatOptionHFEEnc.Text:='';
  edReadFilename.Text := '';
  cbReadPreview.Text:='';
+ cbReadFormat.Enabled             :=false;
+ cbReadFormatOption.Enabled       :=false;
+ cbReadFormatOptionHFEInt.Enabled :=false;
+ cbReadFormatOptionHFEVer.Enabled :=false;
+ cbReadFormatOptionHFEEnc.Enabled :=false;
 end;
 
 procedure TForm1.btReadTplDelClick(Sender: TObject);
@@ -1729,6 +1736,25 @@ begin
  cbReadTplFlippyReverse.Checked := false;
  cbReadTplPLL.Text := '';
  cbReadTplDD.Text := '';
+ //
+ edReadDirDest.Text :='';
+ edReadFilename.Text :='';
+ cbReadIncremental.Checked := false;
+ cbReadNoOverwrite.Checked := false;
+ edReadDisk1.Value :=0;
+ edReadDiskOf.Text :='_of_';
+ edReadDisk2.Value :=0;
+ edReadDigits.Value :=1;
+ cbReadFormat.Text :='';
+ cbReadFormatOption.Text :='';
+ cbReadFormatOptionHFEInt.Text :='';
+ cbReadFormatOptionHFEVer.Text :='';
+ cbReadFormatOptionHFEEnc.Text :='';
+ cbReadFormat.Enabled:=false;
+ cbReadFormatOption.Enabled:= false;
+ cbReadFormatOptionHFEInt.Enabled:= false;
+ cbReadFormatOptionHFEVer.Enabled:= false;
+ cbReadFormatOptionHFEEnc.Enabled:= false;
  //
  cbReadTplLogParam.checked := false;
  cbReadTplLogOutput.checked := false;
@@ -1784,6 +1810,20 @@ begin
       INIRead.WriteBool('Settings', 'HSwap', cbReadTplHSwap.Checked);
       INIRead.WriteString('Settings', 'Flippy', cbReadTplFlippy.Text);
       INIRead.WriteBool('Settings', 'FlippyReverse', cbReadTplFlippyReverse.Checked);
+
+      INIRead.WriteString  ('Settings', 'DestDir', edReadDirDest.Text);
+      INIRead.WriteString  ('Settings', 'DestFilename', edReadFilename.Text);
+      INIRead.WriteBool    ('Settings', 'DestIncr', cbReadIncremental.checked);
+      INIRead.WriteBool    ('Settings', 'DestNoOver', cbReadNoOverwrite.checked);
+      INIRead.WriteInteger ('Settings', 'DestDisk1', edReadDisk1.value);
+      INIRead.WriteString  ('Settings', 'DestDOfD', edReadDiskOf.Text);
+      INIRead.WriteInteger ('Settings', 'DestDisk2', edReadDisk2.Value);
+      INIRead.WriteInteger ('Settings', 'DestDigits', edReadDigits.Value);
+      INIRead.WriteString  ('Settings', 'DestForm', cbReadFormat.Text);
+      INIRead.WriteString  ('Settings', 'DestFormOpt', cbReadFormatOption.Text);
+      INIRead.WriteString  ('Settings', 'DestFormInt', cbReadFormatOptionHFEInt.Text);
+      INIRead.WriteString  ('Settings', 'DestFormVer', cbReadFormatOptionHFEVer.Text);
+      INIRead.WriteString  ('Settings', 'DestFormEnc', cbReadFormatOptionHFEEnc.Text);
 
       INIRead.WriteBool('Settings', 'Log_Param', cbReadTplLogParam.Checked);
       INIRead.WriteBool('Settings', 'Log_Output', cbReadTplLogOutput.Checked);
@@ -2075,7 +2115,7 @@ end;
 procedure TForm1.Refresh_Templates_Read;
 var
   iniRefreshRead, INITmplFolder: TiniFile;
-  TmplFolder: String;
+  TmplFolder : String;
 begin
   //Read-Template
   INITmplFolder := TINIFile.Create(sAppPath + 'FluxMyFluffyFloppy.ini');
@@ -2106,6 +2146,58 @@ begin
     cbReadTplHSwap.Checked         := iniRefreshRead.ReadBool('Settings', 'HSwap', false);
     cbReadTplFlippy.Text           := iniRefreshRead.ReadString('Settings', 'Flippy', '');
     cbReadTplFlippyReverse.Checked := iniRefreshRead.ReadBool('Settings', 'FlippyReverse', false);
+
+    edReadDirDest.Text             := iniRefreshRead.ReadString('Settings', 'DestDir', '');
+    edReadFilename.Text            := iniRefreshRead.ReadString('Settings', 'DestFilename', '');
+    cbReadIncremental.Checked      := iniRefreshRead.ReadBool('Settings', 'DestIncr', false);
+    cbReadNoOverwrite.Checked      := iniRefreshRead.ReadBool('Settings', 'DestNoOver', false);
+    edReadDisk1.value              := iniRefreshRead.ReadInteger('Settings', 'DestDisk1', 0);
+    edReadDiskOf.Text              := iniRefreshRead.ReadString('Settings', 'DestDOfD', '_of_');
+    edReadDisk2.value              := iniRefreshRead.ReadInteger('Settings', 'DestDisk2', 0);
+    edReadDigits.Value             := iniRefreshRead.ReadInteger('Settings', 'DestDigits', 1);
+
+    if iniRefreshRead.ReadString('Settings', 'DestForm', '') <> '' then
+     begin
+      cbReadFormat.Enabled             :=true;
+      edReadDisk1.Enabled              :=true;
+      edReadDiskOf.Enabled             :=true;
+      edReadDisk2.Enabled              :=true;
+      edReadDigits.Enabled             :=true;
+      cbReadIncremental.Enabled        :=true;
+      cbReadNoOverwrite.Enabled        :=true;
+      cbReadFormatOption.Enabled       :=true;
+      cbReadFormatOptionHFEInt.Enabled :=true;
+      cbReadFormatOptionHFEVer.Enabled :=true;
+      cbReadFormatOptionHFEEnc.Enabled :=true;
+
+      cbReadFormat.Text                := iniRefreshRead.ReadString('Settings', 'DestForm', '');
+      if cbReadFormat.Text = 'SCP (SuperCardPro)' then AddItemsSCP;
+      if cbReadFormat.Text = 'HFE (HxC Floppy Emulator)' then AddItemsHFE;
+
+      cbReadFormatOption.Text          := iniRefreshRead.ReadString('Settings', 'DestFormOpt', '');
+      cbReadFormatOptionHFEInt.Text    := iniRefreshRead.ReadString('Settings', 'DestFormInt', '');
+      cbReadFormatOptionHFEVer.Text    := iniRefreshRead.ReadString('Settings', 'DestFormVer', '');
+      cbReadFormatOptionHFEEnc.Text    := iniRefreshRead.ReadString('Settings', 'DestFormEnc', '');
+     end
+    else
+     begin
+      cbReadFormat.Enabled             :=false;
+      edReadDisk1.Enabled              :=false;
+      edReadDiskOf.Enabled             :=false;
+      edReadDisk2.Enabled              :=false;
+      edReadDigits.Enabled             :=false;
+      cbReadIncremental.Enabled        :=false;
+      cbReadNoOverwrite.Enabled        :=false;
+      cbReadFormatOption.Enabled       :=false;
+      cbReadFormatOptionHFEInt.Enabled :=false;
+      cbReadFormatOptionHFEVer.Enabled :=false;
+      cbReadFormatOptionHFEEnc.Enabled :=false;
+      cbReadFormat.Text                := '';
+      cbReadFormatOption.Text          := '';
+      cbReadFormatOptionHFEInt.Text    := '';
+      cbReadFormatOptionHFEVer.Text    := '';
+      cbReadFormatOptionHFEEnc.Text    := '';
+     end;
 
     cbReadTplLogParam.Checked      := iniRefreshRead.ReadBool('Settings', 'Log_Param', false);
     cbReadTplLogOutput.Checked     := iniRefreshRead.ReadBool('Settings', 'Log_Output', false);
@@ -3263,6 +3355,7 @@ begin
   begin
    btReadTplSave.Enabled := true;
    btReadTplDel.Enabled := true;
+   Refresh_Templates_Read;
   end;
 end;
 
@@ -3544,122 +3637,143 @@ procedure TForm1.cbReadFormatChange(Sender: TObject);
 begin
   cbReadFormatOption.Items.Clear;
   cbReadFormatOption.ItemIndex := -1;
+  cbReadFormat.Enabled:=false;
   cbReadFormatOption.Enabled:= false;
+  cbReadFormatOptionHFEInt.Enabled:= false;
+  cbReadFormatOptionHFEVer.Enabled:= false;
+  cbReadFormatOptionHFEEnc.Enabled:= false;
 
-  if cbReadFormat.Text = 'SCP (SuperCardPro)' then
-  begin
-   cbReadFormatOption.Items.Clear;
-   cbReadFormatOption.ItemIndex := -1;
-   cbReadFormatOption.Enabled:= true;
-   cbReadFormatOption.Items.Add('');
-   cbReadFormatOption.Items.Add('::disktype=amiga');
-   cbReadFormatOption.Items.Add('::disktype=amigahd');
-   cbReadFormatOption.Items.Add('::disktype=c64');
-   cbReadFormatOption.Items.Add('::disktype=amstrad-cpc');
-   cbReadFormatOption.Items.Add('::disktype=apple-1m44');
-   cbReadFormatOption.Items.Add('::disktype=apple-400k');
-   cbReadFormatOption.Items.Add('::disktype=apple-800k');
-   cbReadFormatOption.Items.Add('::disktype=appleii');
-   cbReadFormatOption.Items.Add('::disktype=appleiipro');
-   cbReadFormatOption.Items.Add('::disktype=atari800-dd');
-   cbReadFormatOption.Items.Add('::disktype=atari800-ed ');
-   cbReadFormatOption.Items.Add('::disktype=atari800-sd');
-   cbReadFormatOption.Items.Add('::disktype=atarist-ds');
-   cbReadFormatOption.Items.Add('::disktype=atarist-ss');
-   cbReadFormatOption.Items.Add('::disktype=hdd-mfm');
-   cbReadFormatOption.Items.Add('::disktype=hdd-rll');
-   cbReadFormatOption.Items.Add('::disktype=ibmpc-1m2');
-   cbReadFormatOption.Items.Add('::disktype=ibmpc-1m44');
-   cbReadFormatOption.Items.Add('::disktype=ibmpc-360k');
-   cbReadFormatOption.Items.Add('::disktype=ibmpc-720k');
-   cbReadFormatOption.Items.Add('::disktype=other-1m2');
-   cbReadFormatOption.Items.Add('::disktype=other-1m44');
-   cbReadFormatOption.Items.Add('::disktype=other-320k');
-   cbReadFormatOption.Items.Add('::disktype=other-720k');
-   cbReadFormatOption.Items.Add('::disktype=roland-d20');
-   cbReadFormatOption.Items.Add('::disktype=tape-gcr1');
-   cbReadFormatOption.Items.Add('::disktype=tape-gcr2');
-   cbReadFormatOption.Items.Add('::disktype=tape-mfm');
-   cbReadFormatOption.Items.Add('::disktype=ti-99/4a');
-   cbReadFormatOption.Items.Add('::disktype=trs80_dsdd');
-   cbReadFormatOption.Items.Add('::disktype=trs80_dssd');
-   cbReadFormatOption.Items.Add('::disktype=trs80_ssdd');
-   cbReadFormatOption.Items.Add('::disktype=trs80_sssd');
-   cbReadFormatOption.ItemIndex := 0;
-  end;
+  cbReadFormatOption.Text:='';
+  cbReadFormatOptionHFEInt.Text:='';
+  cbReadFormatOptionHFEVer.Text:='';
+  cbReadFormatOptionHFEEnc.Text:='';
+
+ if cbReadFormat.Text = 'SCP (SuperCardPro)' then
+   begin
+    cbReadFormat.Enabled:=true;
+    AddItemsSCP;
+   end;
 
   if cbReadFormat.Text = 'HFE (HxC Floppy Emulator)' then
-  begin
-   cbReadFormatOption.Items.Clear;
-   cbReadFormatOption.ItemIndex := -1;
-   cbReadFormatOption.Enabled:= true;
-   cbReadFormatOption.Items.Add('');
-   cbReadFormatOption.Items.Add('::bitrate=125');
-   cbReadFormatOption.Items.Add('::bitrate=250');
-   cbReadFormatOption.Items.Add('::bitrate=300');
-   cbReadFormatOption.Items.Add('::bitrate=500');
-   cbReadFormatOption.ItemIndex := 0;
-
-   //HFEVersion
-   cbReadFormatOptionHFEVer.ItemIndex := -1;
-   cbReadFormatOptionHFEVer.Enabled:= true;
-
-   //HLE InterfaceMode
-   cbReadFormatOptionHFEInt.Items.Clear;
-   cbReadFormatOptionHFEInt.ItemIndex := -1;
-   cbReadFormatOptionHFEInt.Enabled:= true;
-   cbReadFormatOptionHFEInt.Items.Add('');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=IBMPC_DD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=IBMPC_HD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=ATARIST_DD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=ATARIST_HD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=AMIGA_DD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=AMIGA_HD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=CPC_DD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=GENERIC_SHUGART_DD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=IBMPC_ED');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=MSX2_DD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=C64_DD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=EMU_SHUGART');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=S950_DD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=S950_HD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=S950_DD_HD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=IBMPC_DD_HD');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=QUICKDISK');
-   cbReadFormatOptionHFEInt.Items.Add('::interface=UNKNOWN');
-   cbReadFormatOptionHFEInt.ItemIndex := 0;
-
-   //HLE EncodingType
-   cbReadFormatOptionHFEEnc.Items.Clear;
-   cbReadFormatOptionHFEEnc.ItemIndex := -1;
-   cbReadFormatOptionHFEEnc.Enabled:= true;
-   cbReadFormatOptionHFEEnc.Items.Add('');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=ISOIBM_MFM');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=AMIGA_MFM');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=ISOIBM_FM');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=EMU_FM');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=TYCOM_FM');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=MEMBRAIN_MFM');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=APPLEII_GCR1');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=APPLEII_GCR2');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=APPLEII_HDDD_A2_GCR1');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=APPLEII_HDDD_A2_GCR2');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=ARBURGDAT');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=ARBURGSYS');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=AED6200P_MFM');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=NORTHSTAR_HS_MFM');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=HEATHKIT_HS_FM');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=DEC_RX02_M2FM');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=APPLEMAC_GCR');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=QD_MO5');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=C64_GCR');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=VICTOR9K_GCR');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=MICRALN_HS_FM');
-   cbReadFormatOptionHFEEnc.Items.Add('::encoding=UNKNOWN');
-   cbReadFormatOptionHFEEnc.ItemIndex := 0;
-  end;
+   begin
+    cbReadFormat.Enabled:=true;
+    AddItemsHFE;
+   end;
 
   Create_Filename;
+end;
+
+procedure TForm1.AddItemsSCP;
+begin
+  cbReadFormatOption.Items.Clear;
+  cbReadFormatOption.ItemIndex := -1;
+  cbReadFormatOption.Enabled:= true;
+  cbReadFormatOption.Items.Add('');
+  cbReadFormatOption.Items.Add('::disktype=amiga');
+  cbReadFormatOption.Items.Add('::disktype=amigahd');
+  cbReadFormatOption.Items.Add('::disktype=c64');
+  cbReadFormatOption.Items.Add('::disktype=amstrad-cpc');
+  cbReadFormatOption.Items.Add('::disktype=apple-1m44');
+  cbReadFormatOption.Items.Add('::disktype=apple-400k');
+  cbReadFormatOption.Items.Add('::disktype=apple-800k');
+  cbReadFormatOption.Items.Add('::disktype=appleii');
+  cbReadFormatOption.Items.Add('::disktype=appleiipro');
+  cbReadFormatOption.Items.Add('::disktype=atari800-dd');
+  cbReadFormatOption.Items.Add('::disktype=atari800-ed ');
+  cbReadFormatOption.Items.Add('::disktype=atari800-sd');
+  cbReadFormatOption.Items.Add('::disktype=atarist-ds');
+  cbReadFormatOption.Items.Add('::disktype=atarist-ss');
+  cbReadFormatOption.Items.Add('::disktype=hdd-mfm');
+  cbReadFormatOption.Items.Add('::disktype=hdd-rll');
+  cbReadFormatOption.Items.Add('::disktype=ibmpc-1m2');
+  cbReadFormatOption.Items.Add('::disktype=ibmpc-1m44');
+  cbReadFormatOption.Items.Add('::disktype=ibmpc-360k');
+  cbReadFormatOption.Items.Add('::disktype=ibmpc-720k');
+  cbReadFormatOption.Items.Add('::disktype=other-1m2');
+  cbReadFormatOption.Items.Add('::disktype=other-1m44');
+  cbReadFormatOption.Items.Add('::disktype=other-320k');
+  cbReadFormatOption.Items.Add('::disktype=other-720k');
+  cbReadFormatOption.Items.Add('::disktype=roland-d20');
+  cbReadFormatOption.Items.Add('::disktype=tape-gcr1');
+  cbReadFormatOption.Items.Add('::disktype=tape-gcr2');
+  cbReadFormatOption.Items.Add('::disktype=tape-mfm');
+  cbReadFormatOption.Items.Add('::disktype=ti-99/4a');
+  cbReadFormatOption.Items.Add('::disktype=trs80_dsdd');
+  cbReadFormatOption.Items.Add('::disktype=trs80_dssd');
+  cbReadFormatOption.Items.Add('::disktype=trs80_ssdd');
+  cbReadFormatOption.Items.Add('::disktype=trs80_sssd');
+  cbReadFormatOption.ItemIndex := 0;
+end;
+
+procedure tform1.AddItemsHFE;
+begin
+  cbReadFormatOption.Items.Clear;
+  cbReadFormatOption.ItemIndex := -1;
+  cbReadFormatOption.Enabled:= true;
+  cbReadFormatOption.Items.Add('');
+  cbReadFormatOption.Items.Add('::bitrate=125');
+  cbReadFormatOption.Items.Add('::bitrate=250');
+  cbReadFormatOption.Items.Add('::bitrate=300');
+  cbReadFormatOption.Items.Add('::bitrate=500');
+  cbReadFormatOption.ItemIndex := 0;
+
+  //HFEVersion
+  cbReadFormatOptionHFEVer.ItemIndex := -1;
+  cbReadFormatOptionHFEVer.Enabled:= true;
+
+  //HLE InterfaceMode
+  cbReadFormatOptionHFEInt.Items.Clear;
+  cbReadFormatOptionHFEInt.ItemIndex := -1;
+  cbReadFormatOptionHFEInt.Enabled:= true;
+  cbReadFormatOptionHFEInt.Items.Add('');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=IBMPC_DD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=IBMPC_HD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=ATARIST_DD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=ATARIST_HD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=AMIGA_DD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=AMIGA_HD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=CPC_DD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=GENERIC_SHUGART_DD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=IBMPC_ED');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=MSX2_DD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=C64_DD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=EMU_SHUGART');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=S950_DD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=S950_HD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=S950_DD_HD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=IBMPC_DD_HD');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=QUICKDISK');
+  cbReadFormatOptionHFEInt.Items.Add('::interface=UNKNOWN');
+  cbReadFormatOptionHFEInt.ItemIndex := 0;
+
+  //HLE EncodingType
+  cbReadFormatOptionHFEEnc.Items.Clear;
+  cbReadFormatOptionHFEEnc.ItemIndex := -1;
+  cbReadFormatOptionHFEEnc.Enabled:= true;
+  cbReadFormatOptionHFEEnc.Items.Add('');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=ISOIBM_MFM');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=AMIGA_MFM');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=ISOIBM_FM');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=EMU_FM');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=TYCOM_FM');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=MEMBRAIN_MFM');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=APPLEII_GCR1');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=APPLEII_GCR2');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=APPLEII_HDDD_A2_GCR1');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=APPLEII_HDDD_A2_GCR2');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=ARBURGDAT');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=ARBURGSYS');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=AED6200P_MFM');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=NORTHSTAR_HS_MFM');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=HEATHKIT_HS_FM');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=DEC_RX02_M2FM');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=APPLEMAC_GCR');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=QD_MO5');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=C64_GCR');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=VICTOR9K_GCR');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=MICRALN_HS_FM');
+  cbReadFormatOptionHFEEnc.Items.Add('::encoding=UNKNOWN');
+  cbReadFormatOptionHFEEnc.ItemIndex := 0;
 end;
 
 procedure TForm1.edToolsFWChange(Sender: TObject);
@@ -3734,9 +3848,8 @@ begin
   // Read
   if pcActions.ActivePageIndex = 0 then
    begin
-     if edReadFilename.Text = '' then
+    if edReadFilename.Text = '' then
      begin
-      btReadDiskReset.Enabled:=false;
       edReadDisk1.Enabled:=false;
       edReadDiskOf.Enabled:=false;
       edReadDisk2.Enabled:=false;
@@ -3744,17 +3857,37 @@ begin
       cbReadIncremental.Enabled:=false;
       cbReadNoOverwrite.Enabled := false;
       cbReadFormat.Enabled:=false;
-      cbReadFormatOption.Enabled :=false;
-      cbReadFormatOptionHFEVer.Enabled :=false;
-      cbReadFormatOptionHFEInt.Enabled :=false;
-      cbReadFormatOptionHFEEnc.Enabled :=false;
+
+     If cbReadFormat.Text <> '' then
+      begin
+       cbReadFormat.Enabled:=true;
+       edReadDisk1.Enabled:=true;
+       edReadDiskOf.Enabled:=true;
+       edReadDisk2.Enabled:=true;
+       edReadDigits.Enabled:=true;
+       cbReadIncremental.Enabled:=true;
+       cbReadNoOverwrite.Enabled:=true;
+       if cbReadFormat.Text = 'SCP (SuperCardPro)' then
+       begin
+        cbReadFormatOption.Enabled:=true;
+        cbReadFormatOptionHFEVer.Enabled:=false;
+        cbReadFormatOptionHFEInt.Enabled:=false;
+        cbReadFormatOptionHFEEnc.Enabled:=false;
+       end;
+      if cbReadFormat.Text = 'HFE (HxC Floppy Emulator)' then
+       begin
+        cbReadFormatOption.Enabled :=true;
+        cbReadFormatOptionHFEVer.Enabled :=true;
+        cbReadFormatOptionHFEInt.Enabled :=true;
+        cbReadFormatOptionHFEEnc.Enabled :=true;
+       end;
+      end;
       cbReadPreview.Text:='';
       btGo.Default := false;
       exit;
      end;
-     if edReadFilename.Text <> '' then
+    if edReadFilename.Text <> '' then
      begin
-      btReadDiskReset.Enabled:=true;
       edReadDisk1.Enabled:=true;
       edReadDiskOf.Enabled:=true;
       edReadDisk2.Enabled:=true;
@@ -3762,6 +3895,22 @@ begin
       cbReadIncremental.Enabled:=true;
       cbReadNoOverwrite.Enabled:=true;
       cbReadFormat.Enabled:=true;
+
+      if cbReadFormat.Text = 'SCP (SuperCardPro)' then
+       begin
+        cbReadFormatOption.Enabled:=true;
+        cbReadFormatOptionHFEVer.Enabled:=false;
+        cbReadFormatOptionHFEInt.Enabled:=false;
+        cbReadFormatOptionHFEEnc.Enabled:=false;
+       end;
+      if cbReadFormat.Text = 'HFE (HxC Floppy Emulator)' then
+       begin
+        cbReadFormatOption.Enabled :=true;
+        cbReadFormatOptionHFEVer.Enabled :=true;
+        cbReadFormatOptionHFEInt.Enabled :=true;
+        cbReadFormatOptionHFEEnc.Enabled :=true;
+       end;
+
       cbReadPreview.Text:='';
       btGo.Default := true;
      end;
@@ -3901,18 +4050,12 @@ begin
     end;
   end;
 
-  // read file extension - FMFF 4.0
-   cbReadFormatOptionHFEVer.Enabled :=false;
-   cbReadFormatOptionHFEInt.Enabled :=false;
-   cbReadFormatOptionHFEEnc.Enabled :=false;
+  // read file extension
    case trim(leftStr(cbReadFormat.Text,3)) of
     'EDS':
      cbReadPreview.Text := filenameRead + '.' + lowercase(trim(leftStr(cbReadFormat.Text,4)));
     'HFE':
       begin
-       cbReadFormatOptionHFEVer.Enabled :=true;
-       cbReadFormatOptionHFEInt.Enabled :=true;
-       cbReadFormatOptionHFEEnc.Enabled :=true;
        cbReadPreview.Text := filenameRead + '.' + lowercase(leftStr(cbReadFormat.Text,3)) + cbReadFormatoption.Text + cbReadFormatoptionHFEVer.Text + cbReadFormatoptionHFEInt.Text + cbReadFormatoptionHFEEnc.Text;
       end;
     'SCP':

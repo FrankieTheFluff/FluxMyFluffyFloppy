@@ -1,24 +1,24 @@
 object FrmAbout: TFrmAbout
   Left = 716
-  Height = 417
+  Height = 436
   Top = 350
   Width = 585
   Caption = 'About'
-  ClientHeight = 417
+  ClientHeight = 436
   ClientWidth = 585
   Position = poMainFormCenter
   LCLVersion = '4.8.0.0'
   OnShow = FormShow
   object GroupBox1: TGroupBox
     Left = 3
-    Height = 414
+    Height = 433
     Top = 0
     Width = 579
     Align = alClient
     BorderSpacing.Left = 3
     BorderSpacing.Right = 3
     BorderSpacing.Bottom = 3
-    ClientHeight = 394
+    ClientHeight = 413
     ClientWidth = 575
     TabOrder = 0
     object lblAbout: TLabel
@@ -149,7 +149,7 @@ object FrmAbout: TFrmAbout
     object Label2: TLabel
       Left = 11
       Height = 16
-      Top = 197
+      Top = 200
       Width = 346
       AutoSize = False
       Caption = 'The "Greaseweazle" project is developed by Keir Fraser:'
@@ -165,7 +165,7 @@ object FrmAbout: TFrmAbout
     object lblAboutURLGW: TLabel
       Left = 11
       Height = 15
-      Top = 219
+      Top = 224
       Width = 346
       AutoSize = False
       Caption = 'https://github.com/keirf/Greaseweazle'
@@ -182,7 +182,7 @@ object FrmAbout: TFrmAbout
     object lblDisclaimer1: TLabel
       Left = 11
       Height = 15
-      Top = 328
+      Top = 336
       Width = 58
       AutoSize = False
       Caption = 'Disclaimer:'
@@ -200,7 +200,7 @@ object FrmAbout: TFrmAbout
     object lblDisclaimer2: TLabel
       Left = 11
       Height = 16
-      Top = 345
+      Top = 360
       Width = 557
       AutoSize = False
       Caption = 'You can use this software completly free ! But there is no liability for misuse or damage...'
@@ -657,10 +657,10 @@ object FrmAbout: TFrmAbout
       Transparent = True
     end
     object btOK: TButton
-      Left = 497
+      Left = 481
       Height = 25
-      Top = 365
-      Width = 75
+      Top = 384
+      Width = 91
       Caption = 'OK'
       Default = True
       TabOrder = 0
@@ -694,7 +694,7 @@ object FrmAbout: TFrmAbout
     object lblContains: TLabel
       Left = 11
       Height = 15
-      Top = 264
+      Top = 256
       Width = 178
       Caption = 'Uses code from following project:'
       ParentColor = False
@@ -708,9 +708,9 @@ object FrmAbout: TFrmAbout
       ParentColor = False
     end
     object lblAboutUnTerminal: TLabel
-      Left = 200
+      Left = 11
       Height = 13
-      Top = 280
+      Top = 304
       Width = 188
       Caption = 'https://github.com/t-edson/UnTerminal'
       Font.Color = clBlue
@@ -729,9 +729,9 @@ object FrmAbout: TFrmAbout
       ParentColor = False
     end
     object lblDivider2: TLabel
-      Left = 11
+      Left = 8
       Height = 15
-      Top = 244
+      Top = 240
       Width = 195
       Caption = '---------------------------------------'
       ParentColor = False
@@ -739,7 +739,7 @@ object FrmAbout: TFrmAbout
     object lblDivider3: TLabel
       Left = 11
       Height = 15
-      Top = 304
+      Top = 320
       Width = 195
       Caption = '---------------------------------------'
       ParentColor = False
